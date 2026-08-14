@@ -105,6 +105,59 @@ namespace MovieReviewApp
         private void btnRegister_Click(object sender, EventArgs e)
         {
 
+            string name = txtName.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text;
+
+            if (name == "" || email == "" || password == "")
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+
+            try
+            {
+                DatabaseHelper db = new DatabaseHelper();
+
+                using (SqlConnection connection = db.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = @"
+                INSERT INTO Users (Name, Email, Password)
+                VALUES (@Name, @Email, @Password)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", name);
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        command.ExecuteNonQuery();
+
+                        MessageBox.Show("Registration Successful!");
+
+                        txtName.Clear();
+                        txtEmail.Clear();
+                        txtPassword.Clear();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("This email is already registered.");
+                }
+                else
+                {
+                    MessageBox.Show("Registration Failed!\n\n" + ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Registration Failed!\n\n" + ex.Message);
+            }
         }
     }
 }
