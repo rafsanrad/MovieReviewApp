@@ -26,5 +26,10 @@ namespace MovieReviewApp
         {
 
         }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
