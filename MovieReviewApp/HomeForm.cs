@@ -15,6 +15,7 @@ namespace MovieReviewApp
         public HomeForm()
         {
             InitializeComponent();
+            cmbGenre.SelectedIndex = 0;
         }
 
         private void lblTitle_Click(object sender, EventArgs e)
@@ -43,6 +44,11 @@ namespace MovieReviewApp
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

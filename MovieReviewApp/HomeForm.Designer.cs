@@ -37,7 +37,14 @@
             this.btnFavorites = new System.Windows.Forms.Button();
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.lblGenre = new System.Windows.Forms.Label();
+            this.cmbGenre = new System.Windows.Forms.ComboBox();
+            this.flowMovies = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSidebar.SuspendLayout();
+            this.panelContent.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +54,8 @@
             this.lblTitle.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblTitle.Location = new System.Drawing.Point(34, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(211, 40);
+            this.lblTitle.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblTitle.Size = new System.Drawing.Size(252, 40);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "CINEVERSE";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -73,7 +81,7 @@
             this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSidebar.Location = new System.Drawing.Point(0, 0);
             this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(189, 548);
+            this.panelSidebar.Size = new System.Drawing.Size(189, 595);
             this.panelSidebar.TabIndex = 4;
             // 
             // btnProfile
@@ -114,10 +122,16 @@
             // 
             // panelContent
             // 
+            this.panelContent.Controls.Add(this.flowMovies);
+            this.panelContent.Controls.Add(this.cmbGenre);
+            this.panelContent.Controls.Add(this.lblGenre);
+            this.panelContent.Controls.Add(this.btnSearch);
+            this.panelContent.Controls.Add(this.txtSearch);
+            this.panelContent.Controls.Add(this.lblSearch);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(189, 0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(795, 548);
+            this.panelContent.Size = new System.Drawing.Size(795, 595);
             this.panelContent.TabIndex = 5;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
@@ -131,11 +145,73 @@
             this.panelHeader.Size = new System.Drawing.Size(795, 64);
             this.panelHeader.TabIndex = 6;
             // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(63, 104);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(96, 16);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search Movie :";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(184, 104);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(300, 22);
+            this.txtSearch.TabIndex = 1;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(514, 104);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(80, 30);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // lblGenre
+            // 
+            this.lblGenre.AutoSize = true;
+            this.lblGenre.Location = new System.Drawing.Point(99, 151);
+            this.lblGenre.Name = "lblGenre";
+            this.lblGenre.Size = new System.Drawing.Size(50, 16);
+            this.lblGenre.TabIndex = 3;
+            this.lblGenre.Text = "Genre :";
+            // 
+            // cmbGenre
+            // 
+            this.cmbGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGenre.FormattingEnabled = true;
+            this.cmbGenre.Items.AddRange(new object[] {
+            "All",
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Drama",
+            "Horror",
+            "Romance",
+            "Sci-Fi",
+            "Thriller",
+            "Animation"});
+            this.cmbGenre.Location = new System.Drawing.Point(184, 151);
+            this.cmbGenre.Name = "cmbGenre";
+            this.cmbGenre.Size = new System.Drawing.Size(180, 24);
+            this.cmbGenre.TabIndex = 4;
+            this.cmbGenre.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // flowMovies
+            // 
+            this.flowMovies.Location = new System.Drawing.Point(41, 185);
+            this.flowMovies.Name = "flowMovies";
+            this.flowMovies.Size = new System.Drawing.Size(700, 400);
+            this.flowMovies.TabIndex = 5;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 548);
+            this.ClientSize = new System.Drawing.Size(984, 595);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelSidebar);
@@ -144,6 +220,8 @@
             this.Text = "HomeForm";
             this.Load += new System.EventHandler(this.HomeForm_Load);
             this.panelSidebar.ResumeLayout(false);
+            this.panelContent.ResumeLayout(false);
+            this.panelContent.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -159,5 +237,11 @@
         private System.Windows.Forms.Button btnWatchlist;
         private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.Button btnFavorites;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ComboBox cmbGenre;
+        private System.Windows.Forms.Label lblGenre;
+        private System.Windows.Forms.FlowLayoutPanel flowMovies;
     }
 }
