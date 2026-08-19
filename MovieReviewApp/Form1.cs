@@ -16,6 +16,25 @@ namespace MovieReviewApp
         public Form1()
         {
             InitializeComponent();
+
+            InitializeApplication();
+        }
+
+        private void InitializeApplication()
+        {
+            try
+            {
+                DatabaseHelper db = new DatabaseHelper();
+
+                db.InitializeDatabase();
+
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Database initialization failed.\n\n" + ex.Message);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
