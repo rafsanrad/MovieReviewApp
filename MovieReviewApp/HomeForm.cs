@@ -38,7 +38,7 @@ namespace MovieReviewApp
 
         private void btnMovies_Click(object sender, EventArgs e)
         {
-            MovieForm movieForm = new MovieForm();
+            HomeForm movieForm = new HomeForm();
             movieForm.Show();
         }
 

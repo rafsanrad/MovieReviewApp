@@ -45,9 +45,9 @@
             // 
             this.lblTitle.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblTitle.Location = new System.Drawing.Point(34, 14);
+            this.lblTitle.Location = new System.Drawing.Point(38, 18);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(211, 40);
+            this.lblTitle.Size = new System.Drawing.Size(237, 50);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "CINEVERSE";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -55,13 +55,15 @@
             // 
             // btnLogout
             // 
+            this.btnLogout.BackColor = System.Drawing.Color.OrangeRed;
             this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogout.Location = new System.Drawing.Point(638, 12);
+            this.btnLogout.Location = new System.Drawing.Point(718, 15);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(130, 40);
+            this.btnLogout.Size = new System.Drawing.Size(146, 50);
             this.btnLogout.TabIndex = 2;
             this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // panelSidebar
@@ -72,42 +74,47 @@
             this.panelSidebar.Controls.Add(this.btnFavorites);
             this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSidebar.Location = new System.Drawing.Point(0, 0);
+            this.panelSidebar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(189, 548);
+            this.panelSidebar.Size = new System.Drawing.Size(213, 685);
             this.panelSidebar.TabIndex = 4;
             // 
             // btnProfile
             // 
-            this.btnProfile.Location = new System.Drawing.Point(10, 185);
+            this.btnProfile.Location = new System.Drawing.Point(11, 231);
+            this.btnProfile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Size = new System.Drawing.Size(160, 45);
+            this.btnProfile.Size = new System.Drawing.Size(180, 56);
             this.btnProfile.TabIndex = 2;
             this.btnProfile.Text = "Profile";
             this.btnProfile.UseVisualStyleBackColor = true;
             // 
             // btnHome
             // 
-            this.btnHome.Location = new System.Drawing.Point(10, 19);
+            this.btnHome.Location = new System.Drawing.Point(11, 24);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(160, 45);
+            this.btnHome.Size = new System.Drawing.Size(180, 56);
             this.btnHome.TabIndex = 0;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = true;
             // 
             // btnWatchlist
             // 
-            this.btnWatchlist.Location = new System.Drawing.Point(10, 130);
+            this.btnWatchlist.Location = new System.Drawing.Point(11, 162);
+            this.btnWatchlist.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnWatchlist.Name = "btnWatchlist";
-            this.btnWatchlist.Size = new System.Drawing.Size(160, 45);
+            this.btnWatchlist.Size = new System.Drawing.Size(180, 56);
             this.btnWatchlist.TabIndex = 1;
             this.btnWatchlist.Text = "Watchlist";
             this.btnWatchlist.UseVisualStyleBackColor = true;
             // 
             // btnFavorites
             // 
-            this.btnFavorites.Location = new System.Drawing.Point(10, 75);
+            this.btnFavorites.Location = new System.Drawing.Point(11, 94);
+            this.btnFavorites.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFavorites.Name = "btnFavorites";
-            this.btnFavorites.Size = new System.Drawing.Size(160, 45);
+            this.btnFavorites.Size = new System.Drawing.Size(180, 56);
             this.btnFavorites.TabIndex = 0;
             this.btnFavorites.Text = "Favorites";
             this.btnFavorites.UseVisualStyleBackColor = true;
@@ -115,9 +122,10 @@
             // panelContent
             // 
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(189, 0);
+            this.panelContent.Location = new System.Drawing.Point(213, 0);
+            this.panelContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(795, 548);
+            this.panelContent.Size = new System.Drawing.Size(894, 685);
             this.panelContent.TabIndex = 5;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
@@ -126,20 +134,22 @@
             this.panelHeader.Controls.Add(this.lblTitle);
             this.panelHeader.Controls.Add(this.btnLogout);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(189, 0);
+            this.panelHeader.Location = new System.Drawing.Point(213, 0);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(795, 64);
+            this.panelHeader.Size = new System.Drawing.Size(894, 80);
             this.panelHeader.TabIndex = 6;
             // 
             // HomeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 548);
+            this.ClientSize = new System.Drawing.Size(1107, 685);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelSidebar);
             this.Location = new System.Drawing.Point(180, 50);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "HomeForm";
             this.Text = "HomeForm";
             this.Load += new System.EventHandler(this.HomeForm_Load);
