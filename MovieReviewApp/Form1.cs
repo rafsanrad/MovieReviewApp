@@ -177,5 +177,10 @@ namespace MovieReviewApp
                 MessageBox.Show("Registration Failed!\n\n" + ex.Message);
             }
         }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
