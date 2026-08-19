@@ -73,7 +73,6 @@ namespace MovieReviewApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text;
 
@@ -107,6 +106,11 @@ namespace MovieReviewApp
                         if (count > 0)
                         {
                             MessageBox.Show("Login Successful!");
+
+                            HomeForm homeForm = new HomeForm();
+                            homeForm.Show();
+
+                            this.Hide();
                         }
                         else
                         {
