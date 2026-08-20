@@ -55,7 +55,7 @@
             this.lblTitle.Location = new System.Drawing.Point(34, 14);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTitle.Size = new System.Drawing.Size(224, 32);
+            this.lblTitle.Size = new System.Drawing.Size(303, 32);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "CINEVERSE";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,10 +138,11 @@
             // 
             // flowMovies
             // 
-            this.flowMovies.Location = new System.Drawing.Point(36, 148);
+            this.flowMovies.AutoScroll = true;
+            this.flowMovies.Location = new System.Drawing.Point(36, 165);
             this.flowMovies.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowMovies.Name = "flowMovies";
-            this.flowMovies.Size = new System.Drawing.Size(682, 441);
+            this.flowMovies.Size = new System.Drawing.Size(682, 404);
             this.flowMovies.TabIndex = 5;
             // 
             // cmbGenre
