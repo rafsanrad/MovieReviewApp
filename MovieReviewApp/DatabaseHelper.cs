@@ -84,7 +84,9 @@ namespace MovieReviewApp
                         Title VARCHAR(200) NOT NULL,
                         Description VARCHAR(MAX),
                         ReleaseYear INT,
-                        Genre VARCHAR(100)
+                        Genre VARCHAR(100),
+                        Director VARCHAR(100),
+                        PosterPath VARCHAR(500)
                     );
                 END;
 
