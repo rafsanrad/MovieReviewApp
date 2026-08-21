@@ -62,10 +62,10 @@
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="MovieForm.cs">
+    <Compile Include="Forms\MovieForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MovieForm.Designer.cs">
+    <Compile Include="Forms\MovieForm.Designer.cs">
       <DependentUpon>MovieForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -76,6 +76,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MovieForm.resx">
+      <DependentUpon>MovieForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\CreateDatabase.sql" />
+    <Content Include="Pictures\avengers.jpg" />
     <Content Include="Posters\darkknight.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
