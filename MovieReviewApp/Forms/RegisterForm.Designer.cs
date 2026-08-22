@@ -198,7 +198,7 @@
             this.ClientSize = new System.Drawing.Size(618, 340);
             this.Controls.Add(this.pnlRegister);
             this.Name = "RegisterForm";
-            this.Text = "RegisterForm";
+            this.Text = "Cineverse - Register";
             this.pnlRegister.ResumeLayout(false);
             this.pnlRegister.PerformLayout();
             this.ResumeLayout(false);
