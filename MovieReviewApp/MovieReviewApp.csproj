@@ -91,6 +91,12 @@
     <Compile Include="Forms\ReviewForm.Designer.cs">
       <DependentUpon>ReviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WatchlistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WatchlistForm.Designer.cs">
+      <DependentUpon>WatchlistForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Forms\MovieForm.cs">
       <SubType>Form</SubType>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReviewForm.resx">
       <DependentUpon>ReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WatchlistForm.resx">
+      <DependentUpon>WatchlistForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
