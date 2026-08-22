@@ -62,7 +62,7 @@
             // 
             this.lblSubTitle.AutoSize = true;
             this.lblSubTitle.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTitle.Location = new System.Drawing.Point(194, 58);
+            this.lblSubTitle.Location = new System.Drawing.Point(194, 60);
             this.lblSubTitle.Name = "lblSubTitle";
             this.lblSubTitle.Size = new System.Drawing.Size(255, 23);
             this.lblSubTitle.TabIndex = 1;
