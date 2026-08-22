@@ -89,8 +89,14 @@
     <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginFrom.resx">
+      <DependentUpon>LoginFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MovieForm.resx">
       <DependentUpon>MovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -16,5 +16,10 @@ namespace MovieReviewApp.Forms
         {
             InitializeComponent();
         }
+
+        private void pnlRegister_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
