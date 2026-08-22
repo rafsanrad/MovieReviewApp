@@ -78,39 +78,48 @@
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.Location = new System.Drawing.Point(414, 535);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(180, 35);
             this.btnClear.TabIndex = 14;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.Color.Crimson;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(194, 535);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(180, 35);
             this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // btnAddMovie
             // 
+            this.btnAddMovie.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnAddMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddMovie.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAddMovie.Location = new System.Drawing.Point(194, 462);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(400, 45);
             this.btnAddMovie.TabIndex = 1;
             this.btnAddMovie.Text = "ADD MOVIE";
-            this.btnAddMovie.UseVisualStyleBackColor = true;
+            this.btnAddMovie.UseVisualStyleBackColor = false;
             // 
             // btnBrowse
             // 
+            this.btnBrowse.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.Location = new System.Drawing.Point(504, 416);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(90, 30);
             this.btnBrowse.TabIndex = 12;
             this.btnBrowse.Text = "Browse...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.UseVisualStyleBackColor = false;
             // 
             // txtPosterPath
             // 
