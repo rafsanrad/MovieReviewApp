@@ -32,8 +32,11 @@
             this.pnlReviews = new System.Windows.Forms.Panel();
             this.flowlpReviews = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlReview = new System.Windows.Forms.Panel();
+            this.lblReviewDate = new System.Windows.Forms.Label();
+            this.lblReviewComment = new System.Windows.Forms.Label();
             this.lblReviewRating = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
+            this.btnWriteReview = new System.Windows.Forms.Button();
             this.lblReviews = new System.Windows.Forms.Label();
             this.pnlMovieInfo = new System.Windows.Forms.Panel();
             this.btnAddToWatchList = new System.Windows.Forms.Button();
@@ -53,10 +56,6 @@
             this.btnFavourites = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.lblReviewComment = new System.Windows.Forms.Label();
-            this.lblReviewDate = new System.Windows.Forms.Label();
-            this.btnWriteReview = new System.Windows.Forms.Button();
-            this.txtWriteReview = new System.Windows.Forms.TextBox();
             this.pnlMain.SuspendLayout();
             this.pnlReviews.SuspendLayout();
             this.flowlpReviews.SuspendLayout();
@@ -79,7 +78,6 @@
             // 
             // pnlReviews
             // 
-            this.pnlReviews.Controls.Add(this.txtWriteReview);
             this.pnlReviews.Controls.Add(this.flowlpReviews);
             this.pnlReviews.Controls.Add(this.btnWriteReview);
             this.pnlReviews.Controls.Add(this.lblReviews);
@@ -111,6 +109,22 @@
             this.pnlReview.Size = new System.Drawing.Size(1050, 109);
             this.pnlReview.TabIndex = 0;
             // 
+            // lblReviewDate
+            // 
+            this.lblReviewDate.Location = new System.Drawing.Point(20, 80);
+            this.lblReviewDate.Name = "lblReviewDate";
+            this.lblReviewDate.Size = new System.Drawing.Size(180, 25);
+            this.lblReviewDate.TabIndex = 3;
+            this.lblReviewDate.Text = "22 August 2026";
+            // 
+            // lblReviewComment
+            // 
+            this.lblReviewComment.Location = new System.Drawing.Point(20, 38);
+            this.lblReviewComment.Name = "lblReviewComment";
+            this.lblReviewComment.Size = new System.Drawing.Size(1002, 42);
+            this.lblReviewComment.TabIndex = 2;
+            this.lblReviewComment.Text = "Amazing movie! Reallly Enjoyed it.";
+            // 
             // lblReviewRating
             // 
             this.lblReviewRating.Location = new System.Drawing.Point(95, 10);
@@ -130,6 +144,15 @@
             this.lblName.Size = new System.Drawing.Size(69, 21);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Tamim";
+            // 
+            // btnWriteReview
+            // 
+            this.btnWriteReview.Location = new System.Drawing.Point(915, 10);
+            this.btnWriteReview.Name = "btnWriteReview";
+            this.btnWriteReview.Size = new System.Drawing.Size(128, 36);
+            this.btnWriteReview.TabIndex = 4;
+            this.btnWriteReview.Text = "WriteReview";
+            this.btnWriteReview.UseVisualStyleBackColor = true;
             // 
             // lblReviews
             // 
@@ -328,39 +351,6 @@
             this.lblLogo.TabIndex = 0;
             this.lblLogo.Text = "Cineverse";
             // 
-            // lblReviewComment
-            // 
-            this.lblReviewComment.Location = new System.Drawing.Point(20, 38);
-            this.lblReviewComment.Name = "lblReviewComment";
-            this.lblReviewComment.Size = new System.Drawing.Size(1002, 42);
-            this.lblReviewComment.TabIndex = 2;
-            this.lblReviewComment.Text = "Amazing movie! Reallly Enjoyed it.";
-            // 
-            // lblReviewDate
-            // 
-            this.lblReviewDate.Location = new System.Drawing.Point(20, 80);
-            this.lblReviewDate.Name = "lblReviewDate";
-            this.lblReviewDate.Size = new System.Drawing.Size(180, 25);
-            this.lblReviewDate.TabIndex = 3;
-            this.lblReviewDate.Text = "22 August 2026";
-            // 
-            // btnWriteReview
-            // 
-            this.btnWriteReview.Location = new System.Drawing.Point(538, 10);
-            this.btnWriteReview.Name = "btnWriteReview";
-            this.btnWriteReview.Size = new System.Drawing.Size(128, 36);
-            this.btnWriteReview.TabIndex = 4;
-            this.btnWriteReview.Text = "WriteReview";
-            this.btnWriteReview.UseVisualStyleBackColor = true;
-            // 
-            // txtWriteReview
-            // 
-            this.txtWriteReview.Location = new System.Drawing.Point(672, 15);
-            this.txtWriteReview.Name = "txtWriteReview";
-            this.txtWriteReview.Size = new System.Drawing.Size(370, 26);
-            this.txtWriteReview.TabIndex = 5;
-            this.txtWriteReview.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -415,7 +405,6 @@
         private System.Windows.Forms.Label lblReviewRating;
         private System.Windows.Forms.Label lblReviewDate;
         private System.Windows.Forms.Label lblReviewComment;
-        private System.Windows.Forms.TextBox txtWriteReview;
         private System.Windows.Forms.Button btnWriteReview;
     }
 }
