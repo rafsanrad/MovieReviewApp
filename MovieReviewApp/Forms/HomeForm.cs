@@ -534,5 +534,14 @@ namespace MovieReviewApp
             EventArgs e)
         {
         }
+
+        private void btnBackToMovies_Click_1(object sender, EventArgs e)
+        {
+            // Hide movie details
+            panelMovieDetails.Visible = false;
+
+            // Show movie cards
+            flowMovies.Visible = true;
+        }
     }
 }
