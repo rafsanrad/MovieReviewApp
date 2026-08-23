@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.pnlRegister = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
             this.lblNoAccount = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -38,10 +42,6 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.lblEmail = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
             this.pnlRegister.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,40 @@
             this.pnlRegister.TabIndex = 1;
             this.pnlRegister.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlRegister_Paint);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(255, 151);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(270, 26);
+            this.textBox1.TabIndex = 12;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(255, 111);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(270, 26);
+            this.textBox2.TabIndex = 11;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(77, 151);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(178, 23);
+            this.lblEmail.TabIndex = 10;
+            this.lblEmail.Text = "Email                   :";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(77, 111);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(179, 23);
+            this.lblName.TabIndex = 9;
+            this.lblName.Text = "Your Full Name     :";
+            // 
             // btnRegister
             // 
             this.btnRegister.BackColor = System.Drawing.Color.LightCyan;
@@ -83,11 +117,11 @@
             // 
             this.lblNoAccount.AutoSize = true;
             this.lblNoAccount.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoAccount.Location = new System.Drawing.Point(175, 329);
+            this.lblNoAccount.Location = new System.Drawing.Point(155, 329);
             this.lblNoAccount.Name = "lblNoAccount";
-            this.lblNoAccount.Size = new System.Drawing.Size(214, 23);
+            this.lblNoAccount.Size = new System.Drawing.Size(236, 23);
             this.lblNoAccount.TabIndex = 7;
-            this.lblNoAccount.Text = "Don\'t have an account?";
+            this.lblNoAccount.Text = "Already have an account?";
             // 
             // btnLogin
             // 
@@ -156,40 +190,6 @@
             this.lblLogo.TabIndex = 0;
             this.lblLogo.Text = "Cineverse";
             this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(255, 151);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(270, 26);
-            this.textBox1.TabIndex = 12;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(255, 111);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(270, 26);
-            this.textBox2.TabIndex = 11;
-            // 
-            // lblEmail
-            // 
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(77, 151);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(178, 23);
-            this.lblEmail.TabIndex = 10;
-            this.lblEmail.Text = "Email                   :";
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(77, 111);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(179, 23);
-            this.lblName.TabIndex = 9;
-            this.lblName.Text = "Your Full Name     :";
             // 
             // RegisterForm
             // 

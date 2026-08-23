@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using MovieReviewApp;
 using MovieReviewApp.Models;
 
 namespace MovieReviewApp.Services
 {
     public class MovieService
     {
-        private readonly DatabaseHelper db = new DatabaseHelper();
+        private readonly DatabaseHelper db =
+            new DatabaseHelper();
 
         public List<Movie> GetAll()
         {
-            List<Movie> movies = new List<Movie>();
+            List<Movie> movies =
+                new List<Movie>();
 
-            using (SqlConnection connection = db.GetConnection())
+            using (SqlConnection connection =
+                   db.GetConnection())
             {
                 string query = @"
                     SELECT MovieId,
@@ -35,7 +37,8 @@ namespace MovieReviewApp.Services
                     {
                         while (reader.Read())
                         {
-                            Movie movie = new Movie();
+                            Movie movie =
+                                new Movie();
 
                             movie.MovieId =
                                 (int)reader["MovieId"];
@@ -44,7 +47,9 @@ namespace MovieReviewApp.Services
                                 reader["Title"].ToString();
 
                             movie.Description =
-                                reader["Description"].ToString();
+                                reader["Description"] == System.DBNull.Value
+                                ? ""
+                                : reader["Description"].ToString();
 
                             movie.ReleaseYear =
                                 reader["ReleaseYear"] == System.DBNull.Value
@@ -52,13 +57,19 @@ namespace MovieReviewApp.Services
                                 : (int)reader["ReleaseYear"];
 
                             movie.Genre =
-                                reader["Genre"].ToString();
+                                reader["Genre"] == System.DBNull.Value
+                                ? ""
+                                : reader["Genre"].ToString();
 
                             movie.Director =
-                                reader["Director"].ToString();
+                                reader["Director"] == System.DBNull.Value
+                                ? ""
+                                : reader["Director"].ToString();
 
                             movie.PosterPath =
-                                reader["PosterPath"].ToString();
+                                reader["PosterPath"] == System.DBNull.Value
+                                ? ""
+                                : reader["PosterPath"].ToString();
 
                             movies.Add(movie);
                         }
