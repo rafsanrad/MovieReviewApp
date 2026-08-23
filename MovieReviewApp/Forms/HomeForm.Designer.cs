@@ -123,6 +123,7 @@
             this.btnFavorites.TabIndex = 0;
             this.btnFavorites.Text = "Favorites";
             this.btnFavorites.UseVisualStyleBackColor = true;
+            this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
             // 
             // panelContent
             // 
@@ -302,6 +303,7 @@
             this.btnFavorite.TabIndex = 7;
             this.btnFavorite.Text = "Add to Favorite";
             this.btnFavorite.UseVisualStyleBackColor = true;
+            this.btnFavorite.Click += new System.EventHandler(this.btnFavorite_Click);
             // 
             // btnAddToWatchlist
             // 
@@ -311,6 +313,7 @@
             this.btnAddToWatchlist.TabIndex = 8;
             this.btnAddToWatchlist.Text = "Add to Watchlist";
             this.btnAddToWatchlist.UseVisualStyleBackColor = true;
+            this.btnAddToWatchlist.Click += new System.EventHandler(this.btnAddToWatchlist_Click);
             // 
             // HomeForm
             // 

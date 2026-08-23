@@ -86,6 +86,7 @@
             this.Name = "FavouritesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cineverse - My Favourites";
+            this.Load += new System.EventHandler(this.FavouritesForm_Load);
             this.pnlFavourites.ResumeLayout(false);
             this.ResumeLayout(false);
 

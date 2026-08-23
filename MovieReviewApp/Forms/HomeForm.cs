@@ -10,11 +10,24 @@ namespace MovieReviewApp
     public partial class HomeForm : Form
     {
         // =====================================================
-        // MOVIE SERVICE
+        // SERVICES
         // =====================================================
 
         private MovieService movieService =
             new MovieService();
+
+        private FavoriteService favoriteService =
+            new FavoriteService();
+
+        private WatchlistService watchlistService =
+            new WatchlistService();
+
+
+        // =====================================================
+        // SELECTED MOVIE
+        // =====================================================
+
+        private Movie selectedMovie;
 
 
         // =====================================================
@@ -31,7 +44,7 @@ namespace MovieReviewApp
                 cmbGenre.SelectedIndex = 0;
             }
 
-            // Initially show movie cards
+            // Initially show movies
             flowMovies.Visible = true;
 
             // Initially hide movie details
@@ -40,7 +53,7 @@ namespace MovieReviewApp
 
 
         // =====================================================
-        // HOME FORM LOAD
+        // FORM LOAD
         // =====================================================
 
         private void HomeForm_Load(
@@ -52,7 +65,7 @@ namespace MovieReviewApp
 
 
         // =====================================================
-        // LOAD MOVIES
+        // LOAD ALL MOVIES
         // =====================================================
 
         private void LoadMovies()
@@ -66,8 +79,15 @@ namespace MovieReviewApp
 
                 foreach (Movie movie in movies)
                 {
-                    CreateMovieCard(movie);
+                    CreateMovieCard(
+                        movie,
+                        false
+                    );
                 }
+
+                flowMovies.Visible = true;
+
+                panelMovieDetails.Visible = false;
             }
             catch (Exception ex)
             {
@@ -86,9 +106,14 @@ namespace MovieReviewApp
         // CREATE MOVIE CARD
         // =====================================================
 
-        private void CreateMovieCard(Movie movie)
+        private void CreateMovieCard(
+            Movie movie,
+            bool isFavorite = false)
         {
-            // Movie Card
+            // =================================================
+            // MOVIE CARD
+            // =================================================
+
             Panel movieCard =
                 new Panel();
 
@@ -183,13 +208,13 @@ namespace MovieReviewApp
             btnDetails.Text =
                 "Details";
 
-            btnDetails.Width = 100;
+            btnDetails.Width = 80;
             btnDetails.Height = 35;
 
             btnDetails.Location =
                 new Point(10, 280);
 
-            // Store movie object
+            // Store movie
             btnDetails.Tag =
                 movie;
 
@@ -198,8 +223,47 @@ namespace MovieReviewApp
                 BtnDetails_Click;
 
 
+            // Add Details button
+            movieCard.Controls.Add(
+                btnDetails
+            );
+
+
             // =================================================
-            // ADD CONTROLS TO CARD
+            // REMOVE FAVORITE BUTTON
+            // =================================================
+
+            if (isFavorite)
+            {
+                Button btnRemove =
+                    new Button();
+
+                btnRemove.Text =
+                    "Remove";
+
+                btnRemove.Width = 80;
+                btnRemove.Height = 35;
+
+                btnRemove.Location =
+                    new Point(100, 280);
+
+                // Store movie
+                btnRemove.Tag =
+                    movie;
+
+                // Click event
+                btnRemove.Click +=
+                    BtnRemoveFavorite_Click;
+
+
+                movieCard.Controls.Add(
+                    btnRemove
+                );
+            }
+
+
+            // =================================================
+            // ADD OTHER CONTROLS
             // =================================================
 
             movieCard.Controls.Add(
@@ -212,10 +276,6 @@ namespace MovieReviewApp
 
             movieCard.Controls.Add(
                 lblMovieInfo
-            );
-
-            movieCard.Controls.Add(
-                btnDetails
             );
 
 
@@ -296,17 +356,15 @@ namespace MovieReviewApp
                 return;
             }
 
-            Movie selectedMovie =
+            Movie movie =
                 clickedButton.Tag as Movie;
 
-            if (selectedMovie == null)
+            if (movie == null)
             {
                 return;
             }
 
-            ShowMovieDetails(
-                selectedMovie
-            );
+            ShowMovieDetails(movie);
         }
 
 
@@ -317,11 +375,16 @@ namespace MovieReviewApp
         private void ShowMovieDetails(
             Movie movie)
         {
-            // Hide movie cards
+            selectedMovie =
+                movie;
+
+
+            // Hide movies
             flowMovies.Visible =
                 false;
 
-            // Show details panel
+
+            // Show details
             panelMovieDetails.Visible =
                 true;
 
@@ -344,7 +407,7 @@ namespace MovieReviewApp
 
 
             // =================================================
-            // RELEASE YEAR
+            // YEAR
             // =================================================
 
             lblDetailYear.Text =
@@ -407,6 +470,296 @@ namespace MovieReviewApp
 
 
         // =====================================================
+        // ADD TO FAVORITE
+        // =====================================================
+
+        private void btnFavorite_Click(
+            object sender,
+            EventArgs e)
+        {
+            if (selectedMovie == null)
+            {
+                MessageBox.Show(
+                    "Please select a movie first."
+                );
+
+                return;
+            }
+
+
+            if (Session.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "User session not found. " +
+                    "Please login again."
+                );
+
+                return;
+            }
+
+
+            try
+            {
+                bool added =
+                    favoriteService.AddToFavorite(
+                        Session.UserId,
+                        selectedMovie.MovieId
+                    );
+
+
+                if (added)
+                {
+                    MessageBox.Show(
+                        selectedMovie.Title +
+                        " added to favorites!"
+                    );
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "This movie is already in your favorites."
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to add favorite.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+
+        // =====================================================
+        // FAVORITES BUTTON
+        // =====================================================
+
+        private void btnFavorites_Click(
+            object sender,
+            EventArgs e)
+        {
+            LoadFavoriteMovies();
+        }
+
+
+        // =====================================================
+        // LOAD FAVORITE MOVIES
+        // =====================================================
+
+        private void LoadFavoriteMovies()
+        {
+            try
+            {
+                if (Session.UserId <= 0)
+                {
+                    MessageBox.Show(
+                        "User session not found. " +
+                        "Please login again."
+                    );
+
+                    return;
+                }
+
+
+                List<Movie> favoriteMovies =
+                    favoriteService.GetFavoriteMovies(
+                        Session.UserId
+                    );
+
+
+                // Clear current cards
+                flowMovies.Controls.Clear();
+
+
+                // Add favorite cards
+                foreach (Movie movie in favoriteMovies)
+                {
+                    CreateMovieCard(
+                        movie,
+                        true
+                    );
+                }
+
+
+                // Show movies
+                flowMovies.Visible =
+                    true;
+
+
+                // Hide details
+                panelMovieDetails.Visible =
+                    false;
+
+
+                // No favorites
+                if (favoriteMovies.Count == 0)
+                {
+                    MessageBox.Show(
+                        "You haven't added any movies " +
+                        "to your favorites yet."
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to load favorite movies.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+
+        // =====================================================
+        // REMOVE FAVORITE
+        // =====================================================
+
+        private void BtnRemoveFavorite_Click(
+            object sender,
+            EventArgs e)
+        {
+            Button clickedButton =
+                sender as Button;
+
+            if (clickedButton == null)
+            {
+                return;
+            }
+
+
+            Movie movie =
+                clickedButton.Tag as Movie;
+
+            if (movie == null)
+            {
+                return;
+            }
+
+
+            if (Session.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "User session not found. " +
+                    "Please login again."
+                );
+
+                return;
+            }
+
+
+            try
+            {
+                bool removed =
+                    favoriteService.RemoveFromFavorite(
+                        Session.UserId,
+                        movie.MovieId
+                    );
+
+
+                if (removed)
+                {
+                    MessageBox.Show(
+                        movie.Title +
+                        " removed from favorites."
+                    );
+
+
+                    // Refresh favorites
+                    LoadFavoriteMovies();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Movie was not found in your favorites."
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to remove favorite.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+
+        // =====================================================
+        // ADD TO WATCHLIST
+        // =====================================================
+
+        private void btnAddToWatchlist_Click(
+            object sender,
+            EventArgs e)
+        {
+            if (selectedMovie == null)
+            {
+                MessageBox.Show(
+                    "Please select a movie first."
+                );
+
+                return;
+            }
+
+
+            if (Session.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "User session not found. " +
+                    "Please login again."
+                );
+
+                return;
+            }
+
+
+            try
+            {
+                bool added =
+                    watchlistService.AddToWatchlist(
+                        Session.UserId,
+                        selectedMovie.MovieId
+                    );
+
+
+                if (added)
+                {
+                    MessageBox.Show(
+                        selectedMovie.Title +
+                        " added to your watchlist!"
+                    );
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "This movie is already in your watchlist."
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to add movie to watchlist.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+
+        // =====================================================
         // BACK TO MOVIES
         // =====================================================
 
@@ -414,30 +767,37 @@ namespace MovieReviewApp
             object sender,
             EventArgs e)
         {
-            // Hide details
             panelMovieDetails.Visible =
                 false;
 
-            // Show movie cards
             flowMovies.Visible =
                 true;
+
+            selectedMovie =
+                null;
+
+            LoadMovies();
         }
 
 
         // =====================================================
-        // LOGOUT
+        // BACK TO MOVIES - SECOND EVENT
         // =====================================================
 
-        private void btnLogout_Click(
+        private void btnBackToMovies_Click_1(
             object sender,
             EventArgs e)
         {
-            Form1 loginForm =
-                new Form1();
+            panelMovieDetails.Visible =
+                false;
 
-            loginForm.Show();
+            flowMovies.Visible =
+                true;
 
-            this.Close();
+            selectedMovie =
+                null;
+
+            LoadMovies();
         }
 
 
@@ -449,13 +809,35 @@ namespace MovieReviewApp
             object sender,
             EventArgs e)
         {
-            // Hide details
+            selectedMovie =
+                null;
+
             panelMovieDetails.Visible =
                 false;
 
-            // Show movie cards
             flowMovies.Visible =
                 true;
+
+            LoadMovies();
+        }
+
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        private void btnLogout_Click(
+            object sender,
+            EventArgs e)
+        {
+            Session.Clear();
+
+            Form1 loginForm =
+                new Form1();
+
+            loginForm.Show();
+
+            this.Close();
         }
 
 
@@ -533,15 +915,6 @@ namespace MovieReviewApp
             object sender,
             EventArgs e)
         {
-        }
-
-        private void btnBackToMovies_Click_1(object sender, EventArgs e)
-        {
-            // Hide movie details
-            panelMovieDetails.Visible = false;
-
-            // Show movie cards
-            flowMovies.Visible = true;
         }
     }
 }

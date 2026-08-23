@@ -86,37 +86,77 @@ namespace MovieReviewApp
                     connection.Open();
 
                     string query = @"
-                SELECT COUNT(*)
+                SELECT UserId, Name, Email
                 FROM Users
                 WHERE Email = @Email
                 AND Password = @Password";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command =
+                           new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@Password", password);
+                        command.Parameters.AddWithValue(
+                            "@Email",
+                            email
+                        );
 
-                        int count = (int)command.ExecuteScalar();
+                        command.Parameters.AddWithValue(
+                            "@Password",
+                            password
+                        );
 
-                        if (count > 0)
+                        using (SqlDataReader reader =
+                               command.ExecuteReader())
                         {
-                            MessageBox.Show("Login Successful!");
+                            if (reader.Read())
+                            {
+                                // =================================
+                                // SAVE LOGGED-IN USER INFORMATION
+                                // =================================
 
-                            HomeForm homeForm = new HomeForm();
-                            homeForm.Show();
+                                Session.UserId =
+                                    Convert.ToInt32(
+                                        reader["UserId"]
+                                    );
 
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid email or password.");
+                                Session.UserName =
+                                    reader["Name"].ToString();
+
+                                Session.UserEmail =
+                                    reader["Email"].ToString();
+
+
+                                MessageBox.Show(
+                                    "Login Successful!"
+                                );
+
+
+                                // =================================
+                                // OPEN HOME FORM
+                                // =================================
+
+                                HomeForm homeForm =
+                                    new HomeForm();
+
+                                homeForm.Show();
+
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show(
+                                    "Invalid email or password."
+                                );
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Login Failed!\n\n" + ex.Message);
+                MessageBox.Show(
+                    "Login Failed!\n\n" +
+                    ex.Message
+                );
             }
         }
 

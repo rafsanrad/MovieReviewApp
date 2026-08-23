@@ -16,5 +16,10 @@ namespace MovieReviewApp.Forms
         {
             InitializeComponent();
         }
+
+        private void FavouritesForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
