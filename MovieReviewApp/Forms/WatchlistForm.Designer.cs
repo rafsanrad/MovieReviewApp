@@ -52,6 +52,7 @@
             this.flowlpWatchlist.Name = "flowlpWatchlist";
             this.flowlpWatchlist.Size = new System.Drawing.Size(760, 415);
             this.flowlpWatchlist.TabIndex = 2;
+            this.flowlpWatchlist.Paint += new System.Windows.Forms.PaintEventHandler(this.flowlpWatchlist_Paint);
             // 
             // lblSubTitle
             // 

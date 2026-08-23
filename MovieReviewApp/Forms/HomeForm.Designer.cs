@@ -36,21 +36,24 @@
             this.btnFavorites = new System.Windows.Forms.Button();
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelMovieDetails = new System.Windows.Forms.Panel();
-            this.btnBackToMovies = new System.Windows.Forms.Button();
-            this.lblMovieDescription = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lblDescriptiontitle = new System.Windows.Forms.Label();
+            this.lblReview = new System.Windows.Forms.Label();
             this.lblDirector = new System.Windows.Forms.Label();
             this.lblDetailYear = new System.Windows.Forms.Label();
             this.lblDetailGenre = new System.Windows.Forms.Label();
-            this.pictureBoxDetails = new System.Windows.Forms.PictureBox();
             this.lblDetailTitle = new System.Windows.Forms.Label();
+            this.pictureBoxDetails = new System.Windows.Forms.PictureBox();
+            this.btnAddToWatchlist = new System.Windows.Forms.Button();
+            this.btnFavorite = new System.Windows.Forms.Button();
+            this.btnBackToMovies = new System.Windows.Forms.Button();
             this.flowMovies = new System.Windows.Forms.FlowLayoutPanel();
             this.cmbGenre = new System.Windows.Forms.ComboBox();
             this.lblGenre = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.btnFavorite = new System.Windows.Forms.Button();
-            this.btnAddToWatchlist = new System.Windows.Forms.Button();
+            this.pnlDivider = new System.Windows.Forms.Panel();
             this.panelSidebar.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.panelMovieDetails.SuspendLayout();
@@ -59,8 +62,9 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnLogout.BackColor = System.Drawing.Color.Tomato;
             this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(17, 676);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogout.Name = "btnLogout";
@@ -72,6 +76,7 @@
             // 
             // panelSidebar
             // 
+            this.panelSidebar.Controls.Add(this.pnlDivider);
             this.panelSidebar.Controls.Add(this.btnLogout);
             this.panelSidebar.Controls.Add(this.btnProfile);
             this.panelSidebar.Controls.Add(this.btnHome);
@@ -86,43 +91,54 @@
             // 
             // btnProfile
             // 
+            this.btnProfile.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnProfile.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfile.Location = new System.Drawing.Point(11, 231);
             this.btnProfile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(129, 44);
             this.btnProfile.TabIndex = 2;
             this.btnProfile.Text = "Profile";
-            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.UseVisualStyleBackColor = false;
             // 
             // btnHome
             // 
+            this.btnHome.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnHome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btnHome.Location = new System.Drawing.Point(11, 24);
             this.btnHome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(129, 51);
             this.btnHome.TabIndex = 0;
             this.btnHome.Text = "Home";
-            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.UseVisualStyleBackColor = false;
             // 
             // btnWatchlist
             // 
+            this.btnWatchlist.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnWatchlist.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWatchlist.ForeColor = System.Drawing.Color.ForestGreen;
             this.btnWatchlist.Location = new System.Drawing.Point(11, 162);
             this.btnWatchlist.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnWatchlist.Name = "btnWatchlist";
             this.btnWatchlist.Size = new System.Drawing.Size(129, 46);
             this.btnWatchlist.TabIndex = 1;
             this.btnWatchlist.Text = "Watchlist";
-            this.btnWatchlist.UseVisualStyleBackColor = true;
+            this.btnWatchlist.UseVisualStyleBackColor = false;
             // 
             // btnFavorites
             // 
+            this.btnFavorites.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnFavorites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFavorites.ForeColor = System.Drawing.Color.Firebrick;
             this.btnFavorites.Location = new System.Drawing.Point(11, 94);
             this.btnFavorites.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFavorites.Name = "btnFavorites";
             this.btnFavorites.Size = new System.Drawing.Size(129, 48);
             this.btnFavorites.TabIndex = 0;
             this.btnFavorites.Text = "Favorites";
-            this.btnFavorites.UseVisualStyleBackColor = true;
+            this.btnFavorites.UseVisualStyleBackColor = false;
             this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
             // 
             // panelContent
@@ -144,89 +160,138 @@
             // 
             // panelMovieDetails
             // 
-            this.panelMovieDetails.Controls.Add(this.btnAddToWatchlist);
-            this.panelMovieDetails.Controls.Add(this.btnFavorite);
-            this.panelMovieDetails.Controls.Add(this.btnBackToMovies);
-            this.panelMovieDetails.Controls.Add(this.lblMovieDescription);
+            this.panelMovieDetails.Controls.Add(this.lblDescription);
+            this.panelMovieDetails.Controls.Add(this.lblDescriptiontitle);
+            this.panelMovieDetails.Controls.Add(this.lblReview);
             this.panelMovieDetails.Controls.Add(this.lblDirector);
             this.panelMovieDetails.Controls.Add(this.lblDetailYear);
             this.panelMovieDetails.Controls.Add(this.lblDetailGenre);
-            this.panelMovieDetails.Controls.Add(this.pictureBoxDetails);
             this.panelMovieDetails.Controls.Add(this.lblDetailTitle);
+            this.panelMovieDetails.Controls.Add(this.pictureBoxDetails);
+            this.panelMovieDetails.Controls.Add(this.btnAddToWatchlist);
+            this.panelMovieDetails.Controls.Add(this.btnFavorite);
+            this.panelMovieDetails.Controls.Add(this.btnBackToMovies);
             this.panelMovieDetails.Location = new System.Drawing.Point(42, 148);
             this.panelMovieDetails.Name = "panelMovieDetails";
             this.panelMovieDetails.Size = new System.Drawing.Size(800, 552);
             this.panelMovieDetails.TabIndex = 6;
             this.panelMovieDetails.Visible = false;
             // 
-            // btnBackToMovies
+            // lblDescription
             // 
-            this.btnBackToMovies.Location = new System.Drawing.Point(331, 449);
-            this.btnBackToMovies.Name = "btnBackToMovies";
-            this.btnBackToMovies.Size = new System.Drawing.Size(155, 52);
-            this.btnBackToMovies.TabIndex = 6;
-            this.btnBackToMovies.Text = "Back to Movies";
-            this.btnBackToMovies.UseVisualStyleBackColor = true;
-            this.btnBackToMovies.Click += new System.EventHandler(this.btnBackToMovies_Click_1);
+            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescription.Location = new System.Drawing.Point(235, 205);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(502, 73);
+            this.lblDescription.TabIndex = 16;
+            this.lblDescription.Text = "Earth\'s mightiest heroes must come together and learn to fight as a team if they " +
+    "are going to stop the mischievous Loki and his alien army from enslaving humanit" +
+    "y.";
             // 
-            // lblMovieDescription
+            // lblDescriptiontitle
             // 
-            this.lblMovieDescription.AutoSize = true;
-            this.lblMovieDescription.Location = new System.Drawing.Point(345, 262);
-            this.lblMovieDescription.Name = "lblMovieDescription";
-            this.lblMovieDescription.Size = new System.Drawing.Size(51, 20);
-            this.lblMovieDescription.TabIndex = 5;
-            this.lblMovieDescription.Text = "label1";
+            this.lblDescriptiontitle.AutoSize = true;
+            this.lblDescriptiontitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescriptiontitle.Location = new System.Drawing.Point(237, 179);
+            this.lblDescriptiontitle.Name = "lblDescriptiontitle";
+            this.lblDescriptiontitle.Size = new System.Drawing.Size(109, 25);
+            this.lblDescriptiontitle.TabIndex = 15;
+            this.lblDescriptiontitle.Text = "Description";
+            // 
+            // lblReview
+            // 
+            this.lblReview.AutoSize = true;
+            this.lblReview.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReview.Location = new System.Drawing.Point(235, 145);
+            this.lblReview.Name = "lblReview";
+            this.lblReview.Size = new System.Drawing.Size(80, 28);
+            this.lblReview.TabIndex = 14;
+            this.lblReview.Text = "⭐4.8/5";
             // 
             // lblDirector
             // 
             this.lblDirector.AutoSize = true;
-            this.lblDirector.Location = new System.Drawing.Point(349, 215);
+            this.lblDirector.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDirector.Location = new System.Drawing.Point(233, 113);
             this.lblDirector.Name = "lblDirector";
-            this.lblDirector.Size = new System.Drawing.Size(69, 20);
-            this.lblDirector.TabIndex = 4;
-            this.lblDirector.Text = "Director:";
-            this.lblDirector.Click += new System.EventHandler(this.lblDirector_Click);
+            this.lblDirector.Size = new System.Drawing.Size(200, 25);
+            this.lblDirector.TabIndex = 13;
+            this.lblDirector.Text = "Director: Joss Whendon";
             // 
             // lblDetailYear
             // 
             this.lblDetailYear.AutoSize = true;
-            this.lblDetailYear.Location = new System.Drawing.Point(349, 175);
+            this.lblDetailYear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetailYear.Location = new System.Drawing.Point(233, 83);
             this.lblDetailYear.Name = "lblDetailYear";
-            this.lblDetailYear.Size = new System.Drawing.Size(110, 20);
-            this.lblDetailYear.TabIndex = 3;
-            this.lblDetailYear.Text = "Release Year:";
-            this.lblDetailYear.Click += new System.EventHandler(this.lblDetailYear_Click);
+            this.lblDetailYear.Size = new System.Drawing.Size(151, 25);
+            this.lblDetailYear.TabIndex = 12;
+            this.lblDetailYear.Text = "ReleaseYear: 2012";
             // 
             // lblDetailGenre
             // 
             this.lblDetailGenre.AutoSize = true;
-            this.lblDetailGenre.Location = new System.Drawing.Point(345, 130);
+            this.lblDetailGenre.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetailGenre.Location = new System.Drawing.Point(233, 53);
             this.lblDetailGenre.Name = "lblDetailGenre";
-            this.lblDetailGenre.Size = new System.Drawing.Size(58, 20);
-            this.lblDetailGenre.TabIndex = 2;
-            this.lblDetailGenre.Text = "Genre:";
-            // 
-            // pictureBoxDetails
-            // 
-            this.pictureBoxDetails.Location = new System.Drawing.Point(57, 47);
-            this.pictureBoxDetails.Name = "pictureBoxDetails";
-            this.pictureBoxDetails.Size = new System.Drawing.Size(220, 300);
-            this.pictureBoxDetails.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxDetails.TabIndex = 1;
-            this.pictureBoxDetails.TabStop = false;
-            this.pictureBoxDetails.Click += new System.EventHandler(this.pictureBoxDetails_Click);
+            this.lblDetailGenre.Size = new System.Drawing.Size(109, 25);
+            this.lblDetailGenre.TabIndex = 11;
+            this.lblDetailGenre.Text = "Genre: Sci-Fi";
             // 
             // lblDetailTitle
             // 
             this.lblDetailTitle.AutoSize = true;
-            this.lblDetailTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetailTitle.Location = new System.Drawing.Point(314, 47);
+            this.lblDetailTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetailTitle.Location = new System.Drawing.Point(228, 16);
             this.lblDetailTitle.Name = "lblDetailTitle";
-            this.lblDetailTitle.Size = new System.Drawing.Size(219, 48);
-            this.lblDetailTitle.TabIndex = 0;
-            this.lblDetailTitle.Text = " Movie Title";
-            this.lblDetailTitle.Click += new System.EventHandler(this.lblDetailTitle_Click);
+            this.lblDetailTitle.Size = new System.Drawing.Size(194, 38);
+            this.lblDetailTitle.TabIndex = 10;
+            this.lblDetailTitle.Text = "The Avengers";
+            // 
+            // pictureBoxDetails
+            // 
+            this.pictureBoxDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxDetails.Location = new System.Drawing.Point(24, 25);
+            this.pictureBoxDetails.Name = "pictureBoxDetails";
+            this.pictureBoxDetails.Size = new System.Drawing.Size(185, 260);
+            this.pictureBoxDetails.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDetails.TabIndex = 9;
+            this.pictureBoxDetails.TabStop = false;
+            // 
+            // btnAddToWatchlist
+            // 
+            this.btnAddToWatchlist.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddToWatchlist.ForeColor = System.Drawing.Color.ForestGreen;
+            this.btnAddToWatchlist.Location = new System.Drawing.Point(473, 282);
+            this.btnAddToWatchlist.Name = "btnAddToWatchlist";
+            this.btnAddToWatchlist.Size = new System.Drawing.Size(173, 35);
+            this.btnAddToWatchlist.TabIndex = 8;
+            this.btnAddToWatchlist.Text = "Add to Watchlist➕";
+            this.btnAddToWatchlist.UseVisualStyleBackColor = true;
+            this.btnAddToWatchlist.Click += new System.EventHandler(this.btnAddToWatchlist_Click);
+            // 
+            // btnFavorite
+            // 
+            this.btnFavorite.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFavorite.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnFavorite.Location = new System.Drawing.Point(252, 282);
+            this.btnFavorite.Name = "btnFavorite";
+            this.btnFavorite.Size = new System.Drawing.Size(165, 35);
+            this.btnFavorite.TabIndex = 7;
+            this.btnFavorite.Text = "Add to Favorite❤️";
+            this.btnFavorite.UseVisualStyleBackColor = true;
+            this.btnFavorite.Click += new System.EventHandler(this.btnFavorite_Click);
+            // 
+            // btnBackToMovies
+            // 
+            this.btnBackToMovies.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackToMovies.Location = new System.Drawing.Point(634, 10);
+            this.btnBackToMovies.Name = "btnBackToMovies";
+            this.btnBackToMovies.Size = new System.Drawing.Size(153, 40);
+            this.btnBackToMovies.TabIndex = 6;
+            this.btnBackToMovies.Text = "◀️Back to Movies";
+            this.btnBackToMovies.UseVisualStyleBackColor = true;
+            this.btnBackToMovies.Click += new System.EventHandler(this.btnBackToMovies_Click_1);
             // 
             // flowMovies
             // 
@@ -262,21 +327,24 @@
             // lblGenre
             // 
             this.lblGenre.AutoSize = true;
+            this.lblGenre.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGenre.Location = new System.Drawing.Point(138, 66);
             this.lblGenre.Name = "lblGenre";
-            this.lblGenre.Size = new System.Drawing.Size(114, 20);
+            this.lblGenre.Size = new System.Drawing.Size(111, 21);
             this.lblGenre.TabIndex = 3;
             this.lblGenre.Text = "Genre              :";
             // 
             // btnSearch
             // 
+            this.btnSearch.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(462, 66);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 30);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.UseVisualStyleBackColor = false;
             // 
             // txtSearch
             // 
@@ -289,31 +357,20 @@
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSearch.Location = new System.Drawing.Point(138, 22);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(113, 20);
+            this.lblSearch.Size = new System.Drawing.Size(111, 21);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Search Movie :";
             // 
-            // btnFavorite
+            // pnlDivider
             // 
-            this.btnFavorite.Location = new System.Drawing.Point(349, 323);
-            this.btnFavorite.Name = "btnFavorite";
-            this.btnFavorite.Size = new System.Drawing.Size(162, 38);
-            this.btnFavorite.TabIndex = 7;
-            this.btnFavorite.Text = "Add to Favorite";
-            this.btnFavorite.UseVisualStyleBackColor = true;
-            this.btnFavorite.Click += new System.EventHandler(this.btnFavorite_Click);
-            // 
-            // btnAddToWatchlist
-            // 
-            this.btnAddToWatchlist.Location = new System.Drawing.Point(545, 323);
-            this.btnAddToWatchlist.Name = "btnAddToWatchlist";
-            this.btnAddToWatchlist.Size = new System.Drawing.Size(159, 38);
-            this.btnAddToWatchlist.TabIndex = 8;
-            this.btnAddToWatchlist.Text = "Add to Watchlist";
-            this.btnAddToWatchlist.UseVisualStyleBackColor = true;
-            this.btnAddToWatchlist.Click += new System.EventHandler(this.btnAddToWatchlist_Click);
+            this.pnlDivider.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pnlDivider.Location = new System.Drawing.Point(156, 0);
+            this.pnlDivider.Name = "pnlDivider";
+            this.pnlDivider.Size = new System.Drawing.Size(1, 739);
+            this.pnlDivider.TabIndex = 3;
             // 
             // HomeForm
             // 
@@ -352,14 +409,17 @@
         private System.Windows.Forms.Label lblGenre;
         private System.Windows.Forms.FlowLayoutPanel flowMovies;
         private System.Windows.Forms.Panel panelMovieDetails;
-        private System.Windows.Forms.Label lblDetailTitle;
-        private System.Windows.Forms.PictureBox pictureBoxDetails;
+        private System.Windows.Forms.Button btnBackToMovies;
+        private System.Windows.Forms.Button btnAddToWatchlist;
+        private System.Windows.Forms.Button btnFavorite;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Label lblDescriptiontitle;
+        private System.Windows.Forms.Label lblReview;
         private System.Windows.Forms.Label lblDirector;
         private System.Windows.Forms.Label lblDetailYear;
         private System.Windows.Forms.Label lblDetailGenre;
-        private System.Windows.Forms.Button btnBackToMovies;
-        private System.Windows.Forms.Label lblMovieDescription;
-        private System.Windows.Forms.Button btnAddToWatchlist;
-        private System.Windows.Forms.Button btnFavorite;
+        private System.Windows.Forms.Label lblDetailTitle;
+        private System.Windows.Forms.PictureBox pictureBoxDetails;
+        private System.Windows.Forms.Panel pnlDivider;
     }
 }

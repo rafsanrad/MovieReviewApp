@@ -188,6 +188,13 @@ namespace MovieReviewApp
                 " • " +
                 movie.ReleaseYear;
 
+            lblMovieInfo.Font =
+                new Font(
+                    "Segoe UI",
+                    9,
+                    FontStyle.Regular
+                );
+
             lblMovieInfo.AutoSize =
                 false;
 
@@ -207,6 +214,13 @@ namespace MovieReviewApp
 
             btnDetails.Text =
                 "Details";
+
+            btnDetails.Font =
+                new Font(
+                    "Segoe UI",
+                    9,
+                    FontStyle.Regular
+                );
 
             btnDetails.Width = 80;
             btnDetails.Height = 35;
@@ -241,11 +255,26 @@ namespace MovieReviewApp
                 btnRemove.Text =
                     "Remove";
 
+                btnRemove.Font =
+                    new Font(
+                        "Segoe UI",
+                        9,
+                        FontStyle.Regular
+                    );
+
                 btnRemove.Width = 80;
                 btnRemove.Height = 35;
 
                 btnRemove.Location =
                     new Point(100, 280);
+
+                // Firebrick background
+                btnRemove.BackColor =
+                    Color.Firebrick;
+
+                // Black text
+                btnRemove.ForeColor =
+                    Color.Black;
 
                 // Store movie
                 btnRemove.Tag =
@@ -440,12 +469,12 @@ namespace MovieReviewApp
             if (string.IsNullOrEmpty(
                 movie.Description))
             {
-                lblMovieDescription.Text =
+                lblDescriptiontitle.Text =
                     "No description available.";
             }
             else
             {
-                lblMovieDescription.Text =
+                lblDescriptiontitle.Text =
                     movie.Description;
             }
 

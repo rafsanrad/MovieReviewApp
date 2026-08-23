@@ -118,6 +118,34 @@ namespace MovieReviewApp
                 END;
 
 
+                -- FAVORITES TABLE
+                IF NOT EXISTS
+                (
+                    SELECT *
+                    FROM sys.tables
+                    WHERE name = 'Favorites'
+                )
+                BEGIN
+                    CREATE TABLE Favorites
+                    (
+                        FavoriteId INT PRIMARY KEY IDENTITY(1,1),
+                        UserId INT NOT NULL,
+                        MovieId INT NOT NULL,
+
+                        CONSTRAINT FK_Favorites_Users
+                            FOREIGN KEY (UserId)
+                            REFERENCES Users(UserId),
+
+                        CONSTRAINT FK_Favorites_Movies
+                            FOREIGN KEY (MovieId)
+                            REFERENCES Movies(MovieId),
+
+                        CONSTRAINT UQ_Favorites_User_Movie
+                            UNIQUE (UserId, MovieId)
+                    );
+                END;
+
+
                 -- WATCHLIST TABLE
                 IF NOT EXISTS
                 (

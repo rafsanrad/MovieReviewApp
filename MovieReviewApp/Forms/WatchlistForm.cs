@@ -16,5 +16,10 @@ namespace MovieReviewApp.Forms
         {
             InitializeComponent();
         }
+
+        private void flowlpWatchlist_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
