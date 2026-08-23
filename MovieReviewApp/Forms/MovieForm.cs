@@ -26,5 +26,10 @@ namespace MovieReviewApp
         {
 
         }
+
+        private void btnAddToFavourites_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
