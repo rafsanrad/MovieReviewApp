@@ -37,7 +37,21 @@
             this.panelDivider = new System.Windows.Forms.Panel();
             this.lblAdminPanel = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.panelOverView = new System.Windows.Forms.Panel();
+            this.panelMovieManagement = new System.Windows.Forms.Panel();
+            this.panelUserManagement = new System.Windows.Forms.Panel();
+            this.dataGridUsers = new System.Windows.Forms.DataGridView();
+            this.btnSearchUser = new System.Windows.Forms.Button();
+            this.txtSearchUser = new System.Windows.Forms.TextBox();
+            this.lblSearchUser = new System.Windows.Forms.Label();
+            this.lablUserManagement = new System.Windows.Forms.Label();
+            this.btnEditNewMovie = new System.Windows.Forms.Button();
+            this.btnAddNewmovies = new System.Windows.Forms.Button();
+            this.dataGridMovies = new System.Windows.Forms.DataGridView();
+            this.btnSearchMovie = new System.Windows.Forms.Button();
+            this.txtSearchMovie = new System.Windows.Forms.TextBox();
+            this.lblSearchMovie = new System.Windows.Forms.Label();
+            this.lblMovieManagement = new System.Windows.Forms.Label();
+            this.panelOverview = new System.Windows.Forms.Panel();
             this.panelQuickAction = new System.Windows.Forms.Panel();
             this.btnEditMovie = new System.Windows.Forms.Button();
             this.btnAddMovie = new System.Windows.Forms.Button();
@@ -56,7 +70,11 @@
             this.lblMovies = new System.Windows.Forms.Label();
             this.panelSidebar.SuspendLayout();
             this.panelContent.SuspendLayout();
-            this.panelOverView.SuspendLayout();
+            this.panelMovieManagement.SuspendLayout();
+            this.panelUserManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).BeginInit();
+            this.panelOverview.SuspendLayout();
             this.panelQuickAction.SuspendLayout();
             this.panelReviewCard.SuspendLayout();
             this.panelUserCard.SuspendLayout();
@@ -101,6 +119,7 @@
             this.btnReviews.TabIndex = 2;
             this.btnReviews.Text = "📝Reviews";
             this.btnReviews.UseVisualStyleBackColor = false;
+            this.btnReviews.Click += new System.EventHandler(this.btnReviews_Click);
             // 
             // btnDashBoard
             // 
@@ -114,6 +133,7 @@
             this.btnDashBoard.TabIndex = 0;
             this.btnDashBoard.Text = "🏠 DashBoard";
             this.btnDashBoard.UseVisualStyleBackColor = false;
+            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
             // 
             // btnUsers
             // 
@@ -127,6 +147,7 @@
             this.btnUsers.TabIndex = 1;
             this.btnUsers.Text = "👤Users";
             this.btnUsers.UseVisualStyleBackColor = false;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnMovies
             // 
@@ -140,6 +161,7 @@
             this.btnMovies.TabIndex = 1;
             this.btnMovies.Text = "🎬 Movies";
             this.btnMovies.UseVisualStyleBackColor = false;
+            this.btnMovies.Click += new System.EventHandler(this.btnMovies_Click);
             // 
             // panelDivider
             // 
@@ -161,7 +183,9 @@
             // 
             // panelContent
             // 
-            this.panelContent.Controls.Add(this.panelOverView);
+            this.panelContent.Controls.Add(this.panelUserManagement);
+            this.panelContent.Controls.Add(this.panelMovieManagement);
+            this.panelContent.Controls.Add(this.panelOverview);
             this.panelContent.Controls.Add(this.lblAdminPanel);
             this.panelContent.Controls.Add(this.panelDivider);
             this.panelContent.Location = new System.Drawing.Point(170, 0);
@@ -169,16 +193,166 @@
             this.panelContent.Size = new System.Drawing.Size(884, 700);
             this.panelContent.TabIndex = 7;
             // 
-            // panelOverView
+            // panelMovieManagement
             // 
-            this.panelOverView.Controls.Add(this.panelQuickAction);
-            this.panelOverView.Controls.Add(this.panelReviewCard);
-            this.panelOverView.Controls.Add(this.panelUserCard);
-            this.panelOverView.Controls.Add(this.panelMovieCard);
-            this.panelOverView.Location = new System.Drawing.Point(33, 115);
-            this.panelOverView.Name = "panelOverView";
-            this.panelOverView.Size = new System.Drawing.Size(826, 561);
-            this.panelOverView.TabIndex = 8;
+            this.panelMovieManagement.Controls.Add(this.btnEditNewMovie);
+            this.panelMovieManagement.Controls.Add(this.btnAddNewmovies);
+            this.panelMovieManagement.Controls.Add(this.dataGridMovies);
+            this.panelMovieManagement.Controls.Add(this.btnSearchMovie);
+            this.panelMovieManagement.Controls.Add(this.txtSearchMovie);
+            this.panelMovieManagement.Controls.Add(this.lblSearchMovie);
+            this.panelMovieManagement.Controls.Add(this.lblMovieManagement);
+            this.panelMovieManagement.Location = new System.Drawing.Point(11, 25);
+            this.panelMovieManagement.Name = "panelMovieManagement";
+            this.panelMovieManagement.Size = new System.Drawing.Size(826, 561);
+            this.panelMovieManagement.TabIndex = 8;
+            this.panelMovieManagement.Visible = false;
+            // 
+            // panelUserManagement
+            // 
+            this.panelUserManagement.Controls.Add(this.dataGridUsers);
+            this.panelUserManagement.Controls.Add(this.btnSearchUser);
+            this.panelUserManagement.Controls.Add(this.txtSearchUser);
+            this.panelUserManagement.Controls.Add(this.lblSearchUser);
+            this.panelUserManagement.Controls.Add(this.lablUserManagement);
+            this.panelUserManagement.Location = new System.Drawing.Point(0, 0);
+            this.panelUserManagement.Name = "panelUserManagement";
+            this.panelUserManagement.Size = new System.Drawing.Size(826, 561);
+            this.panelUserManagement.TabIndex = 9;
+            // 
+            // dataGridUsers
+            // 
+            this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridUsers.Location = new System.Drawing.Point(32, 135);
+            this.dataGridUsers.Name = "dataGridUsers";
+            this.dataGridUsers.RowHeadersWidth = 62;
+            this.dataGridUsers.RowTemplate.Height = 28;
+            this.dataGridUsers.Size = new System.Drawing.Size(762, 361);
+            this.dataGridUsers.TabIndex = 4;
+            // 
+            // btnSearchUser
+            // 
+            this.btnSearchUser.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchUser.Location = new System.Drawing.Point(635, 73);
+            this.btnSearchUser.Name = "btnSearchUser";
+            this.btnSearchUser.Size = new System.Drawing.Size(82, 34);
+            this.btnSearchUser.TabIndex = 3;
+            this.btnSearchUser.Text = "Search";
+            this.btnSearchUser.UseVisualStyleBackColor = true;
+            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
+            // 
+            // txtSearchUser
+            // 
+            this.txtSearchUser.Location = new System.Drawing.Point(205, 76);
+            this.txtSearchUser.Name = "txtSearchUser";
+            this.txtSearchUser.Size = new System.Drawing.Size(405, 29);
+            this.txtSearchUser.TabIndex = 2;
+            // 
+            // lblSearchUser
+            // 
+            this.lblSearchUser.AutoSize = true;
+            this.lblSearchUser.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchUser.Location = new System.Drawing.Point(43, 76);
+            this.lblSearchUser.Name = "lblSearchUser";
+            this.lblSearchUser.Size = new System.Drawing.Size(134, 28);
+            this.lblSearchUser.TabIndex = 1;
+            this.lblSearchUser.Text = "Search User :";
+            this.lblSearchUser.Visible = false;
+            // 
+            // lablUserManagement
+            // 
+            this.lablUserManagement.AutoSize = true;
+            this.lablUserManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUserManagement.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lablUserManagement.Location = new System.Drawing.Point(226, 15);
+            this.lablUserManagement.Name = "lablUserManagement";
+            this.lablUserManagement.Size = new System.Drawing.Size(328, 48);
+            this.lablUserManagement.TabIndex = 0;
+            this.lablUserManagement.Text = "User Management";
+            // 
+            // btnEditNewMovie
+            // 
+            this.btnEditNewMovie.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditNewMovie.ForeColor = System.Drawing.Color.Crimson;
+            this.btnEditNewMovie.Location = new System.Drawing.Point(431, 512);
+            this.btnEditNewMovie.Name = "btnEditNewMovie";
+            this.btnEditNewMovie.Size = new System.Drawing.Size(170, 39);
+            this.btnEditNewMovie.TabIndex = 6;
+            this.btnEditNewMovie.Text = "✍️ Edit Movie";
+            this.btnEditNewMovie.UseVisualStyleBackColor = true;
+            this.btnEditNewMovie.Click += new System.EventHandler(this.btnEditNewMovie_Click);
+            // 
+            // btnAddNewmovies
+            // 
+            this.btnAddNewmovies.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNewmovies.ForeColor = System.Drawing.Color.Teal;
+            this.btnAddNewmovies.Location = new System.Drawing.Point(193, 512);
+            this.btnAddNewmovies.Name = "btnAddNewmovies";
+            this.btnAddNewmovies.Size = new System.Drawing.Size(170, 39);
+            this.btnAddNewmovies.TabIndex = 5;
+            this.btnAddNewmovies.Text = "➕Add Movie";
+            this.btnAddNewmovies.UseVisualStyleBackColor = true;
+            this.btnAddNewmovies.Click += new System.EventHandler(this.btnAddNewmovies_Click);
+            // 
+            // dataGridMovies
+            // 
+            this.dataGridMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMovies.Location = new System.Drawing.Point(32, 135);
+            this.dataGridMovies.Name = "dataGridMovies";
+            this.dataGridMovies.RowHeadersWidth = 62;
+            this.dataGridMovies.RowTemplate.Height = 28;
+            this.dataGridMovies.Size = new System.Drawing.Size(762, 361);
+            this.dataGridMovies.TabIndex = 4;
+            // 
+            // btnSearchMovie
+            // 
+            this.btnSearchMovie.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchMovie.Location = new System.Drawing.Point(635, 73);
+            this.btnSearchMovie.Name = "btnSearchMovie";
+            this.btnSearchMovie.Size = new System.Drawing.Size(82, 34);
+            this.btnSearchMovie.TabIndex = 3;
+            this.btnSearchMovie.Text = "Search";
+            this.btnSearchMovie.UseVisualStyleBackColor = true;
+            this.btnSearchMovie.Click += new System.EventHandler(this.btnSearchMovie_Click);
+            // 
+            // txtSearchMovie
+            // 
+            this.txtSearchMovie.Location = new System.Drawing.Point(205, 76);
+            this.txtSearchMovie.Name = "txtSearchMovie";
+            this.txtSearchMovie.Size = new System.Drawing.Size(405, 29);
+            this.txtSearchMovie.TabIndex = 2;
+            // 
+            // lblSearchMovie
+            // 
+            this.lblSearchMovie.AutoSize = true;
+            this.lblSearchMovie.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchMovie.Location = new System.Drawing.Point(43, 76);
+            this.lblSearchMovie.Name = "lblSearchMovie";
+            this.lblSearchMovie.Size = new System.Drawing.Size(151, 28);
+            this.lblSearchMovie.TabIndex = 1;
+            this.lblSearchMovie.Text = "Search Movie :";
+            // 
+            // lblMovieManagement
+            // 
+            this.lblMovieManagement.AutoSize = true;
+            this.lblMovieManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovieManagement.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblMovieManagement.Location = new System.Drawing.Point(226, 15);
+            this.lblMovieManagement.Name = "lblMovieManagement";
+            this.lblMovieManagement.Size = new System.Drawing.Size(358, 48);
+            this.lblMovieManagement.TabIndex = 0;
+            this.lblMovieManagement.Text = "Movie Management";
+            // 
+            // panelOverview
+            // 
+            this.panelOverview.Controls.Add(this.panelQuickAction);
+            this.panelOverview.Controls.Add(this.panelReviewCard);
+            this.panelOverview.Controls.Add(this.panelUserCard);
+            this.panelOverview.Controls.Add(this.panelMovieCard);
+            this.panelOverview.Location = new System.Drawing.Point(33, 115);
+            this.panelOverview.Name = "panelOverview";
+            this.panelOverview.Size = new System.Drawing.Size(826, 561);
+            this.panelOverview.TabIndex = 8;
             // 
             // panelQuickAction
             // 
@@ -201,6 +375,7 @@
             this.btnEditMovie.TabIndex = 2;
             this.btnEditMovie.Text = "✍️ Edit Movie";
             this.btnEditMovie.UseVisualStyleBackColor = true;
+            this.btnEditMovie.Click += new System.EventHandler(this.btnEditMovie_Click);
             // 
             // btnAddMovie
             // 
@@ -212,6 +387,7 @@
             this.btnAddMovie.TabIndex = 1;
             this.btnAddMovie.Text = "➕ Add Movie";
             this.btnAddMovie.UseVisualStyleBackColor = true;
+            this.btnAddMovie.Click += new System.EventHandler(this.btnAddMovie_Click);
             // 
             // lblQuickAction
             // 
@@ -369,7 +545,13 @@
             this.Text = "Cineverse";
             this.panelSidebar.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
-            this.panelOverView.ResumeLayout(false);
+            this.panelMovieManagement.ResumeLayout(false);
+            this.panelMovieManagement.PerformLayout();
+            this.panelUserManagement.ResumeLayout(false);
+            this.panelUserManagement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).EndInit();
+            this.panelOverview.ResumeLayout(false);
             this.panelQuickAction.ResumeLayout(false);
             this.panelQuickAction.PerformLayout();
             this.panelReviewCard.ResumeLayout(false);
@@ -393,7 +575,7 @@
         private System.Windows.Forms.Button btnMovies;
         private System.Windows.Forms.Label lblAdminPanel;
         private System.Windows.Forms.Panel panelContent;
-        private System.Windows.Forms.Panel panelOverView;
+        private System.Windows.Forms.Panel panelOverview;
         private System.Windows.Forms.Panel panelQuickAction;
         private System.Windows.Forms.Panel panelReviewCard;
         private System.Windows.Forms.Panel panelUserCard;
@@ -410,5 +592,19 @@
         private System.Windows.Forms.Button btnEditMovie;
         private System.Windows.Forms.Button btnAddMovie;
         private System.Windows.Forms.Label lblQuickAction;
+        private System.Windows.Forms.Panel panelMovieManagement;
+        private System.Windows.Forms.Label lblMovieManagement;
+        private System.Windows.Forms.Label lblSearchMovie;
+        private System.Windows.Forms.TextBox txtSearchMovie;
+        private System.Windows.Forms.DataGridView dataGridMovies;
+        private System.Windows.Forms.Button btnSearchMovie;
+        private System.Windows.Forms.Button btnEditNewMovie;
+        private System.Windows.Forms.Button btnAddNewmovies;
+        private System.Windows.Forms.Panel panelUserManagement;
+        private System.Windows.Forms.DataGridView dataGridUsers;
+        private System.Windows.Forms.Button btnSearchUser;
+        private System.Windows.Forms.TextBox txtSearchUser;
+        private System.Windows.Forms.Label lblSearchUser;
+        private System.Windows.Forms.Label lablUserManagement;
     }
 }
