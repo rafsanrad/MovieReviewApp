@@ -9,11 +9,20 @@ namespace MovieReviewApp
 {
     public partial class HomeForm : Form
     {
-        private MovieService movieService = new MovieService();
-        private FavoriteService favoriteService = new FavoriteService();
-        private WatchlistService watchlistService = new WatchlistService();
+        private MovieService movieService =
+            new MovieService();
+
+        private FavoriteService favoriteService =
+            new FavoriteService();
+
+        private WatchlistService watchlistService =
+            new WatchlistService();
 
         private Movie selectedMovie;
+
+        // =====================================================
+        // CONSTRUCTOR
+        // =====================================================
 
         public HomeForm()
         {
@@ -26,41 +35,60 @@ namespace MovieReviewApp
 
             flowMovies.Visible = true;
             panelMovieDetails.Visible = false;
+            panelProfile.Visible = false;
         }
 
         // =====================================================
-        // HOME FORM LOAD
+        // FORM LOAD
         // =====================================================
 
-        private void HomeForm_Load(object sender, EventArgs e)
+        private void HomeForm_Load(
+            object sender,
+            EventArgs e)
         {
             ShowHomePage();
-        }
-
-        // =====================================================
-        // HOME PAGE
-        // =====================================================
-
-        private void ShowHomePage()
-        {
-            selectedMovie = null;
-
-            panelMovieDetails.Visible = false;
-            panelMovieDetails.SendToBack();
-
-            flowMovies.Visible = true;
-            flowMovies.BringToFront();
-
-            LoadMovies();
         }
 
         // =====================================================
         // HOME BUTTON
         // =====================================================
 
-        private void btnHome_Click(object sender, EventArgs e)
+        private void btnHome_Click(
+            object sender,
+            EventArgs e)
         {
             ShowHomePage();
+        }
+
+        // =====================================================
+        // SHOW HOME PAGE
+        // =====================================================
+
+        private void ShowHomePage()
+        {
+            selectedMovie = null;
+
+            // Show search controls
+            lblSearch.Visible = true;
+            txtSearch.Visible = true;
+            btnSearch.Visible = true;
+            lblGenre.Visible = true;
+            cmbGenre.Visible = true;
+
+            // Show movie list
+            flowMovies.Visible = true;
+            panelMovieDetails.Visible = false;
+            panelProfile.Visible = false;
+
+            // Reset search
+            txtSearch.Text = "";
+
+            if (cmbGenre.Items.Count > 0)
+            {
+                cmbGenre.SelectedIndex = 0;
+            }
+
+            LoadMovies();
         }
 
         // =====================================================
@@ -71,7 +99,74 @@ namespace MovieReviewApp
         {
             try
             {
-                List<Movie> movies = movieService.GetAll();
+                List<Movie> movies =
+                    movieService.GetAll();
+
+                DisplayMovies(movies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to load movies.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        // =====================================================
+        // DISPLAY MOVIES
+        // =====================================================
+
+        private void DisplayMovies(
+            List<Movie> movies)
+        {
+            flowMovies.Controls.Clear();
+
+            foreach (Movie movie in movies)
+            {
+                CreateMovieCard(movie);
+            }
+
+            flowMovies.Visible = true;
+            panelMovieDetails.Visible = false;
+            panelProfile.Visible = false;
+        }
+
+        // =====================================================
+        // SEARCH BUTTON
+        // =====================================================
+
+        private void btnSearch_Click(
+            object sender,
+            EventArgs e)
+        {
+            SearchMovies();
+        }
+
+        // =====================================================
+        // SEARCH MOVIES
+        // =====================================================
+
+        private void SearchMovies()
+        {
+            try
+            {
+                string searchText =
+                    txtSearch.Text.Trim();
+
+                string genre =
+                    cmbGenre.SelectedItem == null
+                    ? "All"
+                    : cmbGenre.SelectedItem.ToString();
+
+                List<Movie> movies =
+                    movieService.SearchMovies(
+                        searchText,
+                        genre
+                    );
 
                 flowMovies.Controls.Clear();
 
@@ -81,18 +176,49 @@ namespace MovieReviewApp
                 }
 
                 flowMovies.Visible = true;
-                flowMovies.BringToFront();
-
                 panelMovieDetails.Visible = false;
+                panelProfile.Visible = false;
+
+                if (movies.Count == 0)
+                {
+                    MessageBox.Show(
+                        "No movies found.",
+                        "Search Result",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Failed to load movies.\n\n" + ex.Message,
-                    "Error",
+                    "Search failed.\n\n" +
+                    ex.Message,
+                    "Search Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+            }
+        }
+
+        // =====================================================
+        // GENRE CHANGE
+        // =====================================================
+
+        private void comboBox1_SelectedIndexChanged(
+            object sender,
+            EventArgs e)
+        {
+            if (panelProfile != null &&
+                panelProfile.Visible)
+            {
+                return;
+            }
+
+            if (flowMovies != null &&
+                flowMovies.Visible)
+            {
+                SearchMovies();
             }
         }
 
@@ -105,31 +231,51 @@ namespace MovieReviewApp
             bool isFavorite = false,
             bool isWatchlist = false)
         {
-            Panel movieCard = new Panel();
+            Panel movieCard =
+                new Panel();
 
             movieCard.Width = 200;
             movieCard.Height = 330;
-            movieCard.BorderStyle = BorderStyle.FixedSingle;
-            movieCard.Margin = new Padding(10);
 
-            // Poster
-            PictureBox poster = new PictureBox();
+            movieCard.BorderStyle =
+                BorderStyle.FixedSingle;
+
+            movieCard.Margin =
+                new Padding(10);
+
+            // =================================================
+            // POSTER
+            // =================================================
+
+            PictureBox poster =
+                new PictureBox();
 
             poster.Width = 180;
             poster.Height = 200;
-            poster.Location = new Point(10, 10);
-            poster.SizeMode = PictureBoxSizeMode.StretchImage;
-            poster.BackColor = Color.LightGray;
+
+            poster.Location =
+                new Point(10, 10);
+
+            poster.SizeMode =
+                PictureBoxSizeMode.StretchImage;
+
+            poster.BackColor =
+                Color.LightGray;
 
             LoadPoster(
                 poster,
                 movie.PosterPath
             );
 
-            // Title
-            Label lblMovieTitle = new Label();
+            // =================================================
+            // TITLE
+            // =================================================
 
-            lblMovieTitle.Text = movie.Title;
+            Label lblMovieTitle =
+                new Label();
+
+            lblMovieTitle.Text =
+                movie.Title;
 
             lblMovieTitle.Font =
                 new Font(
@@ -139,12 +285,19 @@ namespace MovieReviewApp
                 );
 
             lblMovieTitle.AutoSize = false;
+
             lblMovieTitle.Width = 180;
             lblMovieTitle.Height = 30;
-            lblMovieTitle.Location = new Point(10, 215);
 
-            // Genre + Year
-            Label lblMovieInfo = new Label();
+            lblMovieTitle.Location =
+                new Point(10, 215);
+
+            // =================================================
+            // GENRE + YEAR
+            // =================================================
+
+            Label lblMovieInfo =
+                new Label();
 
             lblMovieInfo.Text =
                 movie.Genre +
@@ -152,22 +305,38 @@ namespace MovieReviewApp
                 movie.ReleaseYear;
 
             lblMovieInfo.AutoSize = false;
+
             lblMovieInfo.Width = 180;
             lblMovieInfo.Height = 25;
-            lblMovieInfo.Location = new Point(10, 245);
 
-            // Details Button
-            Button btnDetails = new Button();
+            lblMovieInfo.Location =
+                new Point(10, 245);
 
-            btnDetails.Text = "Details";
+            // =================================================
+            // DETAILS BUTTON
+            // =================================================
+
+            Button btnDetails =
+                new Button();
+
+            btnDetails.Text =
+                "Details";
+
             btnDetails.Width = 80;
             btnDetails.Height = 35;
-            btnDetails.Location = new Point(10, 280);
-            btnDetails.Tag = movie;
 
-            btnDetails.Click += BtnDetails_Click;
+            btnDetails.Location =
+                new Point(10, 280);
 
-            movieCard.Controls.Add(btnDetails);
+            btnDetails.Tag =
+                movie;
+
+            btnDetails.Click +=
+                BtnDetails_Click;
+
+            movieCard.Controls.Add(
+                btnDetails
+            );
 
             // =================================================
             // REMOVE FAVORITE
@@ -175,15 +344,20 @@ namespace MovieReviewApp
 
             if (isFavorite)
             {
-                Button btnRemoveFavorite = new Button();
+                Button btnRemoveFavorite =
+                    new Button();
 
-                btnRemoveFavorite.Text = "Remove";
+                btnRemoveFavorite.Text =
+                    "Remove";
+
                 btnRemoveFavorite.Width = 80;
                 btnRemoveFavorite.Height = 35;
+
                 btnRemoveFavorite.Location =
                     new Point(100, 280);
 
-                btnRemoveFavorite.Tag = movie;
+                btnRemoveFavorite.Tag =
+                    movie;
 
                 btnRemoveFavorite.Click +=
                     BtnRemoveFavorite_Click;
@@ -199,15 +373,20 @@ namespace MovieReviewApp
 
             if (isWatchlist)
             {
-                Button btnRemoveWatchlist = new Button();
+                Button btnRemoveWatchlist =
+                    new Button();
 
-                btnRemoveWatchlist.Text = "Remove";
+                btnRemoveWatchlist.Text =
+                    "Remove";
+
                 btnRemoveWatchlist.Width = 80;
                 btnRemoveWatchlist.Height = 35;
+
                 btnRemoveWatchlist.Location =
                     new Point(100, 280);
 
-                btnRemoveWatchlist.Tag = movie;
+                btnRemoveWatchlist.Tag =
+                    movie;
 
                 btnRemoveWatchlist.Click +=
                     BtnRemoveWatchlist_Click;
@@ -217,11 +396,21 @@ namespace MovieReviewApp
                 );
             }
 
-            movieCard.Controls.Add(poster);
-            movieCard.Controls.Add(lblMovieTitle);
-            movieCard.Controls.Add(lblMovieInfo);
+            movieCard.Controls.Add(
+                poster
+            );
 
-            flowMovies.Controls.Add(movieCard);
+            movieCard.Controls.Add(
+                lblMovieTitle
+            );
+
+            movieCard.Controls.Add(
+                lblMovieInfo
+            );
+
+            flowMovies.Controls.Add(
+                movieCard
+            );
         }
 
         // =====================================================
@@ -232,7 +421,10 @@ namespace MovieReviewApp
             PictureBox pictureBox,
             string posterPath)
         {
-            pictureBox.BackColor = Color.LightGray;
+            pictureBox.BackColor =
+                Color.LightGray;
+
+            pictureBox.Image = null;
 
             if (string.IsNullOrEmpty(posterPath))
             {
@@ -293,10 +485,7 @@ namespace MovieReviewApp
             if (movie == null)
             {
                 MessageBox.Show(
-                    "Movie data not found.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
+                    "Movie data not found."
                 );
 
                 return;
@@ -311,7 +500,8 @@ namespace MovieReviewApp
         // SHOW MOVIE DETAILS
         // =====================================================
 
-        private void ShowMovieDetails(Movie movie)
+        private void ShowMovieDetails(
+            Movie movie)
         {
             if (movie == null)
             {
@@ -320,10 +510,19 @@ namespace MovieReviewApp
 
             selectedMovie = movie;
 
+            panelProfile.Visible = false;
+
+            lblSearch.Visible = false;
+            txtSearch.Visible = false;
+            btnSearch.Visible = false;
+            lblGenre.Visible = false;
+            cmbGenre.Visible = false;
+
             flowMovies.Visible = false;
 
             panelMovieDetails.Visible = true;
             panelMovieDetails.Enabled = true;
+
             panelMovieDetails.BringToFront();
 
             lblDetailTitle.Text =
@@ -337,7 +536,8 @@ namespace MovieReviewApp
                 "Release Year: " +
                 movie.ReleaseYear;
 
-            if (string.IsNullOrEmpty(movie.Director))
+            if (string.IsNullOrEmpty(
+                movie.Director))
             {
                 lblDirector.Text =
                     "Director: Unknown";
@@ -349,7 +549,8 @@ namespace MovieReviewApp
                     movie.Director;
             }
 
-            if (string.IsNullOrEmpty(movie.Description))
+            if (string.IsNullOrEmpty(
+                movie.Description))
             {
                 lblDescription.Text =
                     "No description available.";
@@ -373,7 +574,7 @@ namespace MovieReviewApp
         }
 
         // =====================================================
-        // ADD TO FAVORITE
+        // FAVORITE
         // =====================================================
 
         private void btnFavorite_Click(
@@ -385,6 +586,7 @@ namespace MovieReviewApp
                 MessageBox.Show(
                     "Please select a movie first."
                 );
+
                 return;
             }
 
@@ -393,6 +595,7 @@ namespace MovieReviewApp
                 MessageBox.Show(
                     "User session not found. Please login again."
                 );
+
                 return;
             }
 
@@ -435,12 +638,9 @@ namespace MovieReviewApp
             object sender,
             EventArgs e)
         {
+            HideHomeControls();
             LoadFavoriteMovies();
         }
-
-        // =====================================================
-        // LOAD FAVORITES
-        // =====================================================
 
         private void LoadFavoriteMovies()
         {
@@ -451,6 +651,7 @@ namespace MovieReviewApp
                     MessageBox.Show(
                         "User session not found. Please login again."
                     );
+
                     return;
                 }
 
@@ -470,10 +671,9 @@ namespace MovieReviewApp
                     );
                 }
 
-                panelMovieDetails.Visible = false;
-
                 flowMovies.Visible = true;
-                flowMovies.BringToFront();
+                panelMovieDetails.Visible = false;
+                panelProfile.Visible = false;
 
                 if (favoriteMovies.Count == 0)
                 {
@@ -555,6 +755,7 @@ namespace MovieReviewApp
                 MessageBox.Show(
                     "Please select a movie first."
                 );
+
                 return;
             }
 
@@ -563,6 +764,7 @@ namespace MovieReviewApp
                 MessageBox.Show(
                     "User session not found. Please login again."
                 );
+
                 return;
             }
 
@@ -608,12 +810,9 @@ namespace MovieReviewApp
             object sender,
             EventArgs e)
         {
+            HideHomeControls();
             LoadWatchlistMovies();
         }
-
-        // =====================================================
-        // LOAD WATCHLIST
-        // =====================================================
 
         private void LoadWatchlistMovies()
         {
@@ -624,6 +823,7 @@ namespace MovieReviewApp
                     MessageBox.Show(
                         "User session not found. Please login again."
                     );
+
                     return;
                 }
 
@@ -643,10 +843,9 @@ namespace MovieReviewApp
                     );
                 }
 
-                panelMovieDetails.Visible = false;
-
                 flowMovies.Visible = true;
-                flowMovies.BringToFront();
+                panelMovieDetails.Visible = false;
+                panelProfile.Visible = false;
 
                 if (watchlistMovies.Count == 0)
                 {
@@ -722,6 +921,77 @@ namespace MovieReviewApp
         }
 
         // =====================================================
+        // PROFILE BUTTON
+        // =====================================================
+
+        private void btnProfile_Click(
+            object sender,
+            EventArgs e)
+        {
+            ShowProfile();
+        }
+
+        // =====================================================
+        // SHOW PROFILE
+        // =====================================================
+
+        private void ShowProfile()
+        {
+            selectedMovie = null;
+
+            // =====================================================
+            // HIDE MOVIE CONTROLS
+            // =====================================================
+
+            lblSearch.Visible = false;
+            txtSearch.Visible = false;
+            btnSearch.Visible = false;
+            lblGenre.Visible = false;
+            cmbGenre.Visible = false;
+
+            flowMovies.Visible = false;
+            panelMovieDetails.Visible = false;
+
+            // =====================================================
+            // SHOW PROFILE
+            // =====================================================
+
+            panelProfile.Visible = true;
+            panelProfile.BringToFront();
+
+            // =====================================================
+            // LOAD SESSION INFORMATION
+            // =====================================================
+
+            lblProfileName.Text =
+                "Full Name: " +
+                Session.UserName;
+
+            lblProfileEmail.Text =
+                "Email: " +
+                Session.UserEmail;
+
+            lblProfileRole.Text =
+                "Role: User";
+        }
+
+        // =====================================================
+        // HIDE HOME CONTROLS
+        // =====================================================
+
+        private void HideHomeControls()
+        {
+            lblSearch.Visible = false;
+            txtSearch.Visible = false;
+            btnSearch.Visible = false;
+            lblGenre.Visible = false;
+            cmbGenre.Visible = false;
+
+            panelMovieDetails.Visible = false;
+            panelProfile.Visible = false;
+        }
+
+        // =====================================================
         // BACK TO MOVIES
         // =====================================================
 
@@ -733,25 +1003,17 @@ namespace MovieReviewApp
         }
 
         // =====================================================
-        // DESIGNER MAY USE _1
+        // DESIGNER BACK EVENT
         // =====================================================
 
         private void btnBackToMovies_Click_1(
             object sender,
             EventArgs e)
         {
-            ShowHomePage();
-        }
-
-        // =====================================================
-        // MOVIES
-        // =====================================================
-
-        private void btnMovies_Click(
-            object sender,
-            EventArgs e)
-        {
-            ShowHomePage();
+            btnBackToMovies_Click(
+                sender,
+                e
+            );
         }
 
         // =====================================================
@@ -773,7 +1035,7 @@ namespace MovieReviewApp
         }
 
         // =====================================================
-        // DESIGNER EVENTS
+        // OTHER DESIGNER EVENTS
         // =====================================================
 
         private void lblTitle_Click(
@@ -785,12 +1047,6 @@ namespace MovieReviewApp
         private void panelContent_Paint(
             object sender,
             PaintEventArgs e)
-        {
-        }
-
-        private void comboBox1_SelectedIndexChanged(
-            object sender,
-            EventArgs e)
         {
         }
 
