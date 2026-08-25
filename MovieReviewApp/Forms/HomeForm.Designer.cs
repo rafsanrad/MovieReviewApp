@@ -26,12 +26,13 @@
             this.btnWatchlist = new System.Windows.Forms.Button();
             this.btnFavorites = new System.Windows.Forms.Button();
             this.panelContent = new System.Windows.Forms.Panel();
+            this.panelMovieDetails = new System.Windows.Forms.Panel();
             this.panelProfile = new System.Windows.Forms.Panel();
             this.lblProfileRole = new System.Windows.Forms.Label();
             this.lblProfileEmail = new System.Windows.Forms.Label();
             this.lblProfileName = new System.Windows.Forms.Label();
             this.lblProfileTitle = new System.Windows.Forms.Label();
-            this.panelMovieDetails = new System.Windows.Forms.Panel();
+            this.flowReviews = new System.Windows.Forms.FlowLayoutPanel();
             this.lblReviewsTitle = new System.Windows.Forms.Label();
             this.btnReview = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -51,11 +52,10 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.flowReviews = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSidebar.SuspendLayout();
             this.panelContent.SuspendLayout();
-            this.panelProfile.SuspendLayout();
             this.panelMovieDetails.SuspendLayout();
+            this.panelProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDetails)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,6 +149,7 @@
             // 
             // panelContent
             // 
+            this.panelContent.Controls.Add(this.panelProfile);
             this.panelContent.Controls.Add(this.panelMovieDetails);
             this.panelContent.Controls.Add(this.flowMovies);
             this.panelContent.Controls.Add(this.cmbGenre);
@@ -163,6 +164,28 @@
             this.panelContent.TabIndex = 5;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
+            // panelMovieDetails
+            // 
+            this.panelMovieDetails.Controls.Add(this.flowReviews);
+            this.panelMovieDetails.Controls.Add(this.lblReviewsTitle);
+            this.panelMovieDetails.Controls.Add(this.btnReview);
+            this.panelMovieDetails.Controls.Add(this.lblDescription);
+            this.panelMovieDetails.Controls.Add(this.lblDescriptiontitle);
+            this.panelMovieDetails.Controls.Add(this.lblReview);
+            this.panelMovieDetails.Controls.Add(this.lblDirector);
+            this.panelMovieDetails.Controls.Add(this.lblDetailYear);
+            this.panelMovieDetails.Controls.Add(this.lblDetailGenre);
+            this.panelMovieDetails.Controls.Add(this.lblDetailTitle);
+            this.panelMovieDetails.Controls.Add(this.pictureBoxDetails);
+            this.panelMovieDetails.Controls.Add(this.btnAddToWatchlist);
+            this.panelMovieDetails.Controls.Add(this.btnFavorite);
+            this.panelMovieDetails.Controls.Add(this.btnBackToMovies);
+            this.panelMovieDetails.Location = new System.Drawing.Point(45, 100);
+            this.panelMovieDetails.Name = "panelMovieDetails";
+            this.panelMovieDetails.Size = new System.Drawing.Size(813, 601);
+            this.panelMovieDetails.TabIndex = 6;
+            this.panelMovieDetails.Visible = false;
+            // 
             // panelProfile
             // 
             this.panelProfile.BackColor = System.Drawing.Color.White;
@@ -171,7 +194,7 @@
             this.panelProfile.Controls.Add(this.lblProfileEmail);
             this.panelProfile.Controls.Add(this.lblProfileName);
             this.panelProfile.Controls.Add(this.lblProfileTitle);
-            this.panelProfile.Location = new System.Drawing.Point(180, 53);
+            this.panelProfile.Location = new System.Drawing.Point(180, 165);
             this.panelProfile.Name = "panelProfile";
             this.panelProfile.Size = new System.Drawing.Size(466, 283);
             this.panelProfile.TabIndex = 7;
@@ -217,28 +240,15 @@
             this.lblProfileTitle.TabIndex = 0;
             this.lblProfileTitle.Text = "My Profile";
             // 
-            // panelMovieDetails
+            // flowReviews
             // 
-            this.panelMovieDetails.Controls.Add(this.panelProfile);
-            this.panelMovieDetails.Controls.Add(this.flowReviews);
-            this.panelMovieDetails.Controls.Add(this.lblReviewsTitle);
-            this.panelMovieDetails.Controls.Add(this.btnReview);
-            this.panelMovieDetails.Controls.Add(this.lblDescription);
-            this.panelMovieDetails.Controls.Add(this.lblDescriptiontitle);
-            this.panelMovieDetails.Controls.Add(this.lblReview);
-            this.panelMovieDetails.Controls.Add(this.lblDirector);
-            this.panelMovieDetails.Controls.Add(this.lblDetailYear);
-            this.panelMovieDetails.Controls.Add(this.lblDetailGenre);
-            this.panelMovieDetails.Controls.Add(this.lblDetailTitle);
-            this.panelMovieDetails.Controls.Add(this.pictureBoxDetails);
-            this.panelMovieDetails.Controls.Add(this.btnAddToWatchlist);
-            this.panelMovieDetails.Controls.Add(this.btnFavorite);
-            this.panelMovieDetails.Controls.Add(this.btnBackToMovies);
-            this.panelMovieDetails.Location = new System.Drawing.Point(45, 100);
-            this.panelMovieDetails.Name = "panelMovieDetails";
-            this.panelMovieDetails.Size = new System.Drawing.Size(813, 601);
-            this.panelMovieDetails.TabIndex = 6;
-            this.panelMovieDetails.Visible = false;
+            this.flowReviews.AutoScroll = true;
+            this.flowReviews.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowReviews.Location = new System.Drawing.Point(58, 390);
+            this.flowReviews.Name = "flowReviews";
+            this.flowReviews.Size = new System.Drawing.Size(686, 137);
+            this.flowReviews.TabIndex = 19;
+            this.flowReviews.WrapContents = false;
             // 
             // lblReviewsTitle
             // 
@@ -441,16 +451,6 @@
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Search Movie :";
             // 
-            // flowReviews
-            // 
-            this.flowReviews.AutoScroll = true;
-            this.flowReviews.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowReviews.Location = new System.Drawing.Point(58, 390);
-            this.flowReviews.Name = "flowReviews";
-            this.flowReviews.Size = new System.Drawing.Size(686, 137);
-            this.flowReviews.TabIndex = 19;
-            this.flowReviews.WrapContents = false;
-            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -464,10 +464,10 @@
             this.panelSidebar.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();
-            this.panelProfile.ResumeLayout(false);
-            this.panelProfile.PerformLayout();
             this.panelMovieDetails.ResumeLayout(false);
             this.panelMovieDetails.PerformLayout();
+            this.panelProfile.ResumeLayout(false);
+            this.panelProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDetails)).EndInit();
             this.ResumeLayout(false);
 
