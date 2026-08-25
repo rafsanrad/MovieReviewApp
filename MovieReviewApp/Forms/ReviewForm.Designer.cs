@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.pnlReview = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSubTitle = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtReviewComment = new System.Windows.Forms.TextBox();
+            this.cmbRating = new System.Windows.Forms.ComboBox();
+            this.lblMovieName = new System.Windows.Forms.Label();
             this.lblMovie = new System.Windows.Forms.Label();
             this.lblRating = new System.Windows.Forms.Label();
             this.lblReview = new System.Windows.Forms.Label();
-            this.lblMovieName = new System.Windows.Forms.Label();
-            this.cmbRating = new System.Windows.Forms.ComboBox();
-            this.txtReviewComment = new System.Windows.Forms.TextBox();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblSubTitle = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.pnlReview.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,26 +59,61 @@
             this.pnlReview.Name = "pnlReview";
             this.pnlReview.Size = new System.Drawing.Size(578, 444);
             this.pnlReview.TabIndex = 0;
+            this.pnlReview.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlReview_Paint);
             // 
-            // lblTitle
+            // btnCancel
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(50, 25);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(500, 40);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Write a Review";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.BackColor = System.Drawing.Color.IndianRed;
+            this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(310, 387);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(220, 45);
+            this.btnCancel.TabIndex = 7;
+            this.btnCancel.Text = "CANCEL";
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
-            // lblSubTitle
+            // btnSubmit
             // 
-            this.lblSubTitle.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTitle.Location = new System.Drawing.Point(50, 67);
-            this.lblSubTitle.Name = "lblSubTitle";
-            this.lblSubTitle.Size = new System.Drawing.Size(500, 25);
-            this.lblSubTitle.TabIndex = 1;
-            this.lblSubTitle.Text = "Share your thoughts about this movie";
-            this.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSubmit.BackColor = System.Drawing.Color.LightBlue;
+            this.btnSubmit.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Location = new System.Drawing.Point(70, 387);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(220, 45);
+            this.btnSubmit.TabIndex = 1;
+            this.btnSubmit.Text = "SUBMIT REVIEW";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            // 
+            // txtReviewComment
+            // 
+            this.txtReviewComment.Location = new System.Drawing.Point(70, 250);
+            this.txtReviewComment.Multiline = true;
+            this.txtReviewComment.Name = "txtReviewComment";
+            this.txtReviewComment.Size = new System.Drawing.Size(460, 110);
+            this.txtReviewComment.TabIndex = 6;
+            // 
+            // cmbRating
+            // 
+            this.cmbRating.FormattingEnabled = true;
+            this.cmbRating.Items.AddRange(new object[] {
+            "1⭐",
+            "2⭐⭐",
+            "3⭐⭐⭐",
+            "4⭐⭐⭐⭐",
+            "5⭐⭐⭐⭐⭐"});
+            this.cmbRating.Location = new System.Drawing.Point(180, 162);
+            this.cmbRating.Name = "cmbRating";
+            this.cmbRating.Size = new System.Drawing.Size(121, 28);
+            this.cmbRating.TabIndex = 5;
+            // 
+            // lblMovieName
+            // 
+            this.lblMovieName.AutoSize = true;
+            this.lblMovieName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovieName.Location = new System.Drawing.Point(180, 115);
+            this.lblMovieName.Name = "lblMovieName";
+            this.lblMovieName.Size = new System.Drawing.Size(97, 24);
+            this.lblMovieName.TabIndex = 4;
+            this.lblMovieName.Text = "Inception";
             // 
             // lblMovie
             // 
@@ -110,59 +145,25 @@
             this.lblReview.TabIndex = 3;
             this.lblReview.Text = "Your Review :";
             // 
-            // lblMovieName
+            // lblSubTitle
             // 
-            this.lblMovieName.AutoSize = true;
-            this.lblMovieName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMovieName.Location = new System.Drawing.Point(180, 115);
-            this.lblMovieName.Name = "lblMovieName";
-            this.lblMovieName.Size = new System.Drawing.Size(97, 24);
-            this.lblMovieName.TabIndex = 4;
-            this.lblMovieName.Text = "Inception";
+            this.lblSubTitle.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTitle.Location = new System.Drawing.Point(50, 67);
+            this.lblSubTitle.Name = "lblSubTitle";
+            this.lblSubTitle.Size = new System.Drawing.Size(500, 25);
+            this.lblSubTitle.TabIndex = 1;
+            this.lblSubTitle.Text = "Share your thoughts about this movie";
+            this.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cmbRating
+            // lblTitle
             // 
-            this.cmbRating.FormattingEnabled = true;
-            this.cmbRating.Items.AddRange(new object[] {
-            "1⭐",
-            "2⭐⭐",
-            "3⭐⭐⭐",
-            "4⭐⭐⭐⭐",
-            "5⭐⭐⭐⭐⭐"});
-            this.cmbRating.Location = new System.Drawing.Point(180, 162);
-            this.cmbRating.Name = "cmbRating";
-            this.cmbRating.Size = new System.Drawing.Size(121, 28);
-            this.cmbRating.TabIndex = 5;
-            // 
-            // txtReviewComment
-            // 
-            this.txtReviewComment.Location = new System.Drawing.Point(70, 250);
-            this.txtReviewComment.Multiline = true;
-            this.txtReviewComment.Name = "txtReviewComment";
-            this.txtReviewComment.Size = new System.Drawing.Size(460, 110);
-            this.txtReviewComment.TabIndex = 6;
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.BackColor = System.Drawing.Color.LightBlue;
-            this.btnSubmit.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(70, 387);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(220, 45);
-            this.btnSubmit.TabIndex = 1;
-            this.btnSubmit.Text = "SUBMIT REVIEW";
-            this.btnSubmit.UseVisualStyleBackColor = false;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.IndianRed;
-            this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(310, 387);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(220, 45);
-            this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "CANCEL";
-            this.btnCancel.UseVisualStyleBackColor = false;
+            this.lblTitle.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(50, 25);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(500, 40);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Write a Review";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ReviewForm
             // 

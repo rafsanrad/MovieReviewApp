@@ -36,6 +36,12 @@ namespace MovieReviewApp
             flowMovies.Visible = true;
             panelMovieDetails.Visible = false;
             panelProfile.Visible = false;
+
+            // =================================================
+            // REVIEW BUTTON EVENT
+            // =================================================
+
+            btnReview.Click += btnReview_Click;
         }
 
         // =====================================================
@@ -574,6 +580,50 @@ namespace MovieReviewApp
         }
 
         // =====================================================
+        // REVIEW BUTTON
+        // =====================================================
+
+        private void btnReview_Click(
+            object sender,
+            EventArgs e)
+        {
+            if (selectedMovie == null)
+            {
+                MessageBox.Show(
+                    "Please select a movie first.",
+                    "Review",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            if (Session.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "Please login first.",
+                    "Login Required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            using (
+                Forms.ReviewForm reviewForm =
+                new Forms.ReviewForm(
+                    selectedMovie.MovieId,
+                    selectedMovie.Title
+                )
+            )
+            {
+                reviewForm.ShowDialog();
+            }
+        }
+
+        // =====================================================
         // FAVORITE
         // =====================================================
 
@@ -939,10 +989,7 @@ namespace MovieReviewApp
         {
             selectedMovie = null;
 
-            // =====================================================
-            // HIDE MOVIE CONTROLS
-            // =====================================================
-
+            // Hide movie controls
             lblSearch.Visible = false;
             txtSearch.Visible = false;
             btnSearch.Visible = false;
@@ -952,17 +999,11 @@ namespace MovieReviewApp
             flowMovies.Visible = false;
             panelMovieDetails.Visible = false;
 
-            // =====================================================
-            // SHOW PROFILE
-            // =====================================================
-
+            // Show profile
             panelProfile.Visible = true;
             panelProfile.BringToFront();
 
-            // =====================================================
-            // LOAD SESSION INFORMATION
-            // =====================================================
-
+            // Load session information
             lblProfileName.Text =
                 "Full Name: " +
                 Session.UserName;

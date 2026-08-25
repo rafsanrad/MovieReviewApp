@@ -116,10 +116,12 @@
     <Compile Include="Forms\MovieForm.Designer.cs">
       <DependentUpon>MovieForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FavoriteService.cs" />
     <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\WatchlistService.cs" />
     <Compile Include="Session.cs" />
     <EmbeddedResource Include="Forms\AddMovie.resx">
