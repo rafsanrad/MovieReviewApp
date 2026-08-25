@@ -32,6 +32,7 @@
             this.lblProfileName = new System.Windows.Forms.Label();
             this.lblProfileTitle = new System.Windows.Forms.Label();
             this.panelMovieDetails = new System.Windows.Forms.Panel();
+            this.btnReview = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblDescriptiontitle = new System.Windows.Forms.Label();
             this.lblReview = new System.Windows.Forms.Label();
@@ -49,12 +50,20 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.btnReview = new System.Windows.Forms.Button();
+            this.flowlpReviews = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlReview = new System.Windows.Forms.Panel();
+            this.lblReviewDate = new System.Windows.Forms.Label();
+            this.lblReviewComment = new System.Windows.Forms.Label();
+            this.lblReviewRating = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblReviews = new System.Windows.Forms.Label();
             this.panelSidebar.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.panelProfile.SuspendLayout();
             this.panelMovieDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDetails)).BeginInit();
+            this.flowlpReviews.SuspendLayout();
+            this.pnlReview.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLogout
@@ -170,7 +179,7 @@
             this.panelProfile.Controls.Add(this.lblProfileEmail);
             this.panelProfile.Controls.Add(this.lblProfileName);
             this.panelProfile.Controls.Add(this.lblProfileTitle);
-            this.panelProfile.Location = new System.Drawing.Point(31, 46);
+            this.panelProfile.Location = new System.Drawing.Point(42, 51);
             this.panelProfile.Name = "panelProfile";
             this.panelProfile.Size = new System.Drawing.Size(813, 283);
             this.panelProfile.TabIndex = 7;
@@ -218,6 +227,8 @@
             // 
             // panelMovieDetails
             // 
+            this.panelMovieDetails.Controls.Add(this.flowlpReviews);
+            this.panelMovieDetails.Controls.Add(this.lblReviews);
             this.panelMovieDetails.Controls.Add(this.btnReview);
             this.panelMovieDetails.Controls.Add(this.lblDescription);
             this.panelMovieDetails.Controls.Add(this.lblDescriptiontitle);
@@ -235,6 +246,17 @@
             this.panelMovieDetails.Size = new System.Drawing.Size(813, 562);
             this.panelMovieDetails.TabIndex = 6;
             this.panelMovieDetails.Visible = false;
+            // 
+            // btnReview
+            // 
+            this.btnReview.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReview.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnReview.Location = new System.Drawing.Point(380, 332);
+            this.btnReview.Name = "btnReview";
+            this.btnReview.Size = new System.Drawing.Size(134, 30);
+            this.btnReview.TabIndex = 17;
+            this.btnReview.Text = "Add a Review";
+            this.btnReview.UseVisualStyleBackColor = true;
             // 
             // lblDescription
             // 
@@ -416,16 +438,74 @@
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Search Movie :";
             // 
-            // btnReview
+            // flowlpReviews
             // 
-            this.btnReview.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReview.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnReview.Location = new System.Drawing.Point(380, 332);
-            this.btnReview.Name = "btnReview";
-            this.btnReview.Size = new System.Drawing.Size(146, 39);
-            this.btnReview.TabIndex = 17;
-            this.btnReview.Text = "Add a Review";
-            this.btnReview.UseVisualStyleBackColor = true;
+            this.flowlpReviews.AutoScroll = true;
+            this.flowlpReviews.Controls.Add(this.pnlReview);
+            this.flowlpReviews.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowlpReviews.Location = new System.Drawing.Point(58, 390);
+            this.flowlpReviews.Name = "flowlpReviews";
+            this.flowlpReviews.Size = new System.Drawing.Size(686, 137);
+            this.flowlpReviews.TabIndex = 19;
+            this.flowlpReviews.WrapContents = false;
+            // 
+            // pnlReview
+            // 
+            this.pnlReview.Controls.Add(this.lblReviewDate);
+            this.pnlReview.Controls.Add(this.lblReviewComment);
+            this.pnlReview.Controls.Add(this.lblReviewRating);
+            this.pnlReview.Controls.Add(this.lblName);
+            this.pnlReview.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlReview.Location = new System.Drawing.Point(75, 25);
+            this.pnlReview.Margin = new System.Windows.Forms.Padding(75, 25, 3, 3);
+            this.pnlReview.Name = "pnlReview";
+            this.pnlReview.Size = new System.Drawing.Size(542, 74);
+            this.pnlReview.TabIndex = 0;
+            // 
+            // lblReviewDate
+            // 
+            this.lblReviewDate.Location = new System.Drawing.Point(20, 80);
+            this.lblReviewDate.Name = "lblReviewDate";
+            this.lblReviewDate.Size = new System.Drawing.Size(180, 25);
+            this.lblReviewDate.TabIndex = 3;
+            this.lblReviewDate.Text = "22 August 2026";
+            // 
+            // lblReviewComment
+            // 
+            this.lblReviewComment.Location = new System.Drawing.Point(20, 38);
+            this.lblReviewComment.Name = "lblReviewComment";
+            this.lblReviewComment.Size = new System.Drawing.Size(252, 22);
+            this.lblReviewComment.TabIndex = 2;
+            this.lblReviewComment.Text = "Amazing movie! Reallly Enjoyed it.";
+            // 
+            // lblReviewRating
+            // 
+            this.lblReviewRating.Location = new System.Drawing.Point(95, 10);
+            this.lblReviewRating.Name = "lblReviewRating";
+            this.lblReviewRating.Size = new System.Drawing.Size(150, 25);
+            this.lblReviewRating.TabIndex = 1;
+            this.lblReviewRating.Text = "⭐⭐⭐⭐⭐⭐";
+            this.lblReviewRating.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(21, 10);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(69, 21);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Tamim";
+            // 
+            // lblReviews
+            // 
+            this.lblReviews.AutoSize = true;
+            this.lblReviews.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReviews.Location = new System.Drawing.Point(57, 349);
+            this.lblReviews.Name = "lblReviews";
+            this.lblReviews.Size = new System.Drawing.Size(101, 26);
+            this.lblReviews.TabIndex = 18;
+            this.lblReviews.Text = "Reviews";
             // 
             // HomeForm
             // 
@@ -445,6 +525,9 @@
             this.panelMovieDetails.ResumeLayout(false);
             this.panelMovieDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDetails)).EndInit();
+            this.flowlpReviews.ResumeLayout(false);
+            this.pnlReview.ResumeLayout(false);
+            this.pnlReview.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -511,5 +594,12 @@
         private System.Windows.Forms.Label lblProfileEmail;
         private System.Windows.Forms.Label lblProfileRole;
         private System.Windows.Forms.Button btnReview;
+        private System.Windows.Forms.FlowLayoutPanel flowlpReviews;
+        private System.Windows.Forms.Panel pnlReview;
+        private System.Windows.Forms.Label lblReviewDate;
+        private System.Windows.Forms.Label lblReviewComment;
+        private System.Windows.Forms.Label lblReviewRating;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblReviews;
     }
 }
