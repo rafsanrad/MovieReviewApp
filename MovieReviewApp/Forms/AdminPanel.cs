@@ -13,197 +13,143 @@ namespace MovieReviewApp.Forms
 {
     public partial class AdminPanel : Form
     {
-        // -----------------------------------------------------
+        // =====================================================
         // DATABASE
-        // -----------------------------------------------------
+        // =====================================================
 
-        private DatabaseHelper db =
-            new DatabaseHelper();
+        private DatabaseHelper db = new DatabaseHelper();
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // CONSTRUCTOR
-        // -----------------------------------------------------
+        // =====================================================
 
         public AdminPanel()
         {
             InitializeComponent();
 
-            // -------------------------------------------------
-            // PANEL LOCATIONS
-            // -------------------------------------------------
+            // Set all management panels to the same position
+            SetPanelLocations();
 
-            panelOverview.Location =
-                new Point(33, 115);
-
-            panelMovieManagement.Location =
-                new Point(33, 115);
-
-            panelUserManagement.Location =
-                new Point(33, 115);
-
-            panelReviewManagement.Location =
-                new Point(33, 115);
-
-
-            // -------------------------------------------------
-            // LOADING INITIAL PANEL
-            // -------------------------------------------------
-
+            // Show dashboard when Admin Panel opens
             ShowOverviewPanel();
 
-
-            // -------------------------------------------------
-            // LOADING DASHBOARD
-            // -------------------------------------------------
-
+            // Load dashboard statistics
             LoadDashboardCounts();
         }
 
 
         // =====================================================
-        // SHOW OVERVIEW PANEL
+        // PANEL SETUP
         // =====================================================
 
-        private void ShowOverviewPanel()
+        private void SetPanelLocations()
         {
-            panelOverview.Visible = true;
-            panelMovieManagement.Visible = false;
-            panelUserManagement.Visible = false;
-            panelReviewManagement.Visible = false;
+            Point panelLocation = new Point(33, 115);
 
-            panelOverview.BringToFront();
+            panelOverview.Location = panelLocation;
+            panelMovieManagement.Location = panelLocation;
+            panelUserManagement.Location = panelLocation;
+            panelReviewManagement.Location = panelLocation;
         }
 
 
         // =====================================================
-        // SHOW MOVIE MANAGEMENT PANEL
+        // PANEL NAVIGATION
         // =====================================================
 
-        private void ShowMovieManagementPanel()
+        private void ShowPanel(Panel panel)
         {
+            // Hide all panels first
             panelOverview.Visible = false;
-            panelMovieManagement.Visible = true;
+            panelMovieManagement.Visible = false;
             panelUserManagement.Visible = false;
             panelReviewManagement.Visible = false;
 
-            panelMovieManagement.BringToFront();
+            // Show selected panel
+            panel.Visible = true;
+            panel.BringToFront();
+        }
 
+
+        private void ShowOverviewPanel()
+        {
+            ShowPanel(panelOverview);
+        }
+
+
+        private void ShowMovieManagementPanel()
+        {
+            ShowPanel(panelMovieManagement);
             LoadMovies();
         }
 
 
-        // =====================================================
-        // SHOW USER MANAGEMENT PANEL
-        // =====================================================
-
         private void ShowUserManagementPanel()
         {
-            panelOverview.Visible = false;
-            panelMovieManagement.Visible = false;
-            panelUserManagement.Visible = true;
-            panelReviewManagement.Visible = false;
-
-            panelUserManagement.BringToFront();
-
+            ShowPanel(panelUserManagement);
             LoadUsers();
         }
 
 
-        // =====================================================
-        // SHOW REVIEW MANAGEMENT PANEL
-        // =====================================================
-
         private void ShowReviewManagementPanel()
         {
-            panelOverview.Visible = false;
-            panelMovieManagement.Visible = false;
-            panelUserManagement.Visible = false;
-            panelReviewManagement.Visible = true;
-
-            panelReviewManagement.BringToFront();
-
+            ShowPanel(panelReviewManagement);
             LoadReviews();
         }
 
 
         // =====================================================
-        // DASHBOARD COUNTS
+        // DASHBOARD STATISTICS
         // =====================================================
 
         private void LoadDashboardCounts()
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
-
-                    // -------------------------------------------------
-                    // MOVIES
-                    // -------------------------------------------------
-
+                    // Total Movies
                     string movieQuery =
                         "SELECT COUNT(*) FROM Movies";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               movieQuery,
-                               connection))
+                           new SqlCommand(movieQuery, connection))
                     {
-                        int totalMovies =
+                        lblMovieNumber.Text =
                             Convert.ToInt32(
                                 command.ExecuteScalar()
-                            );
-
-                        lblMovieNumber.Text =
-                            totalMovies.ToString();
+                            ).ToString();
                     }
 
 
-                    // -------------------------------------------------
-                    // USERS
-                    // -------------------------------------------------
-
+                    // Total Users (excluding Admin)
                     string userQuery =
                         "SELECT COUNT(*) FROM Users WHERE Role <> 'Admin'";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               userQuery,
-                               connection))
+                           new SqlCommand(userQuery, connection))
                     {
-                        int totalUsers =
+                        lblUserNumber.Text =
                             Convert.ToInt32(
                                 command.ExecuteScalar()
-                            );
-
-                        lblUserNumber.Text =
-                            totalUsers.ToString();
+                            ).ToString();
                     }
 
 
-                    // -------------------------------------------------
-                    // REVIEWS
-                    // -------------------------------------------------
-
+                    // Total Reviews
                     string reviewQuery =
                         "SELECT COUNT(*) FROM Reviews";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               reviewQuery,
-                               connection))
+                           new SqlCommand(reviewQuery, connection))
                     {
-                        int totalReviews =
+                        lblReviewNumber.Text =
                             Convert.ToInt32(
                                 command.ExecuteScalar()
-                            );
-
-                        lblReviewNumber.Text =
-                            totalReviews.ToString();
+                            ).ToString();
                     }
                 }
             }
@@ -221,15 +167,93 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // LOAD MOVIES
+        // COMMON DATAGRIDVIEW SETUP
+        // =====================================================
+
+        private void ConfigureGrid(DataGridView grid)
+        {
+            // Basic grid settings
+            grid.Size = new Size(726, 361);
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.ReadOnly = true;
+
+            // Appearance
+            grid.BackgroundColor = Color.White;
+            grid.GridColor = Color.LightGray;
+            grid.BorderStyle = BorderStyle.FixedSingle;
+
+            // Scrolling
+            grid.ScrollBars = ScrollBars.Vertical;
+
+            // Row settings
+            grid.RowHeadersVisible = false;
+            grid.RowTemplate.Height = 32;
+
+            // Selection
+            grid.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            grid.MultiSelect = false;
+
+            // Automatically create columns from DataTable
+            grid.AutoGenerateColumns = true;
+
+            // Header
+            grid.ColumnHeadersVisible = true;
+            grid.ColumnHeadersHeight = 35;
+
+            grid.ColumnHeadersDefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+
+            // Column width
+            grid.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Default cell alignment
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                column.DefaultCellStyle.Alignment =
+                    DataGridViewContentAlignment.MiddleLeft;
+            }
+        }
+
+
+        // =====================================================
+        // COMMON DELETE BUTTON
+        // =====================================================
+
+        private void AddDeleteButton(DataGridView grid)
+        {
+            // Prevent duplicate Delete columns
+            if (grid.Columns["Delete"] != null)
+                return;
+
+            DataGridViewButtonColumn deleteButton =
+                new DataGridViewButtonColumn();
+
+            deleteButton.Name = "Delete";
+            deleteButton.HeaderText = "Action";
+            deleteButton.Text = "Delete";
+            deleteButton.UseColumnTextForButtonValue = true;
+
+            grid.Columns.Add(deleteButton);
+
+            grid.Columns["Delete"]
+                .DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+        }
+
+
+        // =====================================================
+        // MOVIE MANAGEMENT
         // =====================================================
 
         private void LoadMovies()
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -244,17 +268,13 @@ namespace MovieReviewApp.Forms
                         ORDER BY MovieId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridMovies.DataSource =
-                            table;
+                        dataGridMovies.DataSource = table;
                     }
                 }
 
@@ -273,189 +293,38 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // CONFIGURE MOVIE GRID
-        // =====================================================
-
         private void ConfigureMovieGrid()
         {
-            // -------------------------------------------------
-            // FIXED GRID SIZE
-            // -------------------------------------------------
+            ConfigureGrid(dataGridMovies);
 
-            dataGridMovies.Size =
-                new Size(726, 361);
+            // Hide database ID
+            dataGridMovies.Columns["MovieId"].Visible = false;
 
+            // Column headers
+            dataGridMovies.Columns["Title"].HeaderText = "Title";
+            dataGridMovies.Columns["Genre"].HeaderText = "Genre";
+            dataGridMovies.Columns["Director"].HeaderText = "Director";
+            dataGridMovies.Columns["ReleaseYear"].HeaderText = "Year";
 
-            // -------------------------------------------------
-            // REMOVE EXTRA EMPTY ROW
-            // -------------------------------------------------
-
-            dataGridMovies.AllowUserToAddRows =
-                false;
-
-            dataGridMovies.AllowUserToDeleteRows =
-                false;
-
-            dataGridMovies.ReadOnly =
-                true;
-
-
-            // -------------------------------------------------
-            // WHITE BACKGROUND
-            // -------------------------------------------------
-
-            dataGridMovies.BackgroundColor =
-                Color.White;
-
-            dataGridMovies.GridColor =
-                Color.LightGray;
-
-            dataGridMovies.BorderStyle =
-                BorderStyle.FixedSingle;
-
-
-            // -------------------------------------------------
-            // SCROLLING
-            // -------------------------------------------------
-
-            dataGridMovies.ScrollBars =
-                ScrollBars.Vertical;
-
-
-            // -------------------------------------------------
-            // ROW SETTINGS
-            // -------------------------------------------------
-
-            dataGridMovies.RowHeadersVisible =
-                false;
-
-            dataGridMovies.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dataGridMovies.MultiSelect =
-                false;
-
-            dataGridMovies.AutoGenerateColumns =
-                true;
-
-
-            // -------------------------------------------------
-            // HEADER
-            // -------------------------------------------------
-
-            dataGridMovies.ColumnHeadersVisible =
-                true;
-
-            dataGridMovies.ColumnHeadersHeight =
-                35;
-
-            dataGridMovies.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-
-            // -------------------------------------------------
-            // HIDE MOVIE ID
-            // -------------------------------------------------
-
-            if (dataGridMovies.Columns["MovieId"] != null)
-            {
-                dataGridMovies.Columns["MovieId"]
-                    .Visible = false;
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN NAMES
-            // -------------------------------------------------
-
-            dataGridMovies.Columns["Title"]
-                .HeaderText = "Title";
-
-            dataGridMovies.Columns["Genre"]
-                .HeaderText = "Genre";
-
-            dataGridMovies.Columns["Director"]
-                .HeaderText = "Director";
-
-            dataGridMovies.Columns["ReleaseYear"]
-                .HeaderText = "Year";
-
-
-            // -------------------------------------------------
-            // DELETE BUTTON
-            // -------------------------------------------------
-
-            if (dataGridMovies.Columns["Delete"] == null)
-            {
-                DataGridViewButtonColumn deleteButton =
-                    new DataGridViewButtonColumn();
-
-                deleteButton.Name =
-                    "Delete";
-
-                deleteButton.HeaderText =
-                    "Action";
-
-                deleteButton.Text =
-                    "Delete";
-
-                deleteButton.UseColumnTextForButtonValue =
-                    true;
-
-                dataGridMovies.Columns.Add(
-                    deleteButton
-                );
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN WIDTH
-            // -------------------------------------------------
-
-            dataGridMovies.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-
-
-            // -------------------------------------------------
-            // ROW HEIGHT
-            // -------------------------------------------------
-
-            dataGridMovies.RowTemplate.Height =
-                32;
-
-
-            // -------------------------------------------------
-            // CELL ALIGNMENT
-            // -------------------------------------------------
-
-            foreach (DataGridViewColumn column
-                     in dataGridMovies.Columns)
-            {
-                column.DefaultCellStyle.Alignment =
-                    DataGridViewContentAlignment.MiddleLeft;
-            }
-
+            // Center the year column
             dataGridMovies.Columns["ReleaseYear"]
                 .DefaultCellStyle.Alignment =
                 DataGridViewContentAlignment.MiddleCenter;
 
-            dataGridMovies.Columns["Delete"]
-                .DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
+            // Add Delete button
+            AddDeleteButton(dataGridMovies);
         }
 
 
         // =====================================================
-        // LOAD USERS
+        // USER MANAGEMENT
         // =====================================================
 
         private void LoadUsers()
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -470,17 +339,13 @@ namespace MovieReviewApp.Forms
                         ORDER BY UserId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridUsers.DataSource =
-                            table;
+                        dataGridUsers.DataSource = table;
                     }
                 }
 
@@ -499,193 +364,37 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // CONFIGURE USER GRID
-        // =====================================================
-
         private void ConfigureUserGrid()
         {
-            // -------------------------------------------------
-            // FIXED GRID SIZE
-            // -------------------------------------------------
+            ConfigureGrid(dataGridUsers);
 
-            dataGridUsers.Size =
-                new Size(726, 361);
+            // Hide database ID
+            dataGridUsers.Columns["UserId"].Visible = false;
 
-
-            // -------------------------------------------------
-            // REMOVE EXTRA EMPTY ROW
-            // -------------------------------------------------
-
-            dataGridUsers.AllowUserToAddRows =
-                false;
-
-            dataGridUsers.AllowUserToDeleteRows =
-                false;
-
-            dataGridUsers.ReadOnly =
-                true;
-
-
-            // -------------------------------------------------
-            // WHITE BACKGROUND
-            // -------------------------------------------------
-
-            dataGridUsers.BackgroundColor =
-                Color.White;
-
-            dataGridUsers.GridColor =
-                Color.LightGray;
-
-            dataGridUsers.BorderStyle =
-                BorderStyle.FixedSingle;
-
-
-            // -------------------------------------------------
-            // SCROLLBAR
-            // -------------------------------------------------
-
-            dataGridUsers.ScrollBars =
-                ScrollBars.Vertical;
-
-
-            // -------------------------------------------------
-            // ROW HEADER
-            // -------------------------------------------------
-
-            dataGridUsers.RowHeadersVisible =
-                false;
-
-
-            // -------------------------------------------------
-            // SELECTION
-            // -------------------------------------------------
-
-            dataGridUsers.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dataGridUsers.MultiSelect =
-                false;
-
-
-            // -------------------------------------------------
-            // HEADER
-            // -------------------------------------------------
-
-            dataGridUsers.ColumnHeadersVisible =
-                true;
-
-            dataGridUsers.ColumnHeadersHeight =
-                35;
-
-            dataGridUsers.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-
-            // -------------------------------------------------
-            // HIDE USER ID
-            // -------------------------------------------------
-
-            if (dataGridUsers.Columns["UserId"] != null)
-            {
-                dataGridUsers.Columns["UserId"]
-                    .Visible = false;
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN HEADERS
-            // -------------------------------------------------
-
-            dataGridUsers.Columns["Name"]
-                .HeaderText = "Name";
-
-            dataGridUsers.Columns["Email"]
-                .HeaderText = "Email";
-
+            // Column headers
+            dataGridUsers.Columns["Name"].HeaderText = "Name";
+            dataGridUsers.Columns["Email"].HeaderText = "Email";
             dataGridUsers.Columns["DateRegistered"]
                 .HeaderText = "Date Registered";
 
-
-            // -------------------------------------------------
-            // DATE FORMAT
-            // -------------------------------------------------
-
+            // Date format
             dataGridUsers.Columns["DateRegistered"]
-                .DefaultCellStyle.Format =
-                "dd MMM yyyy";
+                .DefaultCellStyle.Format = "dd MMM yyyy";
 
-
-            // -------------------------------------------------
-            // DELETE BUTTON
-            // -------------------------------------------------
-
-            if (dataGridUsers.Columns["Delete"] == null)
-            {
-                DataGridViewButtonColumn deleteButton =
-                    new DataGridViewButtonColumn();
-
-                deleteButton.Name =
-                    "Delete";
-
-                deleteButton.HeaderText =
-                    "Action";
-
-                deleteButton.Text =
-                    "Delete";
-
-                deleteButton.UseColumnTextForButtonValue =
-                    true;
-
-                dataGridUsers.Columns.Add(
-                    deleteButton
-                );
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN WIDTH
-            // -------------------------------------------------
-
-            dataGridUsers.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-
-
-            // -------------------------------------------------
-            // ROW HEIGHT
-            // -------------------------------------------------
-
-            dataGridUsers.RowTemplate.Height =
-                32;
-
-
-            // -------------------------------------------------
-            // ALIGNMENT
-            // -------------------------------------------------
-
-            foreach (DataGridViewColumn column
-                     in dataGridUsers.Columns)
-            {
-                column.DefaultCellStyle.Alignment =
-                    DataGridViewContentAlignment.MiddleLeft;
-            }
-
-            dataGridUsers.Columns["Delete"]
-                .DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
+            // Add Delete button
+            AddDeleteButton(dataGridUsers);
         }
 
 
         // =====================================================
-        // LOAD REVIEWS
+        // REVIEW MANAGEMENT
         // =====================================================
 
         private void LoadReviews()
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -705,17 +414,13 @@ namespace MovieReviewApp.Forms
                         ORDER BY r.ReviewId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridReviews.DataSource =
-                            table;
+                        dataGridReviews.DataSource = table;
                     }
                 }
 
@@ -734,187 +439,25 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // CONFIGURE REVIEW GRID
-        // =====================================================
-
         private void ConfigureReviewGrid()
         {
-            // -------------------------------------------------
-            // FIXED GRID SIZE
-            // -------------------------------------------------
+            ConfigureGrid(dataGridReviews);
 
-            dataGridReviews.Size =
-                new Size(726, 361);
+            // Hide database ID
+            dataGridReviews.Columns["ReviewId"].Visible = false;
 
+            // Column headers
+            dataGridReviews.Columns["UserName"].HeaderText = "User";
+            dataGridReviews.Columns["MovieTitle"].HeaderText = "Movie";
+            dataGridReviews.Columns["Rating"].HeaderText = "Rating";
+            dataGridReviews.Columns["ReviewText"].HeaderText = "Review";
+            dataGridReviews.Columns["ReviewDate"].HeaderText = "Date";
 
-            // -------------------------------------------------
-            // REMOVE EXTRA EMPTY ROW
-            // -------------------------------------------------
-
-            dataGridReviews.AllowUserToAddRows =
-                false;
-
-            dataGridReviews.AllowUserToDeleteRows =
-                false;
-
-            dataGridReviews.ReadOnly =
-                true;
-
-
-            // -------------------------------------------------
-            // WHITE BACKGROUND
-            // -------------------------------------------------
-
-            dataGridReviews.BackgroundColor =
-                Color.White;
-
-            dataGridReviews.GridColor =
-                Color.LightGray;
-
-            dataGridReviews.BorderStyle =
-                BorderStyle.FixedSingle;
-
-
-            // -------------------------------------------------
-            // SCROLLING
-            // -------------------------------------------------
-
-            dataGridReviews.ScrollBars =
-                ScrollBars.Vertical;
-
-
-            // -------------------------------------------------
-            // ROW HEADER
-            // -------------------------------------------------
-
-            dataGridReviews.RowHeadersVisible =
-                false;
-
-
-            // -------------------------------------------------
-            // SELECTION
-            // -------------------------------------------------
-
-            dataGridReviews.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dataGridReviews.MultiSelect =
-                false;
-
-            dataGridReviews.AutoGenerateColumns =
-                true;
-
-
-            // -------------------------------------------------
-            // HEADER
-            // -------------------------------------------------
-
-            dataGridReviews.ColumnHeadersVisible =
-                true;
-
-            dataGridReviews.ColumnHeadersHeight =
-                35;
-
-            dataGridReviews.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-
-            // -------------------------------------------------
-            // HIDE REVIEW ID
-            // -------------------------------------------------
-
-            if (dataGridReviews.Columns["ReviewId"] != null)
-            {
-                dataGridReviews.Columns["ReviewId"]
-                    .Visible = false;
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN HEADERS
-            // -------------------------------------------------
-
-            dataGridReviews.Columns["UserName"]
-                .HeaderText = "User";
-
-            dataGridReviews.Columns["MovieTitle"]
-                .HeaderText = "Movie";
-
-            dataGridReviews.Columns["Rating"]
-                .HeaderText = "Rating";
-
-            dataGridReviews.Columns["ReviewText"]
-                .HeaderText = "Review";
-
+            // Date format
             dataGridReviews.Columns["ReviewDate"]
-                .HeaderText = "Date";
+                .DefaultCellStyle.Format = "dd MMM yyyy";
 
-
-            // -------------------------------------------------
-            // DATE FORMAT
-            // -------------------------------------------------
-
-            dataGridReviews.Columns["ReviewDate"]
-                .DefaultCellStyle.Format =
-                "dd MMM yyyy";
-
-
-            // -------------------------------------------------
-            // DELETE BUTTON
-            // -------------------------------------------------
-
-            if (dataGridReviews.Columns["Delete"] == null)
-            {
-                DataGridViewButtonColumn deleteButton =
-                    new DataGridViewButtonColumn();
-
-                deleteButton.Name =
-                    "Delete";
-
-                deleteButton.HeaderText =
-                    "Action";
-
-                deleteButton.Text =
-                    "Delete";
-
-                deleteButton.UseColumnTextForButtonValue =
-                    true;
-
-                dataGridReviews.Columns.Add(
-                    deleteButton
-                );
-            }
-
-
-            // -------------------------------------------------
-            // COLUMN WIDTH
-            // -------------------------------------------------
-
-            dataGridReviews.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-
-
-            // -------------------------------------------------
-            // ROW HEIGHT
-            // -------------------------------------------------
-
-            dataGridReviews.RowTemplate.Height =
-                32;
-
-
-            // -------------------------------------------------
-            // ALIGNMENT
-            // -------------------------------------------------
-
-            foreach (DataGridViewColumn column
-                     in dataGridReviews.Columns)
-            {
-                column.DefaultCellStyle.Alignment =
-                    DataGridViewContentAlignment.MiddleLeft;
-            }
-
-
+            // Center Rating and Date
             dataGridReviews.Columns["Rating"]
                 .DefaultCellStyle.Alignment =
                 DataGridViewContentAlignment.MiddleCenter;
@@ -923,23 +466,18 @@ namespace MovieReviewApp.Forms
                 .DefaultCellStyle.Alignment =
                 DataGridViewContentAlignment.MiddleCenter;
 
-            dataGridReviews.Columns["Delete"]
-                .DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-
-            // -------------------------------------------------
-            // REVIEW COLUMN
-            // -------------------------------------------------
-
+            // Keep review text in one line
             dataGridReviews.Columns["ReviewText"]
                 .DefaultCellStyle.WrapMode =
                 DataGridViewTriState.False;
+
+            // Add Delete button
+            AddDeleteButton(dataGridReviews);
         }
 
 
         // =====================================================
-        // REVIEW CELL FORMATTING
+        // REVIEW DISPLAY FORMATTING
         // =====================================================
 
         private void dataGridReviews_CellFormatting(
@@ -949,73 +487,54 @@ namespace MovieReviewApp.Forms
             if (e.RowIndex < 0)
                 return;
 
-
             string columnName =
                 dataGridReviews.Columns[e.ColumnIndex].Name;
 
 
-            // -------------------------------------------------
-            // RATING
-            // -------------------------------------------------
-
-            if (columnName == "Rating")
+            // Convert rating number to stars
+            if (columnName == "Rating" &&
+                e.Value != null &&
+                int.TryParse(e.Value.ToString(), out int rating))
             {
-                if (e.Value != null &&
-                    int.TryParse(
-                        e.Value.ToString(),
-                        out int rating))
+                if (rating >= 1 && rating <= 5)
                 {
-                    if (rating >= 1 && rating <= 5)
-                    {
-                        e.Value =
-                            new string('★', rating) +
-                            new string('☆', 5 - rating);
+                    e.Value =
+                        new string('★', rating) +
+                        new string('☆', 5 - rating);
 
-                        e.FormattingApplied = true;
-                    }
+                    e.FormattingApplied = true;
                 }
             }
 
 
-            // -------------------------------------------------
-            // SHORT REVIEW
-            // -------------------------------------------------
-
-            if (columnName == "ReviewText")
+            // Show only a short version of the review
+            if (columnName == "ReviewText" &&
+                e.Value != null)
             {
-                if (e.Value != null)
+                string reviewText = e.Value.ToString();
+
+                if (reviewText.Length > 35)
                 {
-                    string reviewText =
-                        e.Value.ToString();
-
-                    if (reviewText.Length > 35)
-                    {
-                        e.Value =
-                            reviewText.Substring(0, 35) +
-                            "...";
-                    }
-
-                    e.FormattingApplied = true;
+                    e.Value =
+                        reviewText.Substring(0, 35) + "...";
                 }
+
+                e.FormattingApplied = true;
             }
         }
 
 
         // =====================================================
-        // MOVIE DELETE CLICK
+        // MOVIE DELETE
         // =====================================================
 
         private void dataGridMovies_CellContentClick(
             object sender,
             DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 ||
+                dataGridMovies.Columns[e.ColumnIndex].Name != "Delete")
                 return;
-
-            if (dataGridMovies.Columns[e.ColumnIndex].Name
-                != "Delete")
-                return;
-
 
             int movieId =
                 Convert.ToInt32(
@@ -1024,24 +543,20 @@ namespace MovieReviewApp.Forms
                     .Value
                 );
 
-
             string movieTitle =
                 dataGridMovies.Rows[e.RowIndex]
                 .Cells["Title"]
                 .Value
                 .ToString();
 
-
             DialogResult result =
                 MessageBox.Show(
                     "Are you sure you want to delete \"" +
-                    movieTitle +
-                    "\"?",
+                    movieTitle + "\"?",
                     "Delete Movie",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
-
 
             if (result == DialogResult.Yes)
             {
@@ -1050,19 +565,15 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // DELETE MOVIE
-        // =====================================================
-
         private void DeleteMovie(int movieId)
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
+                    // Delete related data before deleting the movie
                     string query = @"
                         DELETE FROM Reviews
                         WHERE MovieId = @MovieId;
@@ -1077,9 +588,7 @@ namespace MovieReviewApp.Forms
                         WHERE MovieId = @MovieId;";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               query,
-                               connection))
+                           new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue(
                             "@MovieId",
@@ -1090,14 +599,12 @@ namespace MovieReviewApp.Forms
                     }
                 }
 
-
                 MessageBox.Show(
                     "Movie deleted successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
-
 
                 LoadMovies();
                 LoadDashboardCounts();
@@ -1116,20 +623,16 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // USER DELETE CLICK
+        // USER DELETE
         // =====================================================
 
         private void dataGridUsers_CellContentClick(
             object sender,
             DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 ||
+                dataGridUsers.Columns[e.ColumnIndex].Name != "Delete")
                 return;
-
-            if (dataGridUsers.Columns[e.ColumnIndex].Name
-                != "Delete")
-                return;
-
 
             int userId =
                 Convert.ToInt32(
@@ -1138,24 +641,20 @@ namespace MovieReviewApp.Forms
                     .Value
                 );
 
-
             string userName =
                 dataGridUsers.Rows[e.RowIndex]
                 .Cells["Name"]
                 .Value
                 .ToString();
 
-
             DialogResult result =
                 MessageBox.Show(
                     "Are you sure you want to delete user \"" +
-                    userName +
-                    "\"?",
+                    userName + "\"?",
                     "Delete User",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
-
 
             if (result == DialogResult.Yes)
             {
@@ -1164,19 +663,15 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // DELETE USER
-        // =====================================================
-
         private void DeleteUser(int userId)
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
+                    // Delete related data before deleting the user
                     string query = @"
                         DELETE FROM Reviews
                         WHERE UserId = @UserId;
@@ -1192,9 +687,7 @@ namespace MovieReviewApp.Forms
                         AND Role <> 'Admin';";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               query,
-                               connection))
+                           new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue(
                             "@UserId",
@@ -1205,14 +698,12 @@ namespace MovieReviewApp.Forms
                     }
                 }
 
-
                 MessageBox.Show(
                     "User deleted successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
-
 
                 LoadUsers();
                 LoadDashboardCounts();
@@ -1231,20 +722,16 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // REVIEW DELETE CLICK
+        // REVIEW DELETE
         // =====================================================
 
         private void dataGridReviews_CellContentClick(
             object sender,
             DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 ||
+                dataGridReviews.Columns[e.ColumnIndex].Name != "Delete")
                 return;
-
-            if (dataGridReviews.Columns[e.ColumnIndex].Name
-                != "Delete")
-                return;
-
 
             int reviewId =
                 Convert.ToInt32(
@@ -1253,13 +740,11 @@ namespace MovieReviewApp.Forms
                     .Value
                 );
 
-
             string userName =
                 dataGridReviews.Rows[e.RowIndex]
                 .Cells["UserName"]
                 .Value
                 .ToString();
-
 
             string movieTitle =
                 dataGridReviews.Rows[e.RowIndex]
@@ -1267,19 +752,16 @@ namespace MovieReviewApp.Forms
                 .Value
                 .ToString();
 
-
             DialogResult result =
                 MessageBox.Show(
                     "Are you sure you want to delete " +
                     userName +
                     "'s review for \"" +
-                    movieTitle +
-                    "\"?",
+                    movieTitle + "\"?",
                     "Delete Review",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
-
 
             if (result == DialogResult.Yes)
             {
@@ -1288,16 +770,11 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // DELETE REVIEW
-        // =====================================================
-
         private void DeleteReview(int reviewId)
         {
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -1306,9 +783,7 @@ namespace MovieReviewApp.Forms
                         WHERE ReviewId = @ReviewId;";
 
                     using (SqlCommand command =
-                           new SqlCommand(
-                               query,
-                               connection))
+                           new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue(
                             "@ReviewId",
@@ -1319,14 +794,12 @@ namespace MovieReviewApp.Forms
                     }
                 }
 
-
                 MessageBox.Show(
                     "Review deleted successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
-
 
                 LoadReviews();
                 LoadDashboardCounts();
@@ -1355,11 +828,9 @@ namespace MovieReviewApp.Forms
             string searchText =
                 txtSearchMovie.Text.Trim();
 
-
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -1377,24 +848,18 @@ namespace MovieReviewApp.Forms
                         ORDER BY MovieId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        adapter.SelectCommand
-                            .Parameters.AddWithValue(
-                                "@Search",
-                                "%" + searchText + "%"
-                            );
+                        adapter.SelectCommand.Parameters.AddWithValue(
+                            "@Search",
+                            "%" + searchText + "%"
+                        );
 
-
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridMovies.DataSource =
-                            table;
+                        dataGridMovies.DataSource = table;
                     }
                 }
 
@@ -1424,11 +889,9 @@ namespace MovieReviewApp.Forms
             string searchText =
                 txtSearchUser.Text.Trim();
 
-
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -1448,24 +911,18 @@ namespace MovieReviewApp.Forms
                         ORDER BY UserId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        adapter.SelectCommand
-                            .Parameters.AddWithValue(
-                                "@Search",
-                                "%" + searchText + "%"
-                            );
+                        adapter.SelectCommand.Parameters.AddWithValue(
+                            "@Search",
+                            "%" + searchText + "%"
+                        );
 
-
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridUsers.DataSource =
-                            table;
+                        dataGridUsers.DataSource = table;
                     }
                 }
 
@@ -1495,11 +952,9 @@ namespace MovieReviewApp.Forms
             string searchText =
                 txtSearchReview.Text.Trim();
 
-
             try
             {
-                using (SqlConnection connection =
-                       db.GetConnection())
+                using (SqlConnection connection = db.GetConnection())
                 {
                     connection.Open();
 
@@ -1522,24 +977,18 @@ namespace MovieReviewApp.Forms
                         ORDER BY r.ReviewId DESC";
 
                     using (SqlDataAdapter adapter =
-                           new SqlDataAdapter(
-                               query,
-                               connection))
+                           new SqlDataAdapter(query, connection))
                     {
-                        adapter.SelectCommand
-                            .Parameters.AddWithValue(
-                                "@Search",
-                                "%" + searchText + "%"
-                            );
+                        adapter.SelectCommand.Parameters.AddWithValue(
+                            "@Search",
+                            "%" + searchText + "%"
+                        );
 
-
-                        DataTable table =
-                            new DataTable();
+                        DataTable table = new DataTable();
 
                         adapter.Fill(table);
 
-                        dataGridReviews.DataSource =
-                            table;
+                        dataGridReviews.DataSource = table;
                     }
                 }
 
@@ -1559,26 +1008,7 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // LOGOUT
-        // =====================================================
-
-        private void btnLogout_Click(
-            object sender,
-            EventArgs e)
-        {
-            Session.Clear();
-
-            Form1 loginForm =
-                new Form1();
-
-            loginForm.Show();
-
-            this.Close();
-        }
-
-
-        // =====================================================
-        // DASHBOARD
+        // NAVIGATION BUTTONS
         // =====================================================
 
         private void btnDashBoard_Click(
@@ -1586,14 +1016,9 @@ namespace MovieReviewApp.Forms
             EventArgs e)
         {
             ShowOverviewPanel();
-
             LoadDashboardCounts();
         }
 
-
-        // =====================================================
-        // MOVIES
-        // =====================================================
 
         private void btnMovies_Click(
             object sender,
@@ -1603,10 +1028,6 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // USERS
-        // =====================================================
-
         private void btnUsers_Click(
             object sender,
             EventArgs e)
@@ -1614,10 +1035,6 @@ namespace MovieReviewApp.Forms
             ShowUserManagementPanel();
         }
 
-
-        // =====================================================
-        // REVIEWS
-        // =====================================================
 
         private void btnReviews_Click(
             object sender,
@@ -1628,7 +1045,7 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // ADD MOVIE
+        // MOVIE ACTION BUTTONS
         // =====================================================
 
         private void btnAddMovie_Click(
@@ -1641,10 +1058,6 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // EDIT MOVIE
-        // =====================================================
-
         private void btnEditMovie_Click(
             object sender,
             EventArgs e)
@@ -1655,10 +1068,6 @@ namespace MovieReviewApp.Forms
         }
 
 
-        // =====================================================
-        // ADD NEW MOVIE
-        // =====================================================
-
         private void btnAddNewmovies_Click(
             object sender,
             EventArgs e)
@@ -1666,10 +1075,6 @@ namespace MovieReviewApp.Forms
             btnAddMovie_Click(sender, e);
         }
 
-
-        // =====================================================
-        // EDIT NEW MOVIE
-        // =====================================================
 
         private void btnEditNewMovie_Click(
             object sender,
@@ -1680,24 +1085,49 @@ namespace MovieReviewApp.Forms
 
 
         // =====================================================
-        // PANEL BORDERS
+        // LOGOUT
         // =====================================================
 
-        private void panelMovieCard_Paint(
+        private void btnLogout_Click(
             object sender,
-            PaintEventArgs e)
+            EventArgs e)
         {
-            using (Pen pen =
-                   new Pen(Color.Black, 1))
+            Session.Clear();
+
+            Form1 loginForm = new Form1();
+
+            loginForm.Show();
+
+            this.Close();
+        }
+
+
+        // =====================================================
+        // OVERVIEW CARD BORDERS
+        // =====================================================
+
+        private void DrawPanelBorder(
+            PaintEventArgs e,
+            Panel panel)
+        {
+            using (Pen pen = new Pen(Color.Black, 1))
             {
                 e.Graphics.DrawRectangle(
                     pen,
                     0,
                     0,
-                    panelMovieCard.Width - 1,
-                    panelMovieCard.Height - 1
+                    panel.Width - 1,
+                    panel.Height - 1
                 );
             }
+        }
+
+
+        private void panelMovieCard_Paint(
+            object sender,
+            PaintEventArgs e)
+        {
+            DrawPanelBorder(e, panelMovieCard);
         }
 
 
@@ -1705,17 +1135,7 @@ namespace MovieReviewApp.Forms
             object sender,
             PaintEventArgs e)
         {
-            using (Pen pen =
-                   new Pen(Color.Black, 1))
-            {
-                e.Graphics.DrawRectangle(
-                    pen,
-                    0,
-                    0,
-                    panelUserCard.Width - 1,
-                    panelUserCard.Height - 1
-                );
-            }
+            DrawPanelBorder(e, panelUserCard);
         }
 
 
@@ -1723,17 +1143,7 @@ namespace MovieReviewApp.Forms
             object sender,
             PaintEventArgs e)
         {
-            using (Pen pen =
-                   new Pen(Color.Black, 1))
-            {
-                e.Graphics.DrawRectangle(
-                    pen,
-                    0,
-                    0,
-                    panelReviewCard.Width - 1,
-                    panelReviewCard.Height - 1
-                );
-            }
+            DrawPanelBorder(e, panelReviewCard);
         }
 
 
@@ -1741,19 +1151,7 @@ namespace MovieReviewApp.Forms
             object sender,
             PaintEventArgs e)
         {
-            using (Pen pen =
-                   new Pen(Color.Black, 1))
-            {
-                e.Graphics.DrawRectangle(
-                    pen,
-                    0,
-                    0,
-                    panelQuickAction.Width - 1,
-                    panelQuickAction.Height - 1
-                );
-            }
+            DrawPanelBorder(e, panelQuickAction);
         }
-
-        
     }
 }
