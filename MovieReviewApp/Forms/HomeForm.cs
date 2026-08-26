@@ -48,6 +48,26 @@ namespace MovieReviewApp
             flowMovies.Visible = true;
             panelMovieDetails.Visible = false;
             panelProfile.Visible = false;
+            
+            // Setting transparency
+            flowMovies.BackColor = Color.Transparent;
+            lblSearch.BackColor = Color.Transparent;
+            lblGenre.BackColor = Color.Transparent;
+            lblDetailTitle.BackColor = Color.Transparent;
+            lblDetailGenre.BackColor = Color.Transparent;
+            lblDetailYear.BackColor = Color.Transparent;
+            lblDirector.BackColor = Color.Transparent;
+            lblAverageRating.BackColor = Color.Transparent;
+            lblDescriptiontitle.BackColor = Color.Transparent;
+            lblDescription.BackColor = Color.Transparent;
+            lblReviewCount.BackColor = Color.Transparent;
+            lblReviewsTitle.BackColor = Color.Transparent;
+            flowReviews.BackColor = Color.Transparent;
+            lblProfileTitle.BackColor = Color.Transparent;
+            lblProfileName.BackColor = Color.Transparent;
+            lblProfileEmail.BackColor = Color.Transparent;
+            lblProfileRole.BackColor = Color.Transparent;
+
         }
 
         // =====================================================
@@ -1857,17 +1877,28 @@ namespace MovieReviewApp
         // =====================================================
 
         private void btnLogout_Click(
-            object sender,
-            EventArgs e)
+             object sender,
+             EventArgs e)
         {
-            Session.Clear();
+            DialogResult result =
+                MessageBox.Show(
+                    "Are you sure you want to logout?",
+                    "Logout",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
 
-            Form1 loginForm =
-                new Form1();
+            if (result == DialogResult.Yes)
+            {
+                Session.Clear();
 
-            loginForm.Show();
+                LoginForm loginForm =
+                    new LoginForm();
 
-            this.Close();
+                loginForm.Show();
+
+                this.Close();
+            }
         }
 
         // =====================================================
@@ -1915,5 +1946,8 @@ namespace MovieReviewApp
             PaintEventArgs e)
         {
         }
+
+        // Setting Transparency
+        
     }
 }

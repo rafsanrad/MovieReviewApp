@@ -67,12 +67,6 @@
     <Compile Include="Forms\EditMovie.Designer.cs">
       <DependentUpon>EditMovie.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FavouritesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FavouritesForm.Designer.cs">
-      <DependentUpon>FavouritesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,12 +78,6 @@
     </Compile>
     <Compile Include="Forms\HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\HomePageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HomePageForm.Designer.cs">
-      <DependentUpon>HomePageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginFrom.cs">
       <SubType>Form</SubType>
@@ -109,19 +97,7 @@
     <Compile Include="Forms\ReviewForm.Designer.cs">
       <DependentUpon>ReviewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WatchlistForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\WatchlistForm.Designer.cs">
-      <DependentUpon>WatchlistForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Forms\MovieForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MovieForm.Designer.cs">
-      <DependentUpon>MovieForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Review.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,32 +115,20 @@
     <EmbeddedResource Include="Forms\EditMovie.resx">
       <DependentUpon>EditMovie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FavouritesForm.resx">
-      <DependentUpon>FavouritesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HomePageForm.resx">
-      <DependentUpon>HomePageForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginFrom.resx">
       <DependentUpon>LoginFrom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MovieForm.resx">
-      <DependentUpon>MovieForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReviewForm.resx">
       <DependentUpon>ReviewForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WatchlistForm.resx">
-      <DependentUpon>WatchlistForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -174,6 +138,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -221,6 +186,26 @@
     <Content Include="Posters\titanic.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\rsz_office-coffee-interior-design.jpg" />
+    <None Include="Resources\rsz_user2.jpg" />
+    <None Include="Resources\User32.jpg" />
+    <None Include="Resources\User31.jpg" />
+    <None Include="Resources\User3.jpg" />
+    <None Include="Resources\User.jpg" />
+    <None Include="Resources\Homebg11.jpg" />
+    <None Include="Resources\regbg12.jpg" />
+    <None Include="Resources\HomeBg2.jpg" />
+    <None Include="Resources\Homebg1.jpg" />
+    <None Include="Resources\regbg11.jpg" />
+    <None Include="Resources\regbg2.jpg" />
+    <None Include="Resources\regbg1.jpg" />
+    <None Include="Resources\logbg11.jpg" />
+    <None Include="Resources\logbg1.jpg" />
+    <None Include="Resources\logBg.jpg" />
+    <None Include="Resources\bg2.jpg" />
+    <None Include="Resources\bg1.jpg" />
+    <None Include="Resources\StartBg.jpg" />
+    <None Include="Resources\LoginBG.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
