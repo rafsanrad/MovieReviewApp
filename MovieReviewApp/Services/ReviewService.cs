@@ -1,8 +1,7 @@
-﻿using System.Data.SqlClient;
-using MovieReviewApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using MovieReviewApp.Models;
 
 namespace MovieReviewApp.Services
 {
@@ -14,6 +13,7 @@ namespace MovieReviewApp.Services
 
         private readonly string connectionString =
             @"Data Source=.\SQLEXPRESS;Initial Catalog=MovieReviewDB;Integrated Security=True;TrustServerCertificate=True;";
+
 
         // =====================================================
         // ADD REVIEW
@@ -36,7 +36,7 @@ namespace MovieReviewApp.Services
                         UserId,
                         MovieId,
                         Rating,
-                        Comment,
+                        ReviewText,
                         ReviewDate
                     )
                     VALUES
@@ -44,7 +44,7 @@ namespace MovieReviewApp.Services
                         @UserId,
                         @MovieId,
                         @Rating,
-                        @Comment,
+                        @ReviewText,
                         GETDATE()
                     )";
 
@@ -67,7 +67,7 @@ namespace MovieReviewApp.Services
                     );
 
                     command.Parameters.AddWithValue(
-                        "@Comment",
+                        "@ReviewText",
                         string.IsNullOrWhiteSpace(comment)
                             ? (object)DBNull.Value
                             : comment
@@ -77,6 +77,7 @@ namespace MovieReviewApp.Services
                 }
             }
         }
+
 
         // =====================================================
         // GET REVIEWS FOR A MOVIE
@@ -99,7 +100,7 @@ namespace MovieReviewApp.Services
                         r.UserId,
                         r.MovieId,
                         r.Rating,
-                        r.Comment,
+                        r.ReviewText,
                         r.ReviewDate,
                         u.Name
                     FROM Reviews r
@@ -144,10 +145,12 @@ namespace MovieReviewApp.Services
                                     reader["Rating"]
                                 );
 
+                            // Database column = ReviewText
+                            // C# property = Comment
                             review.Comment =
-                                reader["Comment"] == DBNull.Value
+                                reader["ReviewText"] == DBNull.Value
                                     ? ""
-                                    : reader["Comment"].ToString();
+                                    : reader["ReviewText"].ToString();
 
                             review.ReviewDate =
                                 Convert.ToDateTime(
@@ -165,6 +168,7 @@ namespace MovieReviewApp.Services
 
             return reviews;
         }
+
 
         // =====================================================
         // GET AVERAGE RATING
@@ -205,6 +209,7 @@ namespace MovieReviewApp.Services
             }
         }
 
+
         // =====================================================
         // GET REVIEW COUNT
         // =====================================================
@@ -237,6 +242,7 @@ namespace MovieReviewApp.Services
             }
         }
 
+
         // =====================================================
         // UPDATE REVIEW
         // =====================================================
@@ -256,7 +262,7 @@ namespace MovieReviewApp.Services
                     UPDATE Reviews
                     SET
                         Rating = @Rating,
-                        Comment = @Comment
+                        ReviewText = @ReviewText
                     WHERE ReviewId = @ReviewId
                     AND UserId = @UserId";
 
@@ -269,7 +275,7 @@ namespace MovieReviewApp.Services
                     );
 
                     command.Parameters.AddWithValue(
-                        "@Comment",
+                        "@ReviewText",
                         string.IsNullOrWhiteSpace(comment)
                             ? (object)DBNull.Value
                             : comment
@@ -289,6 +295,7 @@ namespace MovieReviewApp.Services
                 }
             }
         }
+
 
         // =====================================================
         // DELETE REVIEW

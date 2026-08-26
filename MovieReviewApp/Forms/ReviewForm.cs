@@ -7,26 +7,31 @@ namespace MovieReviewApp.Forms
     public partial class ReviewForm : Form
     {
         private int movieId;
+        private string movieName;
 
         // =====================================================
         // CONSTRUCTOR
         // =====================================================
 
-        public ReviewForm(int movieId, string movieName)
+        public ReviewForm(
+            int movieId,
+            string movieName)
         {
             InitializeComponent();
 
             this.movieId = movieId;
+            this.movieName = movieName;
 
-            // Show selected movie name
-            lblMovieName.Text = movieName;
+            lblMovieName.Text =
+                movieName;
 
-            // No rating selected initially
             cmbRating.SelectedIndex = -1;
 
-            // Connect button events
-            btnSubmit.Click += btnSubmit_Click;
-            btnCancel.Click += btnCancel_Click;
+            btnSubmit.Click +=
+                btnSubmit_Click;
+
+            btnCancel.Click +=
+                btnCancel_Click;
         }
 
         // =====================================================
@@ -44,10 +49,10 @@ namespace MovieReviewApp.Forms
             if (Session.UserId <= 0)
             {
                 MessageBox.Show(
-                    "Please login first.",
-                    "Login Required",
+                    "User session not found. Please login again.",
+                    "Error",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
+                    MessageBoxIcon.Error
                 );
 
                 return;
@@ -70,13 +75,13 @@ namespace MovieReviewApp.Forms
             }
 
             // =================================================
-            // CHECK REVIEW TEXT
+            // CHECK REVIEW
             // =================================================
 
             string reviewText =
                 txtReviewComment.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(reviewText))
+            if (string.IsNullOrEmpty(reviewText))
             {
                 MessageBox.Show(
                     "Please write your review.",
@@ -85,20 +90,18 @@ namespace MovieReviewApp.Forms
                     MessageBoxIcon.Warning
                 );
 
-                txtReviewComment.Focus();
-
                 return;
             }
 
             // =================================================
-            // GET RATING VALUE
+            // GET RATING
             // =================================================
 
             int rating =
                 cmbRating.SelectedIndex + 1;
 
             // =================================================
-            // SAVE REVIEW TO DATABASE
+            // SAVE REVIEW
             // =================================================
 
             try
@@ -117,16 +120,14 @@ namespace MovieReviewApp.Forms
                             UserId,
                             MovieId,
                             Rating,
-                            ReviewText,
-                            ReviewDate
+                            ReviewText
                         )
                         VALUES
                         (
                             @UserId,
                             @MovieId,
                             @Rating,
-                            @ReviewText,
-                            GETDATE()
+                            @ReviewText
                         )";
 
                     using (SqlCommand command =
@@ -158,10 +159,6 @@ namespace MovieReviewApp.Forms
                     }
                 }
 
-                // =================================================
-                // SUCCESS MESSAGE
-                // =================================================
-
                 MessageBox.Show(
                     "Review submitted successfully!",
                     "Success",
@@ -169,7 +166,6 @@ namespace MovieReviewApp.Forms
                     MessageBoxIcon.Information
                 );
 
-                // Tell HomeForm that review was submitted
                 this.DialogResult =
                     DialogResult.OK;
 
@@ -180,7 +176,7 @@ namespace MovieReviewApp.Forms
                 MessageBox.Show(
                     "Failed to submit review.\n\n" +
                     ex.Message,
-                    "Database Error",
+                    "Review Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
@@ -188,13 +184,16 @@ namespace MovieReviewApp.Forms
         }
 
         // =====================================================
-        // CANCEL BUTTON
+        // CANCEL
         // =====================================================
 
         private void btnCancel_Click(
             object sender,
             EventArgs e)
         {
+            this.DialogResult =
+                DialogResult.Cancel;
+
             this.Close();
         }
 

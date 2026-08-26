@@ -1,15 +1,19 @@
-﻿using System;
+﻿using MovieReviewApp.Forms;
+using MovieReviewApp.Models;
+using MovieReviewApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using MovieReviewApp.Models;
-using MovieReviewApp.Services;
 
 namespace MovieReviewApp
 {
     public partial class HomeForm : Form
     {
+        // =====================================================
+        // SERVICES
+        // =====================================================
+
         private MovieService movieService =
             new MovieService();
 
@@ -18,6 +22,13 @@ namespace MovieReviewApp
 
         private WatchlistService watchlistService =
             new WatchlistService();
+
+        private ReviewService reviewService =
+            new ReviewService();
+
+        // =====================================================
+        // SELECTED MOVIE
+        // =====================================================
 
         private Movie selectedMovie;
 
@@ -37,13 +48,6 @@ namespace MovieReviewApp
             flowMovies.Visible = true;
             panelMovieDetails.Visible = false;
             panelProfile.Visible = false;
-
-            // Reviews panel initially hidden
-            lblReviewsTitle.Visible = false;
-            flowReviews.Visible = false;
-
-            // Review button event
-            btnReview.Click += btnReview_Click;
         }
 
         // =====================================================
@@ -85,9 +89,6 @@ namespace MovieReviewApp
             flowMovies.Visible = true;
             panelMovieDetails.Visible = false;
             panelProfile.Visible = false;
-
-            lblReviewsTitle.Visible = false;
-            flowReviews.Visible = false;
 
             txtSearch.Text = "";
 
@@ -293,7 +294,6 @@ namespace MovieReviewApp
                 );
 
             lblMovieTitle.AutoSize = false;
-
             lblMovieTitle.Width = 180;
             lblMovieTitle.Height = 30;
 
@@ -313,7 +313,6 @@ namespace MovieReviewApp
                 movie.ReleaseYear;
 
             lblMovieInfo.AutoSize = false;
-
             lblMovieInfo.Width = 180;
             lblMovieInfo.Height = 25;
 
@@ -499,9 +498,12 @@ namespace MovieReviewApp
                 return;
             }
 
-            selectedMovie = movie;
+            selectedMovie =
+                movie;
 
-            ShowMovieDetails(movie);
+            ShowMovieDetails(
+                movie
+            );
         }
 
         // =====================================================
@@ -516,20 +518,35 @@ namespace MovieReviewApp
                 return;
             }
 
-            selectedMovie = movie;
+            selectedMovie =
+                movie;
 
-            panelProfile.Visible = false;
+            panelProfile.Visible =
+                false;
 
-            lblSearch.Visible = false;
-            txtSearch.Visible = false;
-            btnSearch.Visible = false;
-            lblGenre.Visible = false;
-            cmbGenre.Visible = false;
+            lblSearch.Visible =
+                false;
 
-            flowMovies.Visible = false;
+            txtSearch.Visible =
+                false;
 
-            panelMovieDetails.Visible = true;
-            panelMovieDetails.Enabled = true;
+            btnSearch.Visible =
+                false;
+
+            lblGenre.Visible =
+                false;
+
+            cmbGenre.Visible =
+                false;
+
+            flowMovies.Visible =
+                false;
+
+            panelMovieDetails.Visible =
+                true;
+
+            panelMovieDetails.Enabled =
+                true;
 
             panelMovieDetails.BringToFront();
 
@@ -572,7 +589,9 @@ namespace MovieReviewApp
             if (pictureBoxDetails.Image != null)
             {
                 pictureBoxDetails.Image.Dispose();
-                pictureBoxDetails.Image = null;
+
+                pictureBoxDetails.Image =
+                    null;
             }
 
             LoadPoster(
@@ -580,11 +599,52 @@ namespace MovieReviewApp
                 movie.PosterPath
             );
 
-            // =================================================
-            // LOAD REVIEWS
-            // =================================================
+            // Load reviews
+            LoadReviews(
+                movie.MovieId
+            );
+        }
 
-            LoadReviews(movie.MovieId);
+        // =====================================================
+        // ADD REVIEW BUTTON
+        // =====================================================
+
+        private void btnReview_Click(
+            object sender,
+            EventArgs e)
+        {
+            if (selectedMovie == null)
+            {
+                MessageBox.Show(
+                    "Please select a movie first."
+                );
+
+                return;
+            }
+
+            if (Session.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "User session not found. Please login again."
+                );
+
+                return;
+            }
+
+            ReviewForm reviewForm =
+                new ReviewForm(
+                    selectedMovie.MovieId,
+                    selectedMovie.Title
+                );
+
+            reviewForm.ShowDialog();
+
+            if (selectedMovie != null)
+            {
+                LoadReviews(
+                    selectedMovie.MovieId
+                );
+            }
         }
 
         // =====================================================
@@ -598,105 +658,234 @@ namespace MovieReviewApp
             {
                 flowReviews.Controls.Clear();
 
-                DatabaseHelper db =
-                    new DatabaseHelper();
+                List<Review> reviews =
+                    reviewService.GetReviewsByMovie(
+                        movieId
+                    );
 
-                using (SqlConnection connection =
-                       db.GetConnection())
+                // =================================================
+                // NO REVIEWS
+                // =================================================
+
+                if (reviews == null ||
+                    reviews.Count == 0)
                 {
-                    connection.Open();
+                    lblReviewCount.Text =
+                        "Total Reviews: 0";
 
-                    string query = @"
-                        SELECT
-                            r.ReviewId,
-                            r.UserId,
-                            u.Name,
-                            r.Rating,
-                            r.ReviewText,
-                            r.ReviewDate
-                        FROM Reviews r
-                        INNER JOIN Users u
-                            ON r.UserId = u.UserId
-                        WHERE r.MovieId = @MovieId
-                        ORDER BY r.ReviewDate DESC";
+                    lblAverageRating.Text =
+                        "Average Rating: 0 / 5";
 
-                    using (SqlCommand command =
-                           new SqlCommand(
-                               query,
-                               connection))
-                    {
-                        command.Parameters.AddWithValue(
-                            "@MovieId",
-                            movieId
-                        );
-
-                        using (SqlDataReader reader =
-                               command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                int reviewId =
-                                    Convert.ToInt32(
-                                        reader["ReviewId"]
-                                    );
-
-                                string userName =
-                                    reader["Name"].ToString();
-
-                                int rating =
-                                    Convert.ToInt32(
-                                        reader["Rating"]
-                                    );
-
-                                string reviewText =
-                                    reader["ReviewText"] == DBNull.Value
-                                    ? ""
-                                    : reader["ReviewText"].ToString();
-
-                                DateTime reviewDate =
-                                    Convert.ToDateTime(
-                                        reader["ReviewDate"]
-                                    );
-
-                                CreateReviewCard(
-                                    reviewId,
-                                    userName,
-                                    rating,
-                                    reviewText,
-                                    reviewDate
-                                );
-                            }
-                        }
-                    }
-                }
-
-                lblReviewsTitle.Visible = true;
-                flowReviews.Visible = true;
-
-                if (flowReviews.Controls.Count == 0)
-                {
-                    Label lblNoReviews =
+                    Label noReview =
                         new Label();
 
-                    lblNoReviews.Text =
+                    noReview.Text =
                         "No reviews yet. Be the first to review this movie!";
 
-                    lblNoReviews.AutoSize = true;
+                    noReview.AutoSize =
+                        true;
 
-                    lblNoReviews.Font =
+                    noReview.Font =
                         new Font(
                             "Segoe UI",
-                            10,
+                            9,
                             FontStyle.Italic
                         );
 
-                    lblNoReviews.Margin =
-                        new Padding(10);
+                    noReview.Margin =
+                        new Padding(5);
 
                     flowReviews.Controls.Add(
-                        lblNoReviews
+                        noReview
+                    );
+
+                    return;
+                }
+
+                // =================================================
+                // REVIEW COUNT
+                // =================================================
+
+                lblReviewCount.Text =
+                    "Total Reviews: " +
+                    reviews.Count;
+
+                double totalRating =
+                    0;
+
+                // =================================================
+                // DISPLAY REVIEWS
+                // =================================================
+
+                foreach (Review review in reviews)
+                {
+                    totalRating +=
+                        review.Rating;
+
+                    Panel reviewPanel =
+                        new Panel();
+
+                    reviewPanel.Width =
+                        650;
+
+                    reviewPanel.Height =
+                        review.UserId == Session.UserId
+                        ? 115
+                        : 80;
+
+                    reviewPanel.BorderStyle =
+                        BorderStyle.FixedSingle;
+
+                    reviewPanel.Margin =
+                        new Padding(5);
+
+                    // =================================================
+                    // USER + RATING
+                    // =================================================
+
+                    Label lblUser =
+                        new Label();
+
+                    lblUser.AutoSize =
+                        true;
+
+                    lblUser.Font =
+                        new Font(
+                            "Segoe UI",
+                            9,
+                            FontStyle.Bold
+                        );
+
+                    lblUser.Location =
+                        new Point(
+                            10,
+                            8
+                        );
+
+                    lblUser.Text =
+                        review.UserName +
+                        "  |  Rating: " +
+                        review.Rating +
+                        "/5";
+
+                    // =================================================
+                    // COMMENT
+                    // =================================================
+
+                    Label lblComment =
+                        new Label();
+
+                    lblComment.AutoSize =
+                        false;
+
+                    lblComment.Width =
+                        620;
+
+                    lblComment.Height =
+                        40;
+
+                    lblComment.Location =
+                        new Point(
+                            10,
+                            32
+                        );
+
+                    lblComment.Text =
+                        string.IsNullOrEmpty(
+                            review.Comment)
+                        ? "No comment."
+                        : review.Comment;
+
+                    reviewPanel.Controls.Add(
+                        lblUser
+                    );
+
+                    reviewPanel.Controls.Add(
+                        lblComment
+                    );
+
+                    // =================================================
+                    // EDIT + DELETE
+                    // ONLY FOR CURRENT USER
+                    // =================================================
+
+                    if (review.UserId ==
+                        Session.UserId)
+                    {
+                        Button btnEdit =
+                            new Button();
+
+                        btnEdit.Text =
+                            "Edit";
+
+                        btnEdit.Width =
+                            70;
+
+                        btnEdit.Height =
+                            28;
+
+                        btnEdit.Location =
+                            new Point(
+                                10,
+                                75
+                            );
+
+                        btnEdit.Tag =
+                            review;
+
+                        btnEdit.Click +=
+                            BtnEditReview_Click;
+
+                        reviewPanel.Controls.Add(
+                            btnEdit
+                        );
+
+                        Button btnDelete =
+                            new Button();
+
+                        btnDelete.Text =
+                            "Delete";
+
+                        btnDelete.Width =
+                            70;
+
+                        btnDelete.Height =
+                            28;
+
+                        btnDelete.Location =
+                            new Point(
+                                90,
+                                75
+                            );
+
+                        btnDelete.Tag =
+                            review;
+
+                        btnDelete.Click +=
+                            BtnDeleteReview_Click;
+
+                        reviewPanel.Controls.Add(
+                            btnDelete
+                        );
+                    }
+
+                    flowReviews.Controls.Add(
+                        reviewPanel
                     );
                 }
+
+                // =================================================
+                // AVERAGE RATING
+                // =================================================
+
+                double average =
+                    totalRating /
+                    reviews.Count;
+
+                lblAverageRating.Text =
+                    "Average Rating: " +
+                    average.ToString("0.0") +
+                    " / 5";
             }
             catch (Exception ex)
             {
@@ -711,217 +900,482 @@ namespace MovieReviewApp
         }
 
         // =====================================================
-        // CREATE REVIEW CARD
+        // EDIT REVIEW BUTTON
         // =====================================================
 
-        private void CreateReviewCard(
-            int reviewId,
-            string userName,
-            int rating,
-            string reviewText,
-            DateTime reviewDate)
+        private void BtnEditReview_Click(
+            object sender,
+            EventArgs e)
         {
-            Panel reviewPanel =
-                new Panel();
+            Button clickedButton =
+                sender as Button;
 
-            reviewPanel.Width = 430;
-            reviewPanel.Height = 120;
+            if (clickedButton == null)
+            {
+                return;
+            }
 
-            reviewPanel.BorderStyle =
-                BorderStyle.FixedSingle;
+            Review review =
+                clickedButton.Tag as Review;
 
-            reviewPanel.Margin =
-                new Padding(5);
+            if (review == null)
+            {
+                return;
+            }
+
+            // Security check
+            if (review.UserId !=
+                Session.UserId)
+            {
+                MessageBox.Show(
+                    "You can only edit your own review.",
+                    "Access Denied",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            ShowEditReviewForm(
+                review
+            );
+        }
+
+        // =====================================================
+        // DELETE REVIEW BUTTON
+        // =====================================================
+
+        private void BtnDeleteReview_Click(
+            object sender,
+            EventArgs e)
+        {
+            Button clickedButton =
+                sender as Button;
+
+            if (clickedButton == null)
+            {
+                return;
+            }
+
+            Review review =
+                clickedButton.Tag as Review;
+
+            if (review == null)
+            {
+                return;
+            }
+
+            // Security check
+            if (review.UserId !=
+                Session.UserId)
+            {
+                MessageBox.Show(
+                    "You can only delete your own review.",
+                    "Access Denied",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            DialogResult result =
+                MessageBox.Show(
+                    "Are you sure you want to delete your review?",
+                    "Delete Review",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+            if (result !=
+                DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                bool deleted =
+                    reviewService.DeleteReview(
+                        review.ReviewId,
+                        Session.UserId
+                    );
+
+                if (deleted)
+                {
+                    MessageBox.Show(
+                        "Review deleted successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    if (selectedMovie != null)
+                    {
+                        LoadReviews(
+                            selectedMovie.MovieId
+                        );
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Review could not be deleted.",
+                        "Delete Failed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to delete review.\n\n" +
+                    ex.Message,
+                    "Delete Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        // =====================================================
+        // EDIT REVIEW FORM
+        // =====================================================
+
+        private void ShowEditReviewForm(
+            Review review)
+        {
+            Form editForm =
+                new Form();
+
+            editForm.Text =
+                "Edit Review";
+
+            editForm.StartPosition =
+                FormStartPosition.CenterParent;
+
+            editForm.FormBorderStyle =
+                FormBorderStyle.FixedDialog;
+
+            editForm.MaximizeBox =
+                false;
+
+            editForm.MinimizeBox =
+                false;
+
+            editForm.ClientSize =
+                new Size(
+                    430,
+                    300
+                );
 
             // =================================================
-            // USER NAME
+            // TITLE
             // =================================================
 
-            Label lblUser =
+            Label lblTitle =
                 new Label();
 
-            lblUser.Text =
-                userName;
+            lblTitle.Text =
+                "Edit Your Review";
 
-            lblUser.Font =
+            lblTitle.Font =
+                new Font(
+                    "Segoe UI",
+                    16,
+                    FontStyle.Bold
+                );
+
+            lblTitle.AutoSize =
+                true;
+
+            lblTitle.Location =
+                new Point(
+                    25,
+                    20
+                );
+
+            // =================================================
+            // RATING LABEL
+            // =================================================
+
+            Label lblRating =
+                new Label();
+
+            lblRating.Text =
+                "Rating:";
+
+            lblRating.AutoSize =
+                true;
+
+            lblRating.Location =
+                new Point(
+                    25,
+                    75
+                );
+
+            lblRating.Font =
                 new Font(
                     "Segoe UI",
                     10,
                     FontStyle.Bold
                 );
 
-            lblUser.AutoSize = true;
-
-            lblUser.Location =
-                new Point(10, 8);
-
             // =================================================
-            // RATING
+            // RATING COMBOBOX
             // =================================================
 
-            Label lblRatingValue =
+            ComboBox cmbRating =
+                new ComboBox();
+
+            cmbRating.DropDownStyle =
+                ComboBoxStyle.DropDownList;
+
+            cmbRating.Items.AddRange(
+                new object[]
+                {
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                }
+            );
+
+            cmbRating.Location =
+                new Point(
+                    100,
+                    72
+                );
+
+            cmbRating.Width =
+                100;
+
+            cmbRating.SelectedIndex =
+                review.Rating - 1;
+
+            // =================================================
+            // COMMENT LABEL
+            // =================================================
+
+            Label lblComment =
                 new Label();
 
-            lblRatingValue.Text =
-                GetStars(rating);
+            lblComment.Text =
+                "Comment:";
 
-            lblRatingValue.Font =
+            lblComment.AutoSize =
+                true;
+
+            lblComment.Location =
+                new Point(
+                    25,
+                    115
+                );
+
+            lblComment.Font =
                 new Font(
                     "Segoe UI",
                     10,
-                    FontStyle.Regular
+                    FontStyle.Bold
                 );
 
-            lblRatingValue.AutoSize = true;
-
-            lblRatingValue.Location =
-                new Point(10, 35);
-
             // =================================================
-            // REVIEW TEXT
+            // COMMENT TEXTBOX
             // =================================================
 
-            Label lblReviewText =
-                new Label();
+            TextBox txtComment =
+                new TextBox();
 
-            lblReviewText.Text =
-                reviewText;
+            txtComment.Multiline =
+                true;
 
-            lblReviewText.Font =
-                new Font(
-                    "Segoe UI",
-                    9,
-                    FontStyle.Regular
+            txtComment.ScrollBars =
+                ScrollBars.Vertical;
+
+            txtComment.Location =
+                new Point(
+                    100,
+                    112
                 );
 
-            lblReviewText.AutoSize = false;
+            txtComment.Width =
+                290;
 
-            lblReviewText.Width = 400;
-            lblReviewText.Height = 35;
+            txtComment.Height =
+                85;
 
-            lblReviewText.Location =
-                new Point(10, 58);
+            txtComment.Text =
+                review.Comment ?? "";
 
             // =================================================
-            // DATE
+            // SAVE BUTTON
             // =================================================
 
-            Label lblDate =
-                new Label();
+            Button btnSave =
+                new Button();
 
-            lblDate.Text =
-                reviewDate.ToString(
-                    "dd MMM yyyy"
+            btnSave.Text =
+                "Save Changes";
+
+            btnSave.Width =
+                120;
+
+            btnSave.Height =
+                35;
+
+            btnSave.Location =
+                new Point(
+                    100,
+                    225
                 );
 
-            lblDate.Font =
-                new Font(
-                    "Segoe UI",
-                    8,
-                    FontStyle.Italic
+            btnSave.Click +=
+                delegate
+                {
+                    if (cmbRating.SelectedItem ==
+                        null)
+                    {
+                        MessageBox.Show(
+                            "Please select a rating."
+                        );
+
+                        return;
+                    }
+
+                    int newRating =
+                        Convert.ToInt32(
+                            cmbRating.SelectedItem
+                        );
+
+                    string newComment =
+                        txtComment.Text.Trim();
+
+                    try
+                    {
+                        bool updated =
+                            reviewService.UpdateReview(
+                                review.ReviewId,
+                                Session.UserId,
+                                newRating,
+                                newComment
+                            );
+
+                        if (updated)
+                        {
+                            MessageBox.Show(
+                                "Review updated successfully!",
+                                "Success",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                            );
+
+                            editForm.Close();
+
+                            if (selectedMovie != null)
+                            {
+                                LoadReviews(
+                                    selectedMovie.MovieId
+                                );
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "Review could not be updated.",
+                                "Update Failed",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            "Failed to update review.\n\n" +
+                            ex.Message,
+                            "Update Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+                    }
+                };
+
+            // =================================================
+            // CANCEL BUTTON
+            // =================================================
+
+            Button btnCancel =
+                new Button();
+
+            btnCancel.Text =
+                "Cancel";
+
+            btnCancel.Width =
+                100;
+
+            btnCancel.Height =
+                35;
+
+            btnCancel.Location =
+                new Point(
+                    230,
+                    225
                 );
 
-            lblDate.AutoSize = true;
+            btnCancel.Click +=
+                delegate
+                {
+                    editForm.Close();
+                };
 
-            lblDate.Location =
-                new Point(330, 95);
+            // =================================================
+            // ADD CONTROLS
+            // =================================================
 
-            reviewPanel.Controls.Add(
-                lblUser
+            editForm.Controls.Add(
+                lblTitle
             );
 
-            reviewPanel.Controls.Add(
-                lblRatingValue
+            editForm.Controls.Add(
+                lblRating
             );
 
-            reviewPanel.Controls.Add(
-                lblReviewText
+            editForm.Controls.Add(
+                cmbRating
             );
 
-            reviewPanel.Controls.Add(
-                lblDate
+            editForm.Controls.Add(
+                lblComment
             );
 
-            flowReviews.Controls.Add(
-                reviewPanel
+            editForm.Controls.Add(
+                txtComment
+            );
+
+            editForm.Controls.Add(
+                btnSave
+            );
+
+            editForm.Controls.Add(
+                btnCancel
+            );
+
+            editForm.ShowDialog(
+                this
             );
         }
 
         // =====================================================
-        // GET STAR DISPLAY
+        // REVIEW COUNT CLICK
         // =====================================================
 
-        private string GetStars(
-            int rating)
-        {
-            string stars = "";
-
-            for (int i = 1; i <= 5; i++)
-            {
-                if (i <= rating)
-                {
-                    stars += "★";
-                }
-                else
-                {
-                    stars += "☆";
-                }
-            }
-
-            return stars;
-        }
-
-        // =====================================================
-        // REVIEW BUTTON
-        // =====================================================
-
-        private void btnReview_Click(
+        private void lblReviewCount_Click(
             object sender,
             EventArgs e)
         {
-            if (selectedMovie == null)
-            {
-                MessageBox.Show(
-                    "Please select a movie first.",
-                    "Review",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                return;
-            }
-
-            if (Session.UserId <= 0)
-            {
-                MessageBox.Show(
-                    "Please login first.",
-                    "Login Required",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                return;
-            }
-
-            using (
-                Forms.ReviewForm reviewForm =
-                new Forms.ReviewForm(
-                    selectedMovie.MovieId,
-                    selectedMovie.Title
-                )
-            )
-            {
-                DialogResult result =
-                    reviewForm.ShowDialog();
-
-                // Reload reviews after submitting
-                if (result == DialogResult.OK)
-                {
-                    LoadReviews(
-                        selectedMovie.MovieId
-                    );
-                }
-            }
         }
 
         // =====================================================
@@ -990,8 +1444,13 @@ namespace MovieReviewApp
             EventArgs e)
         {
             HideHomeControls();
+
             LoadFavoriteMovies();
         }
+
+        // =====================================================
+        // LOAD FAVORITES
+        // =====================================================
 
         private void LoadFavoriteMovies()
         {
@@ -1022,9 +1481,14 @@ namespace MovieReviewApp
                     );
                 }
 
-                flowMovies.Visible = true;
-                panelMovieDetails.Visible = false;
-                panelProfile.Visible = false;
+                flowMovies.Visible =
+                    true;
+
+                panelMovieDetails.Visible =
+                    false;
+
+                panelProfile.Visible =
+                    false;
 
                 if (favoriteMovies.Count == 0)
                 {
@@ -1162,8 +1626,13 @@ namespace MovieReviewApp
             EventArgs e)
         {
             HideHomeControls();
+
             LoadWatchlistMovies();
         }
+
+        // =====================================================
+        // LOAD WATCHLIST
+        // =====================================================
 
         private void LoadWatchlistMovies()
         {
@@ -1194,9 +1663,14 @@ namespace MovieReviewApp
                     );
                 }
 
-                flowMovies.Visible = true;
-                panelMovieDetails.Visible = false;
-                panelProfile.Visible = false;
+                flowMovies.Visible =
+                    true;
+
+                panelMovieDetails.Visible =
+                    false;
+
+                panelProfile.Visible =
+                    false;
 
                 if (watchlistMovies.Count == 0)
                 {
@@ -1288,21 +1762,33 @@ namespace MovieReviewApp
 
         private void ShowProfile()
         {
-            selectedMovie = null;
+            selectedMovie =
+                null;
 
-            lblSearch.Visible = false;
-            txtSearch.Visible = false;
-            btnSearch.Visible = false;
-            lblGenre.Visible = false;
-            cmbGenre.Visible = false;
+            lblSearch.Visible =
+                false;
 
-            flowMovies.Visible = false;
-            panelMovieDetails.Visible = false;
+            txtSearch.Visible =
+                false;
 
-            lblReviewsTitle.Visible = false;
-            flowReviews.Visible = false;
+            btnSearch.Visible =
+                false;
 
-            panelProfile.Visible = true;
+            lblGenre.Visible =
+                false;
+
+            cmbGenre.Visible =
+                false;
+
+            flowMovies.Visible =
+                false;
+
+            panelMovieDetails.Visible =
+                false;
+
+            panelProfile.Visible =
+                true;
+
             panelProfile.BringToFront();
 
             lblProfileName.Text =
@@ -1323,17 +1809,26 @@ namespace MovieReviewApp
 
         private void HideHomeControls()
         {
-            lblSearch.Visible = false;
-            txtSearch.Visible = false;
-            btnSearch.Visible = false;
-            lblGenre.Visible = false;
-            cmbGenre.Visible = false;
+            lblSearch.Visible =
+                false;
 
-            panelMovieDetails.Visible = false;
-            panelProfile.Visible = false;
+            txtSearch.Visible =
+                false;
 
-            lblReviewsTitle.Visible = false;
-            flowReviews.Visible = false;
+            btnSearch.Visible =
+                false;
+
+            lblGenre.Visible =
+                false;
+
+            cmbGenre.Visible =
+                false;
+
+            panelMovieDetails.Visible =
+                false;
+
+            panelProfile.Visible =
+                false;
         }
 
         // =====================================================
@@ -1346,10 +1841,6 @@ namespace MovieReviewApp
         {
             ShowHomePage();
         }
-
-        // =====================================================
-        // DESIGNER BACK EVENT
-        // =====================================================
 
         private void btnBackToMovies_Click_1(
             object sender,
@@ -1380,7 +1871,7 @@ namespace MovieReviewApp
         }
 
         // =====================================================
-        // OTHER DESIGNER EVENTS
+        // DESIGNER EVENTS
         // =====================================================
 
         private void lblTitle_Click(
