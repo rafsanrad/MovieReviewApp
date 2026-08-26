@@ -1,24 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MovieReviewApp
+﻿namespace MovieReviewApp
 {
     public static class Session
     {
-        public static int UserId { get; set; }
+        // =====================================================
+        // MAIN SESSION PROPERTIES
+        // =====================================================
+
+        public static int UserID { get; set; }
 
         public static string UserName { get; set; }
 
         public static string UserEmail { get; set; }
 
+        public static string Role { get; set; }
+
+
+        // =====================================================
+        // COMPATIBILITY PROPERTIES
+        // These allow existing code using UserId, FullName,
+        // and Email to continue working.
+        // =====================================================
+
+        public static int UserId
+        {
+            get
+            {
+                return UserID;
+            }
+            set
+            {
+                UserID = value;
+            }
+        }
+
+        public static string FullName
+        {
+            get
+            {
+                return UserName;
+            }
+            set
+            {
+                UserName = value;
+            }
+        }
+
+        public static string Email
+        {
+            get
+            {
+                return UserEmail;
+            }
+            set
+            {
+                UserEmail = value;
+            }
+        }
+
+
+        // =====================================================
+        // CLEAR SESSION
+        // =====================================================
+
         public static void Clear()
         {
-            UserId = 0;
+            UserID = 0;
             UserName = null;
             UserEmail = null;
+            Role = null;
         }
     }
 }
