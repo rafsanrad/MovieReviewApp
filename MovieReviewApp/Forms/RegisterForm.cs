@@ -9,6 +9,7 @@ namespace MovieReviewApp.Forms
     {
         public RegisterForm()
         {
+            //Designer.cs theke sob components initialize kora hoyeche, tai ekhane InitializeComponent() call kora hoyeche.
             InitializeComponent();
             ActiveControl = txtFullName;
             lblLogo.BackColor = Color.Transparent;
@@ -210,6 +211,11 @@ namespace MovieReviewApp.Forms
             loginForm.Show();
 
             this.Hide();
+        }
+
+        private void pnlRegister_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
