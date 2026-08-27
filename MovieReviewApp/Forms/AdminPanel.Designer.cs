@@ -34,9 +34,19 @@
             this.btnDashBoard = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
             this.btnMovies = new System.Windows.Forms.Button();
-            this.panelDivider = new System.Windows.Forms.Panel();
-            this.lblAdminPanel = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
+            this.panelUserManagement = new System.Windows.Forms.Panel();
+            this.dataGridUsers = new System.Windows.Forms.DataGridView();
+            this.btnSearchUser = new System.Windows.Forms.Button();
+            this.txtSearchUser = new System.Windows.Forms.TextBox();
+            this.lblSearchUser = new System.Windows.Forms.Label();
+            this.lablUserManagement = new System.Windows.Forms.Label();
+            this.panelReviewManagement = new System.Windows.Forms.Panel();
+            this.dataGridReviews = new System.Windows.Forms.DataGridView();
+            this.btnSearchReview = new System.Windows.Forms.Button();
+            this.txtSearchReview = new System.Windows.Forms.TextBox();
+            this.lblSearchReview = new System.Windows.Forms.Label();
+            this.lblReviewManagement = new System.Windows.Forms.Label();
             this.panelMovieManagement = new System.Windows.Forms.Panel();
             this.btnEditNewMovie = new System.Windows.Forms.Button();
             this.btnAddNewmovies = new System.Windows.Forms.Button();
@@ -45,12 +55,6 @@
             this.txtSearchMovie = new System.Windows.Forms.TextBox();
             this.lblSearchMovie = new System.Windows.Forms.Label();
             this.lblMovieManagement = new System.Windows.Forms.Label();
-            this.panelReviewManagement = new System.Windows.Forms.Panel();
-            this.dataGridReviews = new System.Windows.Forms.DataGridView();
-            this.btnSearchReview = new System.Windows.Forms.Button();
-            this.txtSearchReview = new System.Windows.Forms.TextBox();
-            this.lblSearchReview = new System.Windows.Forms.Label();
-            this.lblReviewManagement = new System.Windows.Forms.Label();
             this.panelOverview = new System.Windows.Forms.Panel();
             this.panelQuickAction = new System.Windows.Forms.Panel();
             this.btnEditMovie = new System.Windows.Forms.Button();
@@ -60,12 +64,6 @@
             this.lblTotalReviews = new System.Windows.Forms.Label();
             this.lblReviewNumber = new System.Windows.Forms.Label();
             this.lblReviews = new System.Windows.Forms.Label();
-            this.panelUserManagement = new System.Windows.Forms.Panel();
-            this.dataGridUsers = new System.Windows.Forms.DataGridView();
-            this.btnSearchUser = new System.Windows.Forms.Button();
-            this.txtSearchUser = new System.Windows.Forms.TextBox();
-            this.lblSearchUser = new System.Windows.Forms.Label();
-            this.lablUserManagement = new System.Windows.Forms.Label();
             this.panelUserCard = new System.Windows.Forms.Panel();
             this.lblTotalUsers = new System.Windows.Forms.Label();
             this.lblUserNumber = new System.Windows.Forms.Label();
@@ -74,17 +72,19 @@
             this.lblTotalMovies = new System.Windows.Forms.Label();
             this.lblMovieNumber = new System.Windows.Forms.Label();
             this.lblMovies = new System.Windows.Forms.Label();
+            this.lblAdminPanel = new System.Windows.Forms.Label();
+            this.panelDivider = new System.Windows.Forms.Panel();
             this.panelSidebar.SuspendLayout();
             this.panelContent.SuspendLayout();
-            this.panelMovieManagement.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).BeginInit();
+            this.panelUserManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
             this.panelReviewManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridReviews)).BeginInit();
+            this.panelMovieManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).BeginInit();
             this.panelOverview.SuspendLayout();
             this.panelQuickAction.SuspendLayout();
             this.panelReviewCard.SuspendLayout();
-            this.panelUserManagement.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
             this.panelUserCard.SuspendLayout();
             this.panelMovieCard.SuspendLayout();
             this.SuspendLayout();
@@ -171,28 +171,10 @@
             this.btnMovies.UseVisualStyleBackColor = false;
             this.btnMovies.Click += new System.EventHandler(this.btnMovies_Click);
             // 
-            // panelDivider
-            // 
-            this.panelDivider.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panelDivider.Location = new System.Drawing.Point(1, 0);
-            this.panelDivider.Name = "panelDivider";
-            this.panelDivider.Size = new System.Drawing.Size(1, 700);
-            this.panelDivider.TabIndex = 3;
-            // 
-            // lblAdminPanel
-            // 
-            this.lblAdminPanel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminPanel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblAdminPanel.Location = new System.Drawing.Point(330, 8);
-            this.lblAdminPanel.Name = "lblAdminPanel";
-            this.lblAdminPanel.Size = new System.Drawing.Size(264, 104);
-            this.lblAdminPanel.TabIndex = 6;
-            this.lblAdminPanel.Text = "        🧑‍💻\r\nAdmin Panel";
-            // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.SystemColors.Control;
-            this.panelContent.BackgroundImage = global::MovieReviewApp.Properties.Resources.rsz_office_coffee_interior_design;
+            this.panelContent.BackgroundImage = global::MovieReviewApp.Properties.Resources.AdminBg1;
             this.panelContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelContent.Controls.Add(this.panelUserManagement);
             this.panelContent.Controls.Add(this.panelReviewManagement);
@@ -204,6 +186,133 @@
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(884, 700);
             this.panelContent.TabIndex = 7;
+            // 
+            // panelUserManagement
+            // 
+            this.panelUserManagement.Controls.Add(this.dataGridUsers);
+            this.panelUserManagement.Controls.Add(this.btnSearchUser);
+            this.panelUserManagement.Controls.Add(this.txtSearchUser);
+            this.panelUserManagement.Controls.Add(this.lblSearchUser);
+            this.panelUserManagement.Controls.Add(this.lablUserManagement);
+            this.panelUserManagement.Location = new System.Drawing.Point(33, 115);
+            this.panelUserManagement.Name = "panelUserManagement";
+            this.panelUserManagement.Size = new System.Drawing.Size(826, 561);
+            this.panelUserManagement.TabIndex = 9;
+            this.panelUserManagement.Visible = false;
+            // 
+            // dataGridUsers
+            // 
+            this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridUsers.Location = new System.Drawing.Point(32, 135);
+            this.dataGridUsers.Name = "dataGridUsers";
+            this.dataGridUsers.RowHeadersWidth = 62;
+            this.dataGridUsers.RowTemplate.Height = 28;
+            this.dataGridUsers.Size = new System.Drawing.Size(762, 361);
+            this.dataGridUsers.TabIndex = 4;
+            // 
+            // btnSearchUser
+            // 
+            this.btnSearchUser.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchUser.Location = new System.Drawing.Point(635, 73);
+            this.btnSearchUser.Name = "btnSearchUser";
+            this.btnSearchUser.Size = new System.Drawing.Size(82, 34);
+            this.btnSearchUser.TabIndex = 3;
+            this.btnSearchUser.Text = "Search";
+            this.btnSearchUser.UseVisualStyleBackColor = true;
+            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
+            // 
+            // txtSearchUser
+            // 
+            this.txtSearchUser.Location = new System.Drawing.Point(205, 76);
+            this.txtSearchUser.Name = "txtSearchUser";
+            this.txtSearchUser.Size = new System.Drawing.Size(405, 29);
+            this.txtSearchUser.TabIndex = 2;
+            // 
+            // lblSearchUser
+            // 
+            this.lblSearchUser.AutoSize = true;
+            this.lblSearchUser.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchUser.Location = new System.Drawing.Point(43, 76);
+            this.lblSearchUser.Name = "lblSearchUser";
+            this.lblSearchUser.Size = new System.Drawing.Size(134, 28);
+            this.lblSearchUser.TabIndex = 1;
+            this.lblSearchUser.Text = "Search User :";
+            // 
+            // lablUserManagement
+            // 
+            this.lablUserManagement.AutoSize = true;
+            this.lablUserManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUserManagement.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lablUserManagement.Location = new System.Drawing.Point(226, 15);
+            this.lablUserManagement.Name = "lablUserManagement";
+            this.lablUserManagement.Size = new System.Drawing.Size(378, 48);
+            this.lablUserManagement.TabIndex = 0;
+            this.lablUserManagement.Text = "👤User Management";
+            // 
+            // panelReviewManagement
+            // 
+            this.panelReviewManagement.Controls.Add(this.dataGridReviews);
+            this.panelReviewManagement.Controls.Add(this.btnSearchReview);
+            this.panelReviewManagement.Controls.Add(this.txtSearchReview);
+            this.panelReviewManagement.Controls.Add(this.lblSearchReview);
+            this.panelReviewManagement.Controls.Add(this.lblReviewManagement);
+            this.panelReviewManagement.Location = new System.Drawing.Point(33, 115);
+            this.panelReviewManagement.Name = "panelReviewManagement";
+            this.panelReviewManagement.Size = new System.Drawing.Size(826, 561);
+            this.panelReviewManagement.TabIndex = 10;
+            this.panelReviewManagement.Visible = false;
+            this.panelReviewManagement.Paint += new System.Windows.Forms.PaintEventHandler(this.panelReviewManagement_Paint);
+            // 
+            // dataGridReviews
+            // 
+            this.dataGridReviews.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridReviews.Location = new System.Drawing.Point(48, 170);
+            this.dataGridReviews.Name = "dataGridReviews";
+            this.dataGridReviews.RowHeadersWidth = 62;
+            this.dataGridReviews.RowTemplate.Height = 28;
+            this.dataGridReviews.Size = new System.Drawing.Size(762, 361);
+            this.dataGridReviews.TabIndex = 9;
+            // 
+            // btnSearchReview
+            // 
+            this.btnSearchReview.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchReview.Location = new System.Drawing.Point(635, 98);
+            this.btnSearchReview.Name = "btnSearchReview";
+            this.btnSearchReview.Size = new System.Drawing.Size(82, 34);
+            this.btnSearchReview.TabIndex = 8;
+            this.btnSearchReview.Text = "Search";
+            this.btnSearchReview.UseVisualStyleBackColor = true;
+            this.btnSearchReview.Click += new System.EventHandler(this.btnSearchReview_Click);
+            // 
+            // txtSearchReview
+            // 
+            this.txtSearchReview.Location = new System.Drawing.Point(205, 101);
+            this.txtSearchReview.Name = "txtSearchReview";
+            this.txtSearchReview.Size = new System.Drawing.Size(405, 29);
+            this.txtSearchReview.TabIndex = 7;
+            // 
+            // lblSearchReview
+            // 
+            this.lblSearchReview.AutoSize = true;
+            this.lblSearchReview.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchReview.Location = new System.Drawing.Point(43, 101);
+            this.lblSearchReview.Name = "lblSearchReview";
+            this.lblSearchReview.Size = new System.Drawing.Size(160, 28);
+            this.lblSearchReview.TabIndex = 6;
+            this.lblSearchReview.Text = "Search Review :";
+            // 
+            // lblReviewManagement
+            // 
+            this.lblReviewManagement.AutoSize = true;
+            this.lblReviewManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReviewManagement.ForeColor = System.Drawing.Color.Chocolate;
+            this.lblReviewManagement.Location = new System.Drawing.Point(191, 40);
+            this.lblReviewManagement.Name = "lblReviewManagement";
+            this.lblReviewManagement.Size = new System.Drawing.Size(423, 48);
+            this.lblReviewManagement.TabIndex = 5;
+            this.lblReviewManagement.Text = "📝Review Management";
             // 
             // panelMovieManagement
             // 
@@ -293,70 +402,6 @@
             this.lblMovieManagement.Size = new System.Drawing.Size(408, 48);
             this.lblMovieManagement.TabIndex = 0;
             this.lblMovieManagement.Text = "🎬Movie Management";
-            // 
-            // panelReviewManagement
-            // 
-            this.panelReviewManagement.Controls.Add(this.dataGridReviews);
-            this.panelReviewManagement.Controls.Add(this.btnSearchReview);
-            this.panelReviewManagement.Controls.Add(this.txtSearchReview);
-            this.panelReviewManagement.Controls.Add(this.lblSearchReview);
-            this.panelReviewManagement.Controls.Add(this.lblReviewManagement);
-            this.panelReviewManagement.Location = new System.Drawing.Point(33, 115);
-            this.panelReviewManagement.Name = "panelReviewManagement";
-            this.panelReviewManagement.Size = new System.Drawing.Size(826, 561);
-            this.panelReviewManagement.TabIndex = 10;
-            this.panelReviewManagement.Visible = false;
-            this.panelReviewManagement.Paint += new System.Windows.Forms.PaintEventHandler(this.panelReviewManagement_Paint);
-            // 
-            // dataGridReviews
-            // 
-            this.dataGridReviews.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridReviews.Location = new System.Drawing.Point(48, 170);
-            this.dataGridReviews.Name = "dataGridReviews";
-            this.dataGridReviews.RowHeadersWidth = 62;
-            this.dataGridReviews.RowTemplate.Height = 28;
-            this.dataGridReviews.Size = new System.Drawing.Size(762, 361);
-            this.dataGridReviews.TabIndex = 9;
-            // 
-            // btnSearchReview
-            // 
-            this.btnSearchReview.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchReview.Location = new System.Drawing.Point(635, 98);
-            this.btnSearchReview.Name = "btnSearchReview";
-            this.btnSearchReview.Size = new System.Drawing.Size(82, 34);
-            this.btnSearchReview.TabIndex = 8;
-            this.btnSearchReview.Text = "Search";
-            this.btnSearchReview.UseVisualStyleBackColor = true;
-            this.btnSearchReview.Click += new System.EventHandler(this.btnSearchReview_Click);
-            // 
-            // txtSearchReview
-            // 
-            this.txtSearchReview.Location = new System.Drawing.Point(205, 101);
-            this.txtSearchReview.Name = "txtSearchReview";
-            this.txtSearchReview.Size = new System.Drawing.Size(405, 29);
-            this.txtSearchReview.TabIndex = 7;
-            // 
-            // lblSearchReview
-            // 
-            this.lblSearchReview.AutoSize = true;
-            this.lblSearchReview.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchReview.Location = new System.Drawing.Point(43, 101);
-            this.lblSearchReview.Name = "lblSearchReview";
-            this.lblSearchReview.Size = new System.Drawing.Size(160, 28);
-            this.lblSearchReview.TabIndex = 6;
-            this.lblSearchReview.Text = "Search Review :";
-            // 
-            // lblReviewManagement
-            // 
-            this.lblReviewManagement.AutoSize = true;
-            this.lblReviewManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReviewManagement.ForeColor = System.Drawing.Color.Chocolate;
-            this.lblReviewManagement.Location = new System.Drawing.Point(191, 40);
-            this.lblReviewManagement.Name = "lblReviewManagement";
-            this.lblReviewManagement.Size = new System.Drawing.Size(423, 48);
-            this.lblReviewManagement.TabIndex = 5;
-            this.lblReviewManagement.Text = "📝Review Management";
             // 
             // panelOverview
             // 
@@ -458,69 +503,6 @@
             this.lblReviews.Text = "Reviews";
             this.lblReviews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panelUserManagement
-            // 
-            this.panelUserManagement.Controls.Add(this.dataGridUsers);
-            this.panelUserManagement.Controls.Add(this.btnSearchUser);
-            this.panelUserManagement.Controls.Add(this.txtSearchUser);
-            this.panelUserManagement.Controls.Add(this.lblSearchUser);
-            this.panelUserManagement.Controls.Add(this.lablUserManagement);
-            this.panelUserManagement.Location = new System.Drawing.Point(33, 115);
-            this.panelUserManagement.Name = "panelUserManagement";
-            this.panelUserManagement.Size = new System.Drawing.Size(826, 561);
-            this.panelUserManagement.TabIndex = 9;
-            this.panelUserManagement.Visible = false;
-            // 
-            // dataGridUsers
-            // 
-            this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridUsers.Location = new System.Drawing.Point(32, 135);
-            this.dataGridUsers.Name = "dataGridUsers";
-            this.dataGridUsers.RowHeadersWidth = 62;
-            this.dataGridUsers.RowTemplate.Height = 28;
-            this.dataGridUsers.Size = new System.Drawing.Size(762, 361);
-            this.dataGridUsers.TabIndex = 4;
-            // 
-            // btnSearchUser
-            // 
-            this.btnSearchUser.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchUser.Location = new System.Drawing.Point(635, 73);
-            this.btnSearchUser.Name = "btnSearchUser";
-            this.btnSearchUser.Size = new System.Drawing.Size(82, 34);
-            this.btnSearchUser.TabIndex = 3;
-            this.btnSearchUser.Text = "Search";
-            this.btnSearchUser.UseVisualStyleBackColor = true;
-            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
-            // 
-            // txtSearchUser
-            // 
-            this.txtSearchUser.Location = new System.Drawing.Point(205, 76);
-            this.txtSearchUser.Name = "txtSearchUser";
-            this.txtSearchUser.Size = new System.Drawing.Size(405, 29);
-            this.txtSearchUser.TabIndex = 2;
-            // 
-            // lblSearchUser
-            // 
-            this.lblSearchUser.AutoSize = true;
-            this.lblSearchUser.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchUser.Location = new System.Drawing.Point(43, 76);
-            this.lblSearchUser.Name = "lblSearchUser";
-            this.lblSearchUser.Size = new System.Drawing.Size(134, 28);
-            this.lblSearchUser.TabIndex = 1;
-            this.lblSearchUser.Text = "Search User :";
-            // 
-            // lablUserManagement
-            // 
-            this.lablUserManagement.AutoSize = true;
-            this.lablUserManagement.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablUserManagement.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lablUserManagement.Location = new System.Drawing.Point(226, 15);
-            this.lablUserManagement.Name = "lablUserManagement";
-            this.lablUserManagement.Size = new System.Drawing.Size(378, 48);
-            this.lablUserManagement.TabIndex = 0;
-            this.lablUserManagement.Text = "👤User Management";
-            // 
             // panelUserCard
             // 
             this.panelUserCard.Controls.Add(this.lblTotalUsers);
@@ -609,6 +591,24 @@
             this.lblMovies.Text = "Movies";
             this.lblMovies.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblAdminPanel
+            // 
+            this.lblAdminPanel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminPanel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblAdminPanel.Location = new System.Drawing.Point(330, 8);
+            this.lblAdminPanel.Name = "lblAdminPanel";
+            this.lblAdminPanel.Size = new System.Drawing.Size(264, 104);
+            this.lblAdminPanel.TabIndex = 6;
+            this.lblAdminPanel.Text = "        🧑‍💻\r\nAdmin Panel";
+            // 
+            // panelDivider
+            // 
+            this.panelDivider.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panelDivider.Location = new System.Drawing.Point(1, 0);
+            this.panelDivider.Name = "panelDivider";
+            this.panelDivider.Size = new System.Drawing.Size(1, 700);
+            this.panelDivider.TabIndex = 3;
+            // 
             // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -623,20 +623,20 @@
             this.Text = "Cineverse";
             this.panelSidebar.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
-            this.panelMovieManagement.ResumeLayout(false);
-            this.panelMovieManagement.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).EndInit();
+            this.panelUserManagement.ResumeLayout(false);
+            this.panelUserManagement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).EndInit();
             this.panelReviewManagement.ResumeLayout(false);
             this.panelReviewManagement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridReviews)).EndInit();
+            this.panelMovieManagement.ResumeLayout(false);
+            this.panelMovieManagement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovies)).EndInit();
             this.panelOverview.ResumeLayout(false);
             this.panelQuickAction.ResumeLayout(false);
             this.panelQuickAction.PerformLayout();
             this.panelReviewCard.ResumeLayout(false);
             this.panelReviewCard.PerformLayout();
-            this.panelUserManagement.ResumeLayout(false);
-            this.panelUserManagement.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).EndInit();
             this.panelUserCard.ResumeLayout(false);
             this.panelUserCard.PerformLayout();
             this.panelMovieCard.ResumeLayout(false);
