@@ -63,6 +63,36 @@ namespace MovieReviewApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ad1 {
+            get {
+                object obj = ResourceManager.GetObject("Ad1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ad1__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Ad1 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Adminbg {
+            get {
+                object obj = ResourceManager.GetObject("Adminbg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AdminBg1 {
             get {
                 object obj = ResourceManager.GetObject("AdminBg1", resourceCulture);
@@ -76,6 +106,16 @@ namespace MovieReviewApp.Properties {
         internal static System.Drawing.Bitmap AdminBg2 {
             get {
                 object obj = ResourceManager.GetObject("AdminBg2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AdminBgFinal {
+            get {
+                object obj = ResourceManager.GetObject("AdminBgFinal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -226,6 +266,26 @@ namespace MovieReviewApp.Properties {
         internal static System.Drawing.Bitmap rsz_user2 {
             get {
                 object obj = ResourceManager.GetObject("rsz_user2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap side2 {
+            get {
+                object obj = ResourceManager.GetObject("side2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SidebarBg {
+            get {
+                object obj = ResourceManager.GetObject("SidebarBg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

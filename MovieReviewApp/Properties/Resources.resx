@@ -118,20 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="regbg11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\regbg11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="rsz_user2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rsz_user2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LoginBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoginBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="regbg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\regbg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rsz_office-coffee-interior-design" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rsz_office-coffee-interior-design.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AdminBg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdminBg2.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="User31" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User31.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,32 +133,41 @@
   <data name="User32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User32.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rsz_office-coffee-interior-design" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rsz_office-coffee-interior-design.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="User3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\User3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Adminbg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Adminbg.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="User" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HomeBg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HomeBg2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logbg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logbg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StartBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rsz_user2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rsz_user2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AdminBg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AdminBg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="regbg12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\regbg12.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Ad1 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ad1 (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Homebg11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Homebg11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HomeBg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HomeBg2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Ad1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ad1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AdminBg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdminBg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="regbg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\regbg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SidebarBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SidebarBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logbg11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logbg11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,13 +175,31 @@
   <data name="regbg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\regbg2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AdminBgFinal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdminBgFinal.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Homebg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Homebg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="User3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\User3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="regbg11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\regbg11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AdminBg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AdminBg2.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LoginBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoginBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="regbg12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\regbg12.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logbg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logbg1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="side2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\side2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

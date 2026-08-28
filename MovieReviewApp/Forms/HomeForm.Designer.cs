@@ -81,8 +81,7 @@
             // 
             // panelProfile
             // 
-            this.panelProfile.BackColor = System.Drawing.Color.White;
-            this.panelProfile.BackgroundImage = global::MovieReviewApp.Properties.Resources.logbg1;
+            this.panelProfile.BackColor = System.Drawing.Color.PowderBlue;
             this.panelProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelProfile.Controls.Add(this.lblProfileRole);
             this.panelProfile.Controls.Add(this.lblProfileEmail);
@@ -421,54 +420,54 @@
             // 
             // btnProfile
             // 
-            this.btnProfile.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnProfile.BackColor = System.Drawing.Color.PowderBlue;
             this.btnProfile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProfile.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.btnProfile.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.btnProfile.Location = new System.Drawing.Point(11, 231);
+            this.btnProfile.Location = new System.Drawing.Point(11, 300);
             this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Size = new System.Drawing.Size(129, 44);
+            this.btnProfile.Size = new System.Drawing.Size(129, 64);
             this.btnProfile.TabIndex = 2;
-            this.btnProfile.Text = "Profile";
+            this.btnProfile.Text = "👤\r\nProfile";
             this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // btnHome
             // 
-            this.btnHome.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnHome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnHome.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnHome.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btnHome.Location = new System.Drawing.Point(11, 24);
+            this.btnHome.Location = new System.Drawing.Point(11, 30);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(129, 51);
+            this.btnHome.Size = new System.Drawing.Size(129, 64);
             this.btnHome.TabIndex = 0;
-            this.btnHome.Text = "Home";
+            this.btnHome.Text = "🏚️\r\nHome\r\n";
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // btnWatchlist
             // 
-            this.btnWatchlist.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnWatchlist.BackColor = System.Drawing.Color.Honeydew;
             this.btnWatchlist.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.btnWatchlist.ForeColor = System.Drawing.Color.ForestGreen;
-            this.btnWatchlist.Location = new System.Drawing.Point(11, 162);
+            this.btnWatchlist.Location = new System.Drawing.Point(11, 210);
             this.btnWatchlist.Name = "btnWatchlist";
-            this.btnWatchlist.Size = new System.Drawing.Size(129, 46);
+            this.btnWatchlist.Size = new System.Drawing.Size(129, 64);
             this.btnWatchlist.TabIndex = 1;
-            this.btnWatchlist.Text = "Watchlist";
+            this.btnWatchlist.Text = "📋\r\nWatchlist";
             this.btnWatchlist.UseVisualStyleBackColor = false;
             this.btnWatchlist.Click += new System.EventHandler(this.btnWatchlist_Click);
             // 
             // btnFavorites
             // 
-            this.btnFavorites.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnFavorites.BackColor = System.Drawing.Color.MistyRose;
             this.btnFavorites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnFavorites.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnFavorites.Location = new System.Drawing.Point(11, 94);
+            this.btnFavorites.Location = new System.Drawing.Point(11, 120);
             this.btnFavorites.Name = "btnFavorites";
-            this.btnFavorites.Size = new System.Drawing.Size(129, 48);
+            this.btnFavorites.Size = new System.Drawing.Size(129, 64);
             this.btnFavorites.TabIndex = 1;
-            this.btnFavorites.Text = "Favorites";
+            this.btnFavorites.Text = "❤️\r\nFavorites";
             this.btnFavorites.UseVisualStyleBackColor = false;
             this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
             // 

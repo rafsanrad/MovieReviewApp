@@ -186,6 +186,12 @@
     <Content Include="Posters\titanic.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\side2.jpg" />
+    <None Include="Resources\Ad1 %281%29.jpg" />
+    <None Include="Resources\Ad1.jpg" />
+    <None Include="Resources\AdminBgFinal.jpg" />
+    <None Include="Resources\Adminbg.jpeg" />
+    <None Include="Resources\SidebarBg.jpg" />
     <None Include="Resources\AdminBg2.jpeg" />
     <None Include="Resources\AdminBg1.jpg" />
     <None Include="Resources\rsz_office-coffee-interior-design.jpg" />

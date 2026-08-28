@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelSidebar = new System.Windows.Forms.Panel();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.btnReviews = new System.Windows.Forms.Button();
-            this.btnDashBoard = new System.Windows.Forms.Button();
-            this.btnUsers = new System.Windows.Forms.Button();
-            this.btnMovies = new System.Windows.Forms.Button();
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelUserManagement = new System.Windows.Forms.Panel();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
@@ -74,7 +68,12 @@
             this.lblMovies = new System.Windows.Forms.Label();
             this.lblAdminPanel = new System.Windows.Forms.Label();
             this.panelDivider = new System.Windows.Forms.Panel();
-            this.panelSidebar.SuspendLayout();
+            this.panelSidebar = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnReviews = new System.Windows.Forms.Button();
+            this.btnDashBoard = new System.Windows.Forms.Button();
+            this.btnUsers = new System.Windows.Forms.Button();
+            this.btnMovies = new System.Windows.Forms.Button();
             this.panelContent.SuspendLayout();
             this.panelUserManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
@@ -87,94 +86,13 @@
             this.panelReviewCard.SuspendLayout();
             this.panelUserCard.SuspendLayout();
             this.panelMovieCard.SuspendLayout();
+            this.panelSidebar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelSidebar
-            // 
-            this.panelSidebar.Controls.Add(this.btnLogout);
-            this.panelSidebar.Controls.Add(this.btnReviews);
-            this.panelSidebar.Controls.Add(this.btnDashBoard);
-            this.panelSidebar.Controls.Add(this.btnUsers);
-            this.panelSidebar.Controls.Add(this.btnMovies);
-            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
-            this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(263, 701);
-            this.panelSidebar.TabIndex = 5;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.Tomato;
-            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(19, 605);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(122, 52);
-            this.btnLogout.TabIndex = 2;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = false;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // btnReviews
-            // 
-            this.btnReviews.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnReviews.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReviews.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReviews.ForeColor = System.Drawing.Color.Chocolate;
-            this.btnReviews.Location = new System.Drawing.Point(9, 232);
-            this.btnReviews.Name = "btnReviews";
-            this.btnReviews.Size = new System.Drawing.Size(155, 52);
-            this.btnReviews.TabIndex = 2;
-            this.btnReviews.Text = "📝Reviews";
-            this.btnReviews.UseVisualStyleBackColor = false;
-            this.btnReviews.Click += new System.EventHandler(this.btnReviews_Click);
-            // 
-            // btnDashBoard
-            // 
-            this.btnDashBoard.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDashBoard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDashBoard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDashBoard.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btnDashBoard.Location = new System.Drawing.Point(9, 25);
-            this.btnDashBoard.Name = "btnDashBoard";
-            this.btnDashBoard.Size = new System.Drawing.Size(155, 52);
-            this.btnDashBoard.TabIndex = 0;
-            this.btnDashBoard.Text = "🏠 DashBoard";
-            this.btnDashBoard.UseVisualStyleBackColor = false;
-            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
-            // 
-            // btnUsers
-            // 
-            this.btnUsers.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsers.ForeColor = System.Drawing.Color.ForestGreen;
-            this.btnUsers.Location = new System.Drawing.Point(9, 163);
-            this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(155, 52);
-            this.btnUsers.TabIndex = 1;
-            this.btnUsers.Text = "👤Users";
-            this.btnUsers.UseVisualStyleBackColor = false;
-            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
-            // 
-            // btnMovies
-            // 
-            this.btnMovies.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnMovies.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMovies.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMovies.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnMovies.Location = new System.Drawing.Point(9, 95);
-            this.btnMovies.Name = "btnMovies";
-            this.btnMovies.Size = new System.Drawing.Size(155, 52);
-            this.btnMovies.TabIndex = 1;
-            this.btnMovies.Text = "🎬 Movies";
-            this.btnMovies.UseVisualStyleBackColor = false;
-            this.btnMovies.Click += new System.EventHandler(this.btnMovies_Click);
             // 
             // panelContent
             // 
             this.panelContent.BackColor = System.Drawing.SystemColors.Control;
-            this.panelContent.BackgroundImage = global::MovieReviewApp.Properties.Resources.AdminBg1;
+            this.panelContent.BackgroundImage = global::MovieReviewApp.Properties.Resources.Ad1__1_;
             this.panelContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelContent.Controls.Add(this.panelUserManagement);
             this.panelContent.Controls.Add(this.panelReviewManagement);
@@ -609,6 +527,89 @@
             this.panelDivider.Size = new System.Drawing.Size(1, 700);
             this.panelDivider.TabIndex = 3;
             // 
+            // panelSidebar
+            // 
+            this.panelSidebar.BackgroundImage = global::MovieReviewApp.Properties.Resources.side2;
+            this.panelSidebar.Controls.Add(this.btnLogout);
+            this.panelSidebar.Controls.Add(this.btnReviews);
+            this.panelSidebar.Controls.Add(this.btnDashBoard);
+            this.panelSidebar.Controls.Add(this.btnUsers);
+            this.panelSidebar.Controls.Add(this.btnMovies);
+            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
+            this.panelSidebar.Name = "panelSidebar";
+            this.panelSidebar.Size = new System.Drawing.Size(170, 701);
+            this.panelSidebar.TabIndex = 5;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Tomato;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Location = new System.Drawing.Point(19, 605);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(122, 52);
+            this.btnLogout.TabIndex = 2;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnReviews
+            // 
+            this.btnReviews.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.btnReviews.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReviews.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReviews.ForeColor = System.Drawing.Color.Chocolate;
+            this.btnReviews.Location = new System.Drawing.Point(9, 232);
+            this.btnReviews.Name = "btnReviews";
+            this.btnReviews.Size = new System.Drawing.Size(155, 52);
+            this.btnReviews.TabIndex = 2;
+            this.btnReviews.Text = "📝Reviews";
+            this.btnReviews.UseVisualStyleBackColor = false;
+            this.btnReviews.Click += new System.EventHandler(this.btnReviews_Click);
+            // 
+            // btnDashBoard
+            // 
+            this.btnDashBoard.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnDashBoard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDashBoard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDashBoard.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnDashBoard.Location = new System.Drawing.Point(9, 25);
+            this.btnDashBoard.Name = "btnDashBoard";
+            this.btnDashBoard.Size = new System.Drawing.Size(155, 52);
+            this.btnDashBoard.TabIndex = 0;
+            this.btnDashBoard.Text = "🏠 DashBoard";
+            this.btnDashBoard.UseVisualStyleBackColor = false;
+            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
+            // 
+            // btnUsers
+            // 
+            this.btnUsers.BackColor = System.Drawing.Color.Honeydew;
+            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsers.ForeColor = System.Drawing.Color.ForestGreen;
+            this.btnUsers.Location = new System.Drawing.Point(9, 163);
+            this.btnUsers.Name = "btnUsers";
+            this.btnUsers.Size = new System.Drawing.Size(155, 52);
+            this.btnUsers.TabIndex = 1;
+            this.btnUsers.Text = "👤Users";
+            this.btnUsers.UseVisualStyleBackColor = false;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
+            // 
+            // btnMovies
+            // 
+            this.btnMovies.BackColor = System.Drawing.Color.MistyRose;
+            this.btnMovies.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMovies.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMovies.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnMovies.Location = new System.Drawing.Point(9, 95);
+            this.btnMovies.Name = "btnMovies";
+            this.btnMovies.Size = new System.Drawing.Size(155, 52);
+            this.btnMovies.TabIndex = 1;
+            this.btnMovies.Text = "🎬 Movies";
+            this.btnMovies.UseVisualStyleBackColor = false;
+            this.btnMovies.Click += new System.EventHandler(this.btnMovies_Click);
+            // 
             // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -621,7 +622,6 @@
             this.Name = "AdminPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cineverse";
-            this.panelSidebar.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
             this.panelUserManagement.ResumeLayout(false);
             this.panelUserManagement.PerformLayout();
@@ -641,6 +641,7 @@
             this.panelUserCard.PerformLayout();
             this.panelMovieCard.ResumeLayout(false);
             this.panelMovieCard.PerformLayout();
+            this.panelSidebar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
