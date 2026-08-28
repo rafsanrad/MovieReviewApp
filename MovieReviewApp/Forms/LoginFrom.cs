@@ -95,6 +95,9 @@ namespace MovieReviewApp.Forms
                         using (SqlDataReader reader =
                                command.ExecuteReader())
                         {
+
+
+                            //user pawa gelo ki na check korar jonno.
                             if (reader.Read())
                             {
                                 // -----------------------------------------
@@ -219,6 +222,11 @@ namespace MovieReviewApp.Forms
                 txtPassword.PasswordChar = '*';
                 btnShowPassword.Text = "Show";
             }
+        }
+
+        private void pnlLogin_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

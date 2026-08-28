@@ -66,6 +66,7 @@
             this.pnlRegister.Name = "pnlRegister";
             this.pnlRegister.Size = new System.Drawing.Size(703, 533);
             this.pnlRegister.TabIndex = 1;
+            this.pnlRegister.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlRegister_Paint);
             // 
             // txtEmail
             // 
