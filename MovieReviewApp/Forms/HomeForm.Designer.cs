@@ -439,7 +439,7 @@
             this.btnHome.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btnHome.Location = new System.Drawing.Point(11, 30);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(129, 64);
+            this.btnHome.Size = new System.Drawing.Size(129, 75);
             this.btnHome.TabIndex = 0;
             this.btnHome.Text = "🏚️\r\nHome\r\n";
             this.btnHome.UseVisualStyleBackColor = false;
